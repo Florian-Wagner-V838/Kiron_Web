@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum — Kiron GmbH i.G.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f0e8; --ink: #0f0f0d; --ink2: #1a1a17; --ink3: #242420;
+  --green: #1d9e75; --green2: #157a5a;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Space Grotesk', sans-serif;
+  --mono: 'Space Mono', monospace;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; }
+body { background:var(--ink); color:var(--paper); font-family:var(--sans); font-weight:300; line-height:1.7; }
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:500; height:60px;
+  background:rgba(15,15,13,0.98); border-bottom:1px solid rgba(29,158,117,0.15);
+  display:flex; align-items:center; padding:0 56px; backdrop-filter:blur(12px);
+}
+.nav-logo { font-family:var(--serif); font-size:22px; font-weight:300; color:var(--paper); margin-right:auto; display:flex; align-items:center; gap:8px; text-decoration:none; }
+.nav-logo em { color:var(--green); font-style:italic; }
+.content { max-width:800px; margin:0 auto; padding:120px 56px 80px; }
+h1 { font-family:var(--serif); font-size:clamp(36px,5vw,56px); font-weight:300; line-height:1; margin-bottom:48px; }
+h1 em { color:rgba(29,158,117,0.8); font-style:italic; }
+h2 { font-family:var(--serif); font-size:24px; font-weight:300; color:var(--paper); margin:40px 0 16px; }
+p, li { color:rgba(244,240,232,0.6); font-size:14px; line-height:1.9; margin-bottom:12px; }
+a { color:var(--green); text-decoration:none; }
+a:hover { color:var(--green2); }
+.placeholder { color:#c07840; font-style:italic; }
+footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); padding:40px 56px; text-align:center; }
+.footer-copy { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,0.2); letter-spacing:1px; text-transform:uppercase; }
+@media(max-width:960px) {
+  .nav { padding:0 24px; }
+  .content { padding:100px 24px 60px; }
+  footer { padding:30px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">Kiron <em>&chi;</em></a>
+</nav>
+
+<div class="content">
+  <h1>Impressum</h1>
+
+  <h2>Angaben nach &sect;5 TMG</h2>
+  <p>
+    Kiron GmbH i.G.<br>
+    <span class="placeholder">[Stra&szlig;e Hausnummer]</span><br>
+    <span class="placeholder">[PLZ Ort]</span><br>
+    Deutschland
+  </p>
+
+  <h2>Vertreten durch</h2>
+  <p>
+    Gesch&auml;ftsf&uuml;hrer: <span class="placeholder">[Name des Gesch&auml;ftsf&uuml;hrers]</span>
+  </p>
+
+  <h2>Kontakt</h2>
+  <p>
+    Telefon: <span class="placeholder">[Telefonnummer]</span><br>
+    E-Mail: <a href="mailto:info@kiron.tech">info@kiron.tech</a>
+  </p>
+
+  <h2>Registereintrag</h2>
+  <p>
+    Eintragung im Handelsregister.<br>
+    Registergericht: <span class="placeholder">[Amtsgericht]</span><br>
+    Registernummer: <span class="placeholder">[HRB-Nummer]</span>
+  </p>
+
+  <h2>Umsatzsteuer-ID</h2>
+  <p>
+    Umsatzsteuer-Identifikationsnummer nach &sect;27a Umsatzsteuergesetz:<br>
+    <span class="placeholder">[USt-IdNr. folgt nach Eintragung]</span>
+  </p>
+
+  <h2>Verantwortlich f&uuml;r den Inhalt nach &sect;55 Abs. 2 RSt V</h2>
+  <p>
+    <span class="placeholder">[Name]</span><br>
+    <span class="placeholder">[Stra&szlig;e Hausnummer]</span><br>
+    <span class="placeholder">[PLZ Ort]</span>
+  </p>
+
+  <h2>EU-Streitschlichtung</h2>
+  <p>
+    Die Europ&auml;ische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+    <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a>.<br>
+    Unsere E-Mail-Adresse finden Sie oben im Impressum.
+  </p>
+
+  <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+  <p>
+    Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+    Verbraucherschlichtungsstelle teilzunehmen.
+  </p>
+</div>
+
+<footer>
+  <span class="footer-copy">&copy; 2026 Kiron GmbH i.G. &middot; <a href="/">Startseite</a> &middot; <a href="/datenschutz.html">Datenschutz</a></span>
+</footer>
+
+</body>
+</html>
