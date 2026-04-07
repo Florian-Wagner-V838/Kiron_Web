@@ -843,7 +843,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       <span class="footer-col-title">Unternehmen</span>
       <ul class="footer-links">
         <li><a href="https://kiron.tech">Die Geschichte</a></li>
-        <li><a href="https://kiron.tech">Kiron GmbH i.G.</a></li>
+        <li><a href="https://kiron.tech">Nexara Group</a></li>
         <li><a href="https://kiron.tech">Karriere</a></li>
         <li><a href="https://kiron.tech">Kontakt</a></li>
       </ul>
@@ -878,36 +878,42 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
     <h3 class="modal-h">30 Minuten.<br><em>Ihr Shopfloor. Live.</em></h3>
     <p class="modal-desc">Kein Vertrag. Keine Präsentation. Direkter Kontakt mit Florian Schreiber, Gründer von Kiron. Wir zeigen das Produkt live an Beispielen aus Ihrer Branche.</p>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Vorname</label>
-        <input type="text" class="form-input" placeholder="Thomas">
+    <form action="https://formsubmit.co/florian@orca-eng.de" method="POST">
+      <input type="hidden" name="_subject" value="Neue Demo-Anfrage über kiron.tech">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://www.kiron.tech">
+      <input type="hidden" name="_template" value="table">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Vorname</label>
+          <input type="text" name="vorname" class="form-input" placeholder="Thomas" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nachname</label>
+          <input type="text" name="nachname" class="form-input" placeholder="Müller" required>
+        </div>
       </div>
       <div class="form-group">
-        <label class="form-label">Nachname</label>
-        <input type="text" class="form-input" placeholder="Müller">
+        <label class="form-label">E-Mail</label>
+        <input type="email" name="email" class="form-input" placeholder="t.mueller@firma.de" required>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">E-Mail</label>
-      <input type="email" class="form-input" placeholder="t.mueller@firma.de">
-    </div>
-    <div class="form-row">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Unternehmen</label>
+          <input type="text" name="unternehmen" class="form-input" placeholder="Müller Metallbau GmbH" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mitarbeiter</label>
+          <input type="text" name="mitarbeiter" class="form-input" placeholder="42">
+        </div>
+      </div>
       <div class="form-group">
-        <label class="form-label">Unternehmen</label>
-        <input type="text" class="form-input" placeholder="Müller Metallbau GmbH">
+        <label class="form-label">Branche</label>
+        <input type="text" name="branche" class="form-input" placeholder="Metallverarbeitung / Maschinenbau / ...">
       </div>
-      <div class="form-group">
-        <label class="form-label">Mitarbeiter</label>
-        <input type="text" class="form-input" placeholder="42">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Branche</label>
-      <input type="text" class="form-input" placeholder="Metallverarbeitung / Maschinenbau / ...">
-    </div>
-    <button class="form-submit">Demo-Termin anfragen →</button>
-    <p class="form-note">Kein Spam. Keine Weitergabe. Direkter Rückruf innerhalb von 24 Stunden.</p>
+      <button type="submit" class="form-submit">Demo-Termin anfragen →</button>
+      <p class="form-note">Kein Spam. Keine Weitergabe. Direkter Rückruf innerhalb von 24 Stunden.</p>
+    </form>
   </div>
 </div>
 
