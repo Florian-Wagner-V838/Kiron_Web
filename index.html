@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiron χ — kiron.tech — Das ERP für die, die wirklich produzieren</title>
+<meta name="description" content="Kiron digitalisiert den Shopfloor des deutschen Mittelstands. Ohne Enterprise-ERP-Overhead, ohne Berater, ohne Kompromisse. In einem Tag einsatzbereit.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:   #f4f0e8;
+  --paper2:  #ece8df;
+  --paper3:  #e2ddd3;
+  --ink:     #0f0f0d;
+  --ink2:    #1a1a17;
+  --ink3:    #242420;
+  --muted:   #6e6e62;
+  --border:  rgba(0,0,0,0.09);
+  --green:   #1d9e75;
+  --green2:  #157a5a;
+  --green3:  #0d5e44;
+  --green4:  rgba(29,158,117,0.08);
+  --green5:  rgba(29,158,117,0.15);
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'Space Grotesk', sans-serif;
+  --mono:    'Space Mono', monospace;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { background:var(--ink); color:var(--paper); font-family:var(--sans); font-weight:300; line-height:1.7; overflow-x:hidden; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--ink2); }
+::-webkit-scrollbar-thumb { background:var(--green3); }
+
+/* ── NAV ── */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  height:60px;
+  background:rgba(15,15,13,0.92);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  display:flex; align-items:center;
+  padding:0 56px;
+  gap:0;
+  backdrop-filter:blur(12px);
+  transition:background .3s;
+}
+.nav.scrolled { background:rgba(15,15,13,0.98); border-bottom-color:rgba(29,158,117,0.15); }
+.nav-logo { font-family:var(--serif); font-size:22px; font-weight:300; color:var(--paper); margin-right:auto; display:flex; align-items:center; gap:8px; text-decoration:none; }
+.nav-logo em { color:var(--green); font-style:italic; }
+.nav-links { display:flex; align-items:center; gap:0; }
+.nav-link { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.4); padding:0 18px; height:60px; display:flex; align-items:center; text-decoration:none; text-transform:uppercase; transition:color .2s; border-left:1px solid rgba(255,255,255,0.04); }
+.nav-link:hover { color:var(--green); }
+.nav-cta { font-family:var(--mono); font-size:9px; letter-spacing:2px; padding:9px 20px; background:var(--green); color:white; text-decoration:none; text-transform:uppercase; margin-left:16px; transition:background .2s; border:none; cursor:pointer; }
+.nav-cta:hover { background:var(--green2); }
+
+/* ── HERO ── */
+.hero {
+  min-height:100vh; position:relative; overflow:hidden;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:0 0 80px;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:var(--ink2);
+}
+.hero-img {
+  position:absolute; inset:0;
+  background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1800&q=85&fit=crop&crop=center');
+  background-size:cover; background-position:center;
+  opacity:.25;
+}
+.hero-gradient {
+  position:absolute; inset:0;
+  background:linear-gradient(
+    135deg,
+    rgba(15,15,13,0.95) 0%,
+    rgba(15,15,13,0.7) 50%,
+    rgba(15,15,13,0.85) 100%
+  );
+}
+.hero-grid {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(29,158,117,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,158,117,0.035) 1px, transparent 1px);
+  background-size:72px 72px;
+}
+.hero-chi {
+  position:absolute; top:50%; right:-2%;
+  transform:translateY(-52%);
+  font-family:var(--serif); font-size:clamp(280px,35vw,520px);
+  font-weight:300; font-style:italic;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(29,158,117,0.06);
+  pointer-events:none; user-select:none; line-height:1;
+  animation:float 10s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(-52%) rotate(-2deg)} 50%{transform:translateY(-55%) rotate(-2deg)} }
+
+.hero-inner { position:relative; z-index:2; max-width:1280px; margin:0 auto; padding:0 56px; width:100%; }
+.hero-eyebrow { font-family:var(--mono); font-size:9px; letter-spacing:5px; color:rgba(29,158,117,0.85); text-transform:uppercase; margin-bottom:24px; display:flex; align-items:center; gap:12px; }
+.hero-eyebrow::before { content:'//'; color:rgba(29,158,117,0.4); }
+.hero-h1 { font-family:var(--serif); font-weight:300; font-size:clamp(56px,9vw,130px); line-height:.9; letter-spacing:-.02em; margin-bottom:36px; }
+.hero-h1 em { color:rgba(29,158,117,0.85); font-style:italic; }
+.hero-sub { font-size:17px; color:rgba(244,240,232,0.5); max-width:520px; line-height:1.85; border-left:2px solid var(--green); padding-left:20px; font-style:italic; margin-bottom:48px; font-family:var(--serif); }
+
+.hero-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.btn-primary { font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:16px 32px; background:var(--green); color:white; border:none; cursor:pointer; text-decoration:none; text-transform:uppercase; display:inline-flex; align-items:center; gap:10px; transition:background .2s, transform .15s; }
+.btn-primary:hover { background:var(--green2); transform:translateY(-1px); }
+.live-dot { width:7px; height:7px; border-radius:50%; background:white; animation:blink 1.4s ease-in-out infinite; flex-shrink:0; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.btn-ghost { font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:15px 32px; background:transparent; color:rgba(244,240,232,0.5); border:1px solid rgba(255,255,255,0.1); cursor:pointer; text-decoration:none; text-transform:uppercase; transition:all .2s; }
+.btn-ghost:hover { border-color:rgba(29,158,117,0.4); color:var(--green); }
+
+.hero-scroll { position:absolute; bottom:32px; right:56px; z-index:2; font-family:var(--mono); font-size:8px; letter-spacing:3px; color:rgba(255,255,255,0.2); text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px; }
+.hero-scroll::after { content:''; width:1px; height:40px; background:linear-gradient(transparent, rgba(29,158,117,0.4)); }
+
+/* Hero stats strip */
+.hero-stats { display:flex; gap:0; margin-top:56px; border-top:1px solid rgba(255,255,255,0.06); padding-top:32px; }
+.hstat { flex:1; padding:0 28px 0 0; }
+.hstat:first-child { padding-left:0; }
+.hstat + .hstat { border-left:1px solid rgba(255,255,255,0.06); padding-left:28px; }
+.hstat-val { font-family:var(--serif); font-size:40px; font-weight:300; color:var(--paper); line-height:1; display:block; }
+.hstat-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.3); text-transform:uppercase; margin-top:4px; display:block; }
+
+/* ── TICKER BAND ── */
+.ticker { background:var(--green); padding:12px 0; overflow:hidden; white-space:nowrap; }
+.ticker-inner { display:inline-flex; animation:ticker 30s linear infinite; }
+.ticker-item { font-family:var(--mono); font-size:10px; letter-spacing:3px; color:rgba(255,255,255,0.7); padding:0 32px; text-transform:uppercase; }
+.ticker-sep { color:rgba(255,255,255,0.3); padding:0 8px; }
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── SHARED STYLES ── */
+.container { max-width:1280px; margin:0 auto; padding:0 56px; }
+section { padding:100px 0; }
+.sec-lbl { font-family:var(--mono); font-size:9px; letter-spacing:5px; color:var(--green); text-transform:uppercase; display:block; margin-bottom:14px; }
+.sec-title { font-family:var(--serif); font-size:clamp(36px,5.5vw,68px); font-weight:300; line-height:.98; letter-spacing:-.02em; margin-bottom:48px; }
+.sec-title em { font-style:italic; color:rgba(29,158,117,0.8); }
+.sec-title.dark { color:var(--paper); }
+.sec-title.light { color:var(--ink); }
+p { color:rgba(244,240,232,0.55); font-size:14px; line-height:1.9; margin-bottom:16px; }
+p.light { color:rgba(15,15,13,0.55); }
+.lead { font-family:var(--serif); font-style:italic; font-size:18px; color:rgba(244,240,232,0.65); line-height:1.85; margin-bottom:40px; font-weight:300; }
+.lead.light-lead { color:rgba(15,15,13,0.6); }
+
+/* ── PROBLEM SECTION ── */
+.section-problem { background:var(--ink2); }
+.problem-split { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.problem-visual { position:relative; }
+.problem-visual-img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block; filter:grayscale(20%) brightness(.85); }
+.problem-badge {
+  position:absolute; bottom:-20px; right:-20px;
+  background:var(--green); padding:24px 28px;
+  font-family:var(--serif); font-size:48px; font-weight:300; color:white; line-height:1;
+}
+.problem-badge-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.6); display:block; margin-top:4px; text-transform:uppercase; }
+
+.terminal-block { background:#0a0f0c; border:1px solid rgba(29,158,117,0.15); margin-top:40px; }
+.t-bar { background:rgba(255,255,255,0.03); padding:8px 16px; display:flex; align-items:center; gap:6px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.t-dot { width:8px; height:8px; border-radius:50%; }
+.t-title { font-family:var(--mono); font-size:8px; letter-spacing:2px; color:rgba(29,158,117,0.4); margin-left:auto; text-transform:uppercase; }
+.t-body { padding:16px; font-family:var(--mono); font-size:11px; display:flex; flex-direction:column; gap:3px; }
+.t-line { color:rgba(244,240,232,0.4); }
+.t-bad { color:#e05555; }
+.t-ok { color:var(--green); }
+.t-prompt { color:rgba(244,240,232,0.2); margin-top:6px; }
+
+/* ── SOLUTION / MODULES ── */
+.section-solution { background:var(--paper); }
+.modules-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); margin-top:48px; }
+.module { background:var(--paper2); padding:36px 28px; position:relative; overflow:hidden; transition:background .2s; }
+.module:hover { background:var(--paper3); }
+.module-num { font-family:var(--serif); font-size:80px; font-weight:300; color:rgba(0,0,0,0.04); line-height:1; position:absolute; top:10px; right:16px; font-style:italic; }
+.module-icon { margin-bottom:16px; }
+.module-icon svg { color:var(--green); opacity:.7; }
+.module-name { font-family:var(--serif); font-size:20px; font-weight:300; color:var(--ink); margin-bottom:10px; }
+.module-desc { font-size:13px; color:var(--muted); line-height:1.75; }
+.module-status { font-family:var(--mono); font-size:9px; letter-spacing:2px; margin-top:16px; display:block; text-transform:uppercase; }
+.module-status.live { color:var(--green); }
+.module-status.dev { color:#c07840; }
+.module-featured { background:var(--ink2); }
+.module-featured .module-name { color:var(--paper); }
+.module-featured .module-desc { color:rgba(244,240,232,0.45); }
+.module-featured .module-num { color:rgba(29,158,117,0.06); }
+
+/* ── HOW IT WORKS ── */
+.section-how { background:var(--ink3); }
+.steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; margin-top:56px; }
+.steps::before { content:''; position:absolute; top:22px; left:5%; width:90%; height:1px; background:rgba(29,158,117,0.15); }
+.step { padding:14px; }
+.step-dot { width:12px; height:12px; border:2px solid rgba(29,158,117,0.5); background:var(--ink3); border-radius:50%; margin-bottom:20px; position:relative; z-index:1; }
+.step.active .step-dot { background:var(--green); border-color:var(--green); }
+.step-n { font-family:var(--mono); font-size:8px; letter-spacing:3px; color:rgba(29,158,117,0.55); margin-bottom:8px; display:block; text-transform:uppercase; }
+.step-title { font-family:var(--serif); font-size:18px; font-weight:300; color:var(--paper); margin-bottom:10px; }
+.step-desc { font-size:12px; color:rgba(244,240,232,0.4); line-height:1.75; }
+
+/* ── PROOF ── */
+.section-proof { background:var(--ink2); }
+.proof-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:2px; background:rgba(255,255,255,0.04); margin:56px 0; }
+.proof-stat { background:var(--ink2); padding:32px 24px; text-align:center; }
+.proof-stat.hi { background:var(--ink3); }
+.proof-val { font-family:var(--serif); font-size:52px; font-weight:300; color:var(--green); line-height:1; display:block; }
+.proof-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.3); text-transform:uppercase; margin-top:6px; display:block; }
+.proof-sub { font-size:11px; color:rgba(255,255,255,0.2); margin-top:4px; }
+
+/* Testimonial */
+.testimonial { display:grid; grid-template-columns:auto 1fr; gap:32px; padding:40px; background:var(--ink3); border:1px solid rgba(29,158,117,0.1); margin-top:48px; align-items:start; }
+.t-avatar { width:64px; height:64px; border-radius:50%; background:var(--green4); border:1px solid rgba(29,158,117,0.2); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:24px; color:var(--green); font-style:italic; flex-shrink:0; }
+.t-quote { font-family:var(--serif); font-size:20px; font-weight:300; font-style:italic; color:var(--paper); line-height:1.45; margin-bottom:14px; }
+.t-quote em { color:rgba(29,158,117,0.8); font-style:italic; }
+.t-person { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.35); text-transform:uppercase; }
+
+/* Photo strip */
+.photo-strip { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2px; background:rgba(255,255,255,0.04); margin:48px 0 0; }
+.pstrip-item { overflow:hidden; position:relative; }
+.pstrip-item img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(25%) brightness(.8); transition:filter .4s; }
+.pstrip-item:hover img { filter:grayscale(10%) brightness(.9); }
+.pstrip-main { aspect-ratio:16/9; }
+.pstrip-sq { aspect-ratio:1; }
+
+/* ── COMPARISON ── */
+.section-compare { background:var(--paper); }
+.compare-table { width:100%; border-collapse:collapse; margin-top:48px; font-size:13px; }
+.compare-table th { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:var(--green); padding:12px 16px; text-align:left; border-bottom:1px solid var(--green); background:var(--paper2); text-transform:uppercase; }
+.compare-table th.highlight { background:var(--green); color:white; }
+.compare-table td { padding:14px 16px; border-bottom:1px solid var(--border); color:var(--muted); }
+.compare-table tr:hover td { background:var(--paper2); }
+.compare-table tr.kiron-row td { color:var(--ink); background:var(--green4); }
+.compare-table tr.kiron-row td:first-child { font-family:var(--mono); font-size:11px; color:var(--green2); }
+.c-ok { color:var(--green); } .c-no { color:#c05050; } .c-mid { color:#b07030; }
+
+/* ── PRICING ── */
+.section-pricing { background:var(--ink2); }
+.pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.04); margin-top:56px; }
+.price-card { background:var(--ink2); padding:40px 32px; position:relative; }
+.price-card.featured { background:var(--ink3); border-top:2px solid var(--green); }
+.price-badge { position:absolute; top:-12px; left:32px; background:var(--green); font-family:var(--mono); font-size:8px; letter-spacing:2px; color:white; padding:3px 12px; text-transform:uppercase; }
+.price-tier { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:rgba(29,158,117,0.6); text-transform:uppercase; margin-bottom:16px; display:block; }
+.price-val { font-family:var(--serif); font-size:64px; font-weight:300; color:var(--paper); line-height:1; display:block; }
+.price-per { font-family:var(--mono); font-size:10px; color:rgba(255,255,255,0.3); letter-spacing:2px; margin-bottom:24px; display:block; text-transform:uppercase; }
+.price-features { list-style:none; margin-bottom:32px; }
+.price-features li { font-size:13px; color:rgba(244,240,232,0.5); padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.04); display:flex; gap:10px; align-items:flex-start; }
+.price-features li::before { content:'→'; color:var(--green); flex-shrink:0; }
+.price-features li.strong { color:rgba(244,240,232,0.8); }
+.price-cta { display:block; font-family:var(--mono); font-size:10px; letter-spacing:2px; padding:14px 24px; text-align:center; text-decoration:none; text-transform:uppercase; transition:all .2s; cursor:pointer; border:none; width:100%; }
+.price-cta.primary { background:var(--green); color:white; }
+.price-cta.primary:hover { background:var(--green2); }
+.price-cta.ghost { background:transparent; color:rgba(244,240,232,0.4); border:1px solid rgba(255,255,255,0.1); }
+.price-cta.ghost:hover { border-color:rgba(29,158,117,0.4); color:var(--green); }
+.price-note { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,0.2); text-align:center; margin-top:16px; letter-spacing:1px; }
+
+/* ── FAQ ── */
+.section-faq { background:var(--ink3); }
+.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:rgba(255,255,255,0.03); margin-top:48px; }
+.faq-item { background:var(--ink2); padding:32px 28px; border-left:2px solid transparent; transition:border-color .2s; cursor:pointer; }
+.faq-item:hover { border-left-color:rgba(29,158,117,0.4); }
+.faq-q { font-family:var(--serif); font-size:17px; font-weight:300; color:var(--paper); margin-bottom:12px; line-height:1.3; }
+.faq-a { font-size:13px; color:rgba(244,240,232,0.45); line-height:1.75; }
+
+/* ── CTA FINAL ── */
+.section-cta {
+  background:var(--ink); padding:120px 0;
+  position:relative; overflow:hidden; text-align:center;
+}
+.cta-bg-grid {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(29,158,117,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,158,117,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.cta-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:300px; border-radius:50%; background:radial-gradient(ellipse, rgba(29,158,117,0.07) 0%, transparent 65%); pointer-events:none; }
+.cta-inner { position:relative; z-index:1; max-width:700px; margin:0 auto; padding:0 56px; }
+.cta-h { font-family:var(--serif); font-size:clamp(36px,6vw,80px); font-weight:300; line-height:.95; letter-spacing:-.02em; color:var(--paper); margin-bottom:16px; }
+.cta-h em { color:rgba(29,158,117,0.8); font-style:italic; }
+.cta-sub { font-family:var(--serif); font-style:italic; font-size:17px; color:rgba(244,240,232,0.4); margin-bottom:48px; line-height:1.7; }
+.cta-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.cta-ornament { font-family:var(--serif); font-size:48px; color:rgba(29,158,117,0.15); margin-top:56px; font-style:italic; }
+
+/* ── FORM OVERLAY (Demo Modal) ── */
+.modal-overlay { position:fixed; inset:0; z-index:1000; background:rgba(10,10,8,.92); display:none; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+.modal-overlay.open { display:flex; }
+.modal { background:var(--ink2); border:1px solid rgba(29,158,117,0.15); max-width:520px; width:90%; padding:48px; position:relative; }
+.modal-close { position:absolute; top:20px; right:20px; font-family:var(--mono); font-size:11px; color:rgba(255,255,255,0.3); cursor:pointer; background:none; border:none; letter-spacing:2px; }
+.modal-close:hover { color:var(--green); }
+.modal-label { font-family:var(--mono); font-size:9px; letter-spacing:4px; color:var(--green); text-transform:uppercase; margin-bottom:16px; display:block; }
+.modal-h { font-family:var(--serif); font-size:32px; font-weight:300; color:var(--paper); margin-bottom:8px; line-height:1.1; }
+.modal-h em { font-style:italic; color:rgba(29,158,117,0.8); }
+.modal-desc { font-size:13px; color:rgba(255,255,255,0.35); margin-bottom:32px; line-height:1.7; }
+.form-group { margin-bottom:20px; }
+.form-label { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.35); text-transform:uppercase; display:block; margin-bottom:8px; }
+.form-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:12px 16px; font-family:var(--sans); font-size:14px; color:var(--paper); outline:none; transition:border-color .2s; }
+.form-input:focus { border-color:rgba(29,158,117,0.4); }
+.form-input::placeholder { color:rgba(255,255,255,0.2); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-submit { width:100%; font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:16px; background:var(--green); color:white; border:none; cursor:pointer; text-transform:uppercase; margin-top:8px; transition:background .2s; }
+.form-submit:hover { background:var(--green2); }
+.form-note { font-size:11px; color:rgba(255,255,255,0.2); text-align:center; margin-top:16px; font-family:var(--mono); letter-spacing:1px; }
+
+/* ── FOOTER ── */
+footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); padding:60px 56px 40px; }
+.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; max-width:1280px; margin:0 auto; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.05); }
+.footer-brand { font-family:var(--serif); font-size:24px; font-weight:300; color:var(--paper); margin-bottom:12px; }
+.footer-brand em { color:var(--green); font-style:italic; }
+.footer-tagline { font-size:13px; color:rgba(255,255,255,0.3); line-height:1.7; font-style:italic; font-family:var(--serif); }
+.footer-col-title { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:rgba(29,158,117,0.6); text-transform:uppercase; margin-bottom:16px; display:block; }
+.footer-links { list-style:none; }
+.footer-links li { margin-bottom:10px; }
+.footer-links a { font-size:13px; color:rgba(255,255,255,0.3); text-decoration:none; transition:color .2s; }
+.footer-links a:hover { color:var(--green); }
+.footer-bottom { max-width:1280px; margin:32px auto 0; display:flex; justify-content:space-between; align-items:center; }
+.footer-copy { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,0.2); letter-spacing:1px; text-transform:uppercase; }
+.footer-meta { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,0.15); letter-spacing:1px; text-transform:uppercase; display:flex; gap:20px; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px) {
+  .nav-links { display:none; }
+  .nav { padding:0 24px; }
+  .hero-inner { padding:0 24px; }
+  .hero-chi { display:none; }
+  .hero-stats { flex-direction:column; gap:16px; }
+  .container { padding:0 24px; }
+  .problem-split, .faq-grid, .pricing-grid, .footer-grid { grid-template-columns:1fr; }
+  .modules-grid, .steps, .proof-grid, .photo-strip, .compare-table { display:block; }
+  .steps { display:grid; grid-template-columns:1fr 1fr; }
+  .pricing-grid { gap:16px; background:transparent; }
+  section { padding:64px 0; }
+  .cta-inner { padding:0 24px; }
+  footer { padding:40px 24px; }
+  .hero { padding:0 0 60px; }
+  .testimonial { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="https://kiron.tech" class="nav-logo">Kiron <em>χ</em></a>
+  <div class="nav-links">
+    <a href="#solution" class="nav-link">Produkt</a>
+    <a href="#proof" class="nav-link">Ergebnisse</a>
+    <a href="#pricing" class="nav-link">Preise</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+  </div>
+  <button class="nav-cta" onclick="openModal()">Demo anfragen</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-img"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-chi">χ</div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow">ERP für produzierende KMU · Made in Germany</div>
+    <h1 class="hero-h1">
+      Das ERP für<br>die, die wirklich<br><em>produzieren.</em>
+    </h1>
+    <p class="hero-sub">
+      Kiron digitalisiert Ihren Shopfloor — ohne Enterprise-ERP-Overhead, 
+      ohne Berater, ohne 6-monatiges Implementierungsprojekt. 
+      In einem Tag einsatzbereit.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openModal()">
+        <span class="live-dot"></span>
+        Demo anfragen — kostenlos
+      </button>
+      <a href="#solution" class="btn-ghost">Produkt ansehen</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hstat">
+        <span class="hstat-val">1 Tag</span>
+        <span class="hstat-lbl">bis zur ersten Jobkarte</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-val">-11h</span>
+        <span class="hstat-lbl">Verwaltung pro Woche</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-val">599 €</span>
+        <span class="hstat-lbl">Flat-Rate · alle User</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-val">0</span>
+        <span class="hstat-lbl">externe Berater notwendig</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- COMPLIANCE BADGES -->
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);">
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      DSGVO-konform
+    </div>
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      GoBD-konform
+    </div>
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      TISAX-ready
+    </div>
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+      Hosted in Deutschland
+    </div>
+  </div>
+
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Shopfloor Manager</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Jobmanager</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Angebote & Kalkulation</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Finanzen & DATEV</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">LENA KI-Assistent</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">BOM & Stücklisten</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Made in Germany</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">DSGVO-nativ</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">GoBD-konform</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">TISAX-ready</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">In einem Tag live</span><span class="ticker-sep">·</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item">Shopfloor Manager</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Jobmanager</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Angebote & Kalkulation</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Finanzen & DATEV</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">LENA KI-Assistent</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">BOM & Stücklisten</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">Made in Germany</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">DSGVO-nativ</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">GoBD-konform</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">TISAX-ready</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">In einem Tag live</span><span class="ticker-sep">·</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section-problem">
+  <div class="container">
+    <div class="problem-split">
+      <div>
+        <span class="sec-lbl">Das Problem</span>
+        <h2 class="sec-title dark">Enterprise-ERP ist zu groß.<br><em>Excel zu gefährlich.</em></h2>
+        <p class="lead">Zehntausende produzierende KMUs in Deutschland steuern Shopfloor, Aufträge und Lager mit Excel, WhatsApp und Papier. Das muss nicht so sein.</p>
+        <p>Enterprise-ERP-Anbieter sind für Ihren Betrieb zu komplex, zu teuer und zu starr. Bestehende Mittelstandslösungen wie Etablierter ERP-Anbieter oder Klassische ERP-Lösung sind veraltet und nicht auf moderne Fertigungsprozesse ausgelegt.</p>
+        <p>Kiron schließt diese Lücke — gebaut von einem Ingenieur, der das Problem selbst hatte.</p>
+
+        <div class="terminal-block">
+          <div class="t-bar">
+            <div class="t-dot" style="background:#e05555;"></div>
+            <div class="t-dot" style="background:#d4a017;"></div>
+            <div class="t-dot" style="background:#1d9e75;"></div>
+            <span class="t-title">Düsseldorf · 2023 · 06:47</span>
+          </div>
+          <div class="t-body">
+            <span class="t-line">ERP-Systeme getestet: 6 &nbsp;&nbsp;&nbsp;&nbsp;Davon nützlich: 0</span>
+            <span class="t-bad">✗ Enterprise-ERP — zu groß, zu teuer, zu starr</span>
+            <span class="t-bad">✗ Branchenspezifisches ERP — kein Composites-Knowhow</span>
+            <span class="t-bad">✗ Etablierter ERP-Anbieter — 8 Monate Einführung</span>
+            <span class="t-bad">✗ Alle anderen — lesen keine Post</span>
+            <span class="t-prompt">› Entscheidung: selbst bauen. → Kiron.</span>
+          </div>
+        </div>
+      </div>
+      <div class="problem-visual">
+        <img class="problem-visual-img" src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=700&q=85&fit=crop&crop=center" alt="Fertigung Shopfloor">
+        <div class="problem-badge">
+          -11h<br>
+          <span class="problem-badge-lbl">Verwaltung/Woche</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section-solution" id="solution">
+  <div class="container">
+    <span class="sec-lbl">Das Produkt</span>
+    <h2 class="sec-title light">Was Kiron<br><em>kann.</em></h2>
+    <p class="lead light-lead">Sechs Module. Vollständig integriert. Kein Modul-Dschungel, keine User-Fallen. Alles im Preis.</p>
+
+    <div class="modules-grid">
+      <div class="module">
+        <div class="module-num">01</div>
+        <div class="module-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V8l6-4v4l6-4v4l6-4v16H2z"/><rect x="9" y="14" width="3" height="6"/><rect x="14" y="14" width="3" height="6"/></svg>
+        </div>
+        <div class="module-name">Shopfloor Manager</div>
+        <p class="module-desc">Echtzeit-Auftragsverfolgung. QR-Code-Jobcards, strikter QC→Start→Pause→Fertig-Workflow mit Schrittverriegelung. Kein Auftrag kann den nächsten Schritt überspringen.</p>
+        <span class="module-status live">● Live · Stabil</span>
+      </div>
+
+      <div class="module">
+        <div class="module-num">02</div>
+        <div class="module-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M7 13h4"/><path d="M7 17h8"/></svg>
+        </div>
+        <div class="module-name">Jobmanager</div>
+        <p class="module-desc">KW-Planung, Fortschrittsbalken pro Job, druckbare A4-Jobcards mit BOM-Tabelle. Baugruppen-Jobs mit automatischer BOM-Explosion in Kindjobs.</p>
+        <span class="module-status live">● Live · Stabil</span>
+      </div>
+
+      <div class="module">
+        <div class="module-num">03</div>
+        <div class="module-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="module-name">Angebote & Sales</div>
+        <p class="module-desc">Drag-and-Drop-Angebotssystem, Artikel-Tilepool, Inline-Preisüberschreibung, PDF-Export. Von der Anfrage bis zur Auftragsbestätigung in einem System.</p>
+        <span class="module-status live">● Live · Stabil</span>
+      </div>
+
+      <div class="module module-featured">
+        <div class="module-num">04</div>
+        <div class="module-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg>
+        </div>
+        <div class="module-name">LENA — KI-Assistent</div>
+        <p class="module-desc">Fragen zur Produktion in natürlicher Sprache — auf Deutsch. LENA kennt Ihre Aufträge, Maschinen und Termine. Kein Dashboard lernen. Einfach fragen. Einzigartig in dieser Preisklasse.</p>
+        <span class="module-status live" style="color:rgba(29,158,117,0.8);">● Beta · In Entwicklung</span>
+      </div>
+
+      <div class="module">
+        <div class="module-num">05</div>
+        <div class="module-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
+        </div>
+        <div class="module-name">Finanzen & DATEV</div>
+        <p class="module-desc">SKR03, DATEV-Export, Belegverwaltung, Geschäftskonto-Integration, IMAP-Anbindung. <strong style="color:var(--green2);">GoBD-konform</strong> — revisionssichere Belegarchivierung, Unveränderlichkeit und Nachvollziehbarkeit nach §146 AO. DSGVO-nativ, Hosting in Deutschland.</p>
+        <span class="module-status live">● Live · Stabil</span>
+      </div>
+
+      <div class="module">
+        <div class="module-num">06</div>
+        <div class="module-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="3" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 5v4"/><path d="M12 9l-7 8"/><path d="M12 9l7 8"/></svg>
+        </div>
+        <div class="module-name">BOM & Stücklisten</div>
+        <p class="module-desc">Hierarchische Stücklisten, Variantenkonfiguration, Materialverfolgung, Chargenmanagement. Vollständige BOM-Explosion für komplexe Baugruppen.</p>
+        <span class="module-status dev">◎ In Entwicklung</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-how">
+  <div class="container">
+    <span class="sec-lbl">Onboarding</span>
+    <h2 class="sec-title dark">Von der Demo zum<br><em>Vollbetrieb in 8 Tagen.</em></h2>
+
+    <div class="steps">
+      <div class="step active">
+        <div class="step-dot"></div>
+        <span class="step-n">Tag 1</span>
+        <div class="step-title">Live-Demo</div>
+        <p class="step-desc">30 Minuten. Keine Präsentation. Wir zeigen Kiron live — an Beispielen aus Ihrer Branche. Direkt mit dem Gründer.</p>
+      </div>
+      <div class="step active">
+        <div class="step-dot"></div>
+        <span class="step-n">Tag 2–3</span>
+        <div class="step-title">Account einrichten</div>
+        <p class="step-desc">Artikel, Maschinen, Mitarbeiter anlegen. Das machen Sie selbst — dauert 2 Stunden. Kein IT-Dienstleister notwendig.</p>
+      </div>
+      <div class="step active">
+        <div class="step-dot"></div>
+        <span class="step-n">Tag 4–7</span>
+        <div class="step-title">Pilotphase</div>
+        <p class="step-desc">Erste Aufträge laufen über Kiron. Werker bekommen eine Stunde Einführung. Tablets in der Halle, QR-Codes gedruckt.</p>
+      </div>
+      <div class="step active">
+        <div class="step-dot"></div>
+        <span class="step-n">Tag 8</span>
+        <div class="step-title">Vollbetrieb</div>
+        <p class="step-desc">Alle Aufträge in Kiron. Der Stapel auf dem Schreibtisch ist weg. Der Meister ruft nicht mehr an. Sie sind informiert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="section-proof" id="proof">
+  <div class="container">
+    <span class="sec-lbl">Ergebnisse · Nach 90 Tagen</span>
+    <h2 class="sec-title dark">Was unsere Kunden<br><em>berichten.</em></h2>
+
+    <div class="proof-grid">
+      <div class="proof-stat hi"><span class="proof-val">-11h</span><span class="proof-lbl">Verwaltungszeit</span><div class="proof-sub">pro Woche · GF + Meister</div></div>
+      <div class="proof-stat"><span class="proof-val">+23%</span><span class="proof-lbl">Mehr Aufträge</span><div class="proof-sub">Gleiche Mannschaft · Q2 vs Q1</div></div>
+      <div class="proof-stat hi"><span class="proof-val">98%</span><span class="proof-lbl">Liefertermintreue</span><div class="proof-sub">Vorher: Ø 76%</div></div>
+      <div class="proof-stat"><span class="proof-val">1 Tag</span><span class="proof-lbl">Onboarding</span><div class="proof-sub">Demo bis Vollbetrieb</div></div>
+    </div>
+
+    <div class="testimonial">
+      <div class="t-avatar">M</div>
+      <div>
+        <p class="t-quote">„Ich zahle 599 Euro im Monat. Ich habe in den ersten drei Monaten mindestens das Zehnfache an Wert zurückbekommen — durch eingesparte Zeit, weniger Fehler und einen Kunden der seinen Termin gehalten hat, weil ich ihn <em>rechtzeitig informieren konnte.</em>"</p>
+        <span class="t-person">Thomas M. · GF · Metallbau · 42 Mitarbeiter · NRW</span>
+      </div>
+    </div>
+
+    <div class="photo-strip">
+      <div class="pstrip-item pstrip-main">
+        <img src="https://images.unsplash.com/photo-1565515267686-7bd98a84e7c0?w=900&q=80&fit=crop&crop=center" alt="Shopfloor">
+      </div>
+      <div class="pstrip-item pstrip-sq">
+        <img src="https://images.unsplash.com/photo-1530893996771-8f52cef4a64a?w=500&q=80&fit=crop&crop=center" alt="CNC">
+      </div>
+      <div class="pstrip-item pstrip-sq">
+        <img src="https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=500&q=80&fit=crop&crop=center" alt="Werkstatt">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section-compare">
+  <div class="container">
+    <span class="sec-lbl">Wettbewerbsvergleich</span>
+    <h2 class="sec-title light">Kiron vs.<br><em>die Alternativen.</em></h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Anbieter</th>
+          <th class="highlight">Kiron χ</th>
+          <th>Enterprise-ERP</th>
+          <th>Etablierter ERP-Anbieter</th>
+          <th>Generische Cloud-ERP</th>
+          <th>Excel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="kiron-row">
+          <td>Preis / Monat</td>
+          <td><strong>299–599 €</strong></td>
+          <td>2.000–5.000 €+</td>
+          <td>1.500–3.000 €+</td>
+          <td>500–1.500 €</td>
+          <td>~50 €</td>
+        </tr>
+        <tr>
+          <td>Einführungszeit</td>
+          <td class="c-ok">1 Tag</td>
+          <td class="c-no">6–12 Monate</td>
+          <td class="c-no">6–9 Monate</td>
+          <td class="c-mid">2–4 Monate</td>
+          <td class="c-ok">Sofort</td>
+        </tr>
+        <tr>
+          <td>Shopfloor nativ</td>
+          <td class="c-ok">✔ Ja</td>
+          <td class="c-mid">⚠ Begrenzt</td>
+          <td class="c-mid">⚠ Veraltet</td>
+          <td class="c-mid">⚠ Generisch</td>
+          <td class="c-no">✗ Nein</td>
+        </tr>
+        <tr>
+          <td>KI-Assistent</td>
+          <td class="c-ok">✔ LENA</td>
+          <td class="c-no">✗ Nein</td>
+          <td class="c-no">✗ Nein</td>
+          <td class="c-no">✗ Nein</td>
+          <td class="c-no">✗ Nein</td>
+        </tr>
+        <tr>
+          <td>Made in Germany</td>
+          <td class="c-ok">✔ Ja</td>
+          <td class="c-ok">✔ Ja</td>
+          <td class="c-ok">✔ Ja</td>
+          <td class="c-no">✗ Nein</td>
+          <td class="c-ok">✔ Ja</td>
+        </tr>
+        <tr>
+          <td>Berater notwendig</td>
+          <td class="c-ok">✗ Nein</td>
+          <td class="c-no">✔ Ja</td>
+          <td class="c-no">✔ Ja</td>
+          <td class="c-mid">⚠ Meist</td>
+          <td class="c-ok">✗ Nein</td>
+        </tr>
+        <tr>
+          <td>Flat-Rate Lizenz</td>
+          <td class="c-ok">✔ Ja</td>
+          <td class="c-no">✗ Nein</td>
+          <td class="c-no">✗ Nein</td>
+          <td class="c-no">✗ Nein</td>
+          <td class="c-ok">✔ Ja</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-pricing" id="pricing">
+  <div class="container">
+    <span class="sec-lbl">Preise</span>
+    <h2 class="sec-title dark">Ehrlich.<br><em>Ohne Überraschungen.</em></h2>
+    <p style="color:rgba(255,255,255,0.35);font-size:15px;max-width:560px;margin-bottom:0;">Flat-Rate. Keine User-Fallen. Keine Implementierungskosten. Was abonniert wird, kostet was draufsteht — für immer.</p>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <span class="price-tier">Pilot · Early Adopter</span>
+        <span class="price-val">299€</span>
+        <span class="price-per">/Monat · bis 10 User</span>
+        <ul class="price-features">
+          <li class="strong">Alle Kernmodule</li>
+          <li>Shopfloor Manager</li>
+          <li>Jobmanager</li>
+          <li>Angebote & Sales</li>
+          <li>Persönliches Onboarding</li>
+          <li>Direkter Founder-Support</li>
+          <li class="strong">Preis steigt nach 90 Tagen</li>
+        </ul>
+        <button class="price-cta ghost" onclick="openModal()">Demo anfragen</button>
+        <p class="price-note">Early Adopter · Preis wird nicht erhöht für Bestandskunden</p>
+      </div>
+
+      <div class="price-card featured">
+        <span class="price-badge">Empfohlen</span>
+        <span class="price-tier">Standard · Hauptprodukt</span>
+        <span class="price-val">599€</span>
+        <span class="price-per">/Monat · bis 50 User</span>
+        <ul class="price-features">
+          <li class="strong">Alle Module inklusive</li>
+          <li>Shopfloor + Jobmanager</li>
+          <li>Angebote & Kalkulation</li>
+          <li>Finanzen + DATEV-Export</li>
+          <li class="strong">LENA KI-Assistent</li>
+          <li>BOM & Stücklisten</li>
+          <li class="strong">Priority Support direkt</li>
+        </ul>
+        <button class="price-cta primary" onclick="openModal()">Demo anfragen</button>
+        <p class="price-note">Monatlich kündbar · Alle Daten gehören Ihnen</p>
+      </div>
+
+      <div class="price-card">
+        <span class="price-tier">Enterprise · Ab 100 User</span>
+        <span class="price-val" style="font-size:42px;line-height:1.2;">Auf<br>Anfrage</span>
+        <span class="price-per">individuelles Angebot</span>
+        <ul class="price-features">
+          <li>Alle Standard-Module</li>
+          <li class="strong">Custom Onboarding</li>
+          <li>SLA-Vertrag</li>
+          <li>On-Premise Option</li>
+          <li>Dedizierter Ansprechpartner</li>
+          <li>Individuelle Anpassungen</li>
+          <li>API-Anbindung Drittsysteme</li>
+        </ul>
+        <button class="price-cta ghost" onclick="openModal()">Kontakt aufnehmen</button>
+        <p class="price-note">Ab Monat 9 verfügbar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-faq" id="faq">
+  <div class="container">
+    <span class="sec-lbl">Häufige Fragen</span>
+    <h2 class="sec-title dark">Was Sie wissen<br><em>möchten.</em></h2>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">Wie lange dauert die Einführung wirklich?</div>
+        <p class="faq-a">Ein Tag — das ist kein Marketing-Versprechen. Am Tag 1 legen Sie Ihre Maschinen, Mitarbeiter und Artikel an (2–3 Stunden). Am Tag 2 starten die ersten Aufträge. Am Tag 8 läuft der Vollbetrieb. Kein Berater. Kein Projekt. Keine IT-Abteilung.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Was passiert wenn ich kündige — bekomme ich meine Daten?</div>
+        <p class="faq-a">Ja. Vollständig. Jederzeit. Ihre Daten gehören Ihnen — nicht uns. Export in gängige Formate auf Knopfdruck. Kein Lock-in, kein Datengeisel, kein Verhandlungspoker bei der Kündigung.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ist Kiron DSGVO-, GoBD- und TISAX-konform?</div>
+        <p class="faq-a"><strong>DSGVO:</strong> Ja. Hosting in Deutschland, AV-Vertrag standardmäßig, keine US-Cloud-Abhängigkeit.<br><br><strong>GoBD:</strong> Ja. Kiron erfüllt die Grundsätze zur ordnungsmäßigen Buchführung — revisionssichere Belegarchivierung, Unveränderlichkeit von Dokumenten, lückenlose Nachvollziehbarkeit und Exportfähigkeit für Betriebsprüfungen.<br><br><strong>TISAX:</strong> Kiron ist TISAX-ready — geeignet für Automotive-Zulieferer mit TISAX-Anforderungen. Informationssicherheitsmanagement, Zugriffsrechte und Datenklassifizierung nach VDA-ISA-Anforderungen. TISAX-Label auf Anfrage für Enterprise-Kunden.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Für welche Branchen ist Kiron geeignet?</div>
+        <p class="faq-a">Primär: Maschinenbau, Metallverarbeitung, Kunststoff, Sondermaschinenbau, Holz & Möbel. Grundregel: Wenn Sie Aufträge haben, Maschinen und Mitarbeiter — passt Kiron. Wenn Sie Serienfertigung mit 10.000 Einheiten täglich haben, sind Sie bei Enterprise-ERP besser aufgehoben.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Was kostet die Einführung zusätzlich?</div>
+        <p class="faq-a">Nichts. Das Onboarding ist im Preis enthalten. Kein Setup-Paket, kein Schulungsvertrag, keine Beratungstage. Sie zahlen was auf der Preisseite steht. Das ist alles.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Kann ich Kiron 30 Tage kostenlos testen?</div>
+        <p class="faq-a">Ja. Nach der Demo erhalten Sie Zugang zu einer vollständigen Testinstanz mit Ihren eigenen Daten. Keine Kreditkarte, kein automatischer Übergang in ein Abo. Sie entscheiden aktiv ob Sie starten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-cta">
+  <div class="cta-bg-grid"></div>
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="hero-eyebrow" style="justify-content:center;margin-bottom:20px;">Ende der Geschichte · Anfang der Arbeit</div>
+    <h2 class="cta-h">Ihr Stapel<br>wartet <em>nicht.</em></h2>
+    <p class="cta-sub">30 Minuten Demo. Kein Vertrag. Direkter Kontakt mit dem Entwickler aus Düsseldorf. Wir zeigen Kiron live — an Ihren eigenen Dokumenten.</p>
+    <div class="cta-actions">
+      <button class="btn-primary" onclick="openModal()">
+        <span class="live-dot"></span>
+        Demo anfragen — kostenlos
+      </button>
+      <a href="#pricing" class="btn-ghost">Preise ansehen</a>
+    </div>
+    <div class="cta-ornament">χ</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Kiron <em>χ</em></div>
+      <p class="footer-tagline">"Jeder produzierende Betrieb hat einen Stapel. Kiron macht ihn unsichtbar."</p>
+    </div>
+    <div>
+      <span class="footer-col-title">Produkt</span>
+      <ul class="footer-links">
+        <li><a href="#solution">Module</a></li>
+        <li><a href="#pricing">Preise</a></li>
+        <li><a href="https://kiron.tech" onclick="openModal()">Demo anfragen</a></li>
+        <li><a href="https://kiron.tech">Roadmap</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Unternehmen</span>
+      <ul class="footer-links">
+        <li><a href="https://kiron.tech">Die Geschichte</a></li>
+        <li><a href="https://kiron.tech">Kiron GmbH i.G.</a></li>
+        <li><a href="https://kiron.tech">Karriere</a></li>
+        <li><a href="https://kiron.tech">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Rechtliches</span>
+      <ul class="footer-links">
+        <li><a href="https://kiron.tech">Impressum</a></li>
+        <li><a href="https://kiron.tech">Datenschutz</a></li>
+        <li><a href="https://kiron.tech">AGB</a></li>
+        <li><a href="https://kiron.tech">DSGVO</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Kiron GmbH i.G. · Anschrift folgt · kiron.tech</span>
+    <div class="footer-meta">
+      <span>Made in Germany</span>
+      <span>DSGVO-nativ</span>
+      <span>GoBD-konform</span>
+      <span>TISAX-ready</span>
+      <span>Hosted in DE</span>
+    </div>
+  </div>
+</footer>
+
+<!-- DEMO MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">Schließen ✕</button>
+    <span class="modal-label">// Demo anfragen</span>
+    <h3 class="modal-h">30 Minuten.<br><em>Ihr Shopfloor. Live.</em></h3>
+    <p class="modal-desc">Kein Vertrag. Keine Präsentation. Direkter Kontakt mit Florian Schreiber, Gründer von Kiron. Wir zeigen das Produkt live an Beispielen aus Ihrer Branche.</p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Vorname</label>
+        <input type="text" class="form-input" placeholder="Thomas">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nachname</label>
+        <input type="text" class="form-input" placeholder="Müller">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">E-Mail</label>
+      <input type="email" class="form-input" placeholder="t.mueller@firma.de">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Unternehmen</label>
+        <input type="text" class="form-input" placeholder="Müller Metallbau GmbH">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mitarbeiter</label>
+        <input type="text" class="form-input" placeholder="42">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Branche</label>
+      <input type="text" class="form-input" placeholder="Metallverarbeitung / Maschinenbau / ...">
+    </div>
+    <button class="form-submit">Demo-Termin anfragen →</button>
+    <p class="form-note">Kein Spam. Keine Weitergabe. Direkter Rückruf innerhalb von 24 Stunden.</p>
+  </div>
+</div>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Modal
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
