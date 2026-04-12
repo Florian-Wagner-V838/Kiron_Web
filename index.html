@@ -1286,41 +1286,63 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
     <h3 class="modal-h">30 Minuten.<br><em>Ihr Shopfloor. Live.</em></h3>
     <p class="modal-desc">Kein Vertrag. Keine Präsentation. Direkter Kontakt mit Florian Schreiber, Gründer von Kiron. Wir zeigen das Produkt live an Beispielen aus Ihrer Branche.</p>
 
-    <form action="https://formsubmit.co/florian@orca-eng.de" method="POST">
-      <input type="hidden" name="_subject" value="Neue Demo-Anfrage über kiron.tech">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://www.kiron.tech">
-      <input type="hidden" name="_template" value="table">
+    <form id="demoForm" onsubmit="submitLead(event)">
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Vorname</label>
-          <input type="text" name="vorname" class="form-input" placeholder="Thomas" required>
+          <label class="form-label">Vorname *</label>
+          <input type="text" id="f-vorname" class="form-input" placeholder="Thomas" required>
         </div>
         <div class="form-group">
-          <label class="form-label">Nachname</label>
-          <input type="text" name="nachname" class="form-input" placeholder="Müller" required>
+          <label class="form-label">Nachname *</label>
+          <input type="text" id="f-nachname" class="form-input" placeholder="Müller" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">E-Mail</label>
-        <input type="email" name="email" class="form-input" placeholder="t.mueller@firma.de" required>
+        <label class="form-label">E-Mail *</label>
+        <input type="email" id="f-email" class="form-input" placeholder="t.mueller@firma.de" required>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Unternehmen</label>
-          <input type="text" name="unternehmen" class="form-input" placeholder="Müller Metallbau GmbH" required>
+          <label class="form-label">Unternehmen *</label>
+          <input type="text" id="f-unternehmen" class="form-input" placeholder="Müller Metallbau GmbH" required>
         </div>
         <div class="form-group">
           <label class="form-label">Mitarbeiter</label>
-          <input type="text" name="mitarbeiter" class="form-input" placeholder="42">
+          <input type="text" id="f-mitarbeiter" class="form-input" placeholder="42">
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Branche</label>
-        <input type="text" name="branche" class="form-input" placeholder="Metallverarbeitung / Maschinenbau / ...">
+        <input type="text" id="f-branche" class="form-input" placeholder="Metallverarbeitung / Maschinenbau / ...">
       </div>
-      <button type="submit" class="form-submit">Demo-Termin anfragen →</button>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Wunschtermin</label>
+          <input type="date" id="f-wunschtermin" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tageszeit</label>
+          <select id="f-wunschzeit" class="form-input">
+            <option value="flexibel">Flexibel</option>
+            <option value="vormittags">Vormittags (9–12 Uhr)</option>
+            <option value="nachmittags">Nachmittags (13–17 Uhr)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nachricht (optional)</label>
+        <textarea id="f-nachricht" class="form-input" rows="3" placeholder="Was möchten Sie in der Demo sehen?" style="resize:vertical;"></textarea>
+      </div>
+      <button type="submit" id="f-submit" class="form-submit">Demo-Termin anfragen →</button>
       <p class="form-note">Kein Spam. Keine Weitergabe. Direkter Rückruf innerhalb von 24 Stunden.</p>
+      <div id="f-success" style="display:none;text-align:center;padding:20px 0;">
+        <span style="font-size:32px;display:block;margin-bottom:12px;">✓</span>
+        <span style="font-family:var(--serif);font-size:22px;color:var(--paper);display:block;margin-bottom:8px;">Anfrage erhalten!</span>
+        <span style="font-size:13px;color:rgba(244,240,232,0.5);">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</span>
+      </div>
+      <div id="f-error" style="display:none;text-align:center;padding:12px;background:rgba(224,85,85,0.15);margin-top:12px;">
+        <span style="font-size:13px;color:#e05555;">Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an info@kiron.tech.</span>
+      </div>
     </form>
   </div>
 </div>
@@ -1344,6 +1366,55 @@ function closeModalOutside(e) {
   if (e.target === document.getElementById('modal')) closeModal();
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Lead form submit
+const SUPABASE_URL = 'https://mahshbbsicmirqbfakhl.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1haHNoYmJzaWNtaXJxYmZha2hsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk1NjA4MjMsImV4cCI6MjA1NTEzNjgyM30.NbjGK9gKGGP41k0sDKT3ct1qs8Q76Wt1ohsKH_hKzK8';
+
+async function submitLead(e) {
+  e.preventDefault();
+  const btn = document.getElementById('f-submit');
+  const form = document.getElementById('demoForm');
+  btn.disabled = true;
+  btn.textContent = 'Wird gesendet...';
+  document.getElementById('f-error').style.display = 'none';
+
+  const body = {
+    vorname: document.getElementById('f-vorname').value,
+    nachname: document.getElementById('f-nachname').value,
+    email: document.getElementById('f-email').value,
+    unternehmen: document.getElementById('f-unternehmen').value || null,
+    mitarbeiter: document.getElementById('f-mitarbeiter').value || null,
+    branche: document.getElementById('f-branche').value || null,
+    wunschtermin: document.getElementById('f-wunschtermin').value || null,
+    wunschzeit: document.getElementById('f-wunschzeit').value || 'flexibel',
+    nachricht: document.getElementById('f-nachricht').value || null,
+    quelle: 'website'
+  };
+
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON,
+        'Authorization': 'Bearer ' + SUPABASE_ANON,
+        'Prefer': 'return=minimal',
+        'Accept-Profile': 'saas',
+        'Content-Profile': 'saas'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error(res.status);
+    // Hide form, show success
+    Array.from(form.querySelectorAll('.form-group,.form-row,#f-submit,.form-note')).forEach(el => el.style.display = 'none');
+    document.getElementById('f-success').style.display = 'block';
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Demo-Termin anfragen →';
+    document.getElementById('f-error').style.display = 'block';
+  }
+}
 
 // Feature list toggle
 function toggleFeatures() {
