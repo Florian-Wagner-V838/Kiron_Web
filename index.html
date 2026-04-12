@@ -1369,7 +1369,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 // Lead form submit
 const SUPABASE_URL = 'https://mahshbbsicmirqbfakhl.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1haHNoYmJzaWNtaXJxYmZha2hsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk1NjA4MjMsImV4cCI6MjA1NTEzNjgyM30.NbjGK9gKGGP41k0sDKT3ct1qs8Q76Wt1ohsKH_hKzK8';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1haHNoYmJzaWNtaXJxYmZha2hsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyMDU3MTIsImV4cCI6MjA5MDc4MTcxMn0.NbjGK9gKGGP41k0sDKT3ct1qs8Q76Wt1ohsKH_hKzK8';
 
 async function submitLead(e) {
   e.preventDefault();
@@ -1393,17 +1393,25 @@ async function submitLead(e) {
   };
 
   try {
-    const res = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+    const rpcBody = {
+      p_vorname: body.vorname,
+      p_nachname: body.nachname,
+      p_email: body.email,
+      p_unternehmen: body.unternehmen,
+      p_mitarbeiter: body.mitarbeiter,
+      p_branche: body.branche,
+      p_wunschtermin: body.wunschtermin,
+      p_wunschzeit: body.wunschzeit,
+      p_nachricht: body.nachricht
+    };
+    const res = await fetch(SUPABASE_URL + '/rest/v1/rpc/submit_lead', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'apikey': SUPABASE_ANON,
-        'Authorization': 'Bearer ' + SUPABASE_ANON,
-        'Prefer': 'return=minimal',
-        'Accept-Profile': 'saas',
-        'Content-Profile': 'saas'
+        'Authorization': 'Bearer ' + SUPABASE_ANON
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(rpcBody)
     });
     if (!res.ok) throw new Error(res.status);
     // Hide form, show success
