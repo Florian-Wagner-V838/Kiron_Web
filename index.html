@@ -321,16 +321,54 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   .hero-inner { padding:0 24px; }
   .hero-chi { display:none; }
   .hero-stats { flex-direction:column; gap:16px; }
+  .hero-scroll { display:none; }
   .container { padding:0 24px; }
   .problem-split, .faq-grid, .pricing-grid, .footer-grid { grid-template-columns:1fr; }
-  .modules-grid, .steps, .proof-grid, .photo-strip, .compare-table { display:block; }
+  .modules-grid { display:grid; grid-template-columns:1fr; gap:2px; }
   .steps { display:grid; grid-template-columns:1fr 1fr; }
+  .proof-grid { display:grid; grid-template-columns:1fr 1fr; }
+  .photo-strip { display:grid; grid-template-columns:1fr; }
   .pricing-grid { gap:16px; background:transparent; }
   section { padding:64px 0; }
   .cta-inner { padding:0 24px; }
   footer { padding:40px 24px; }
   .hero { padding:0 0 60px; }
   .testimonial { grid-template-columns:1fr; }
+  .compare-table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .compare-table th, .compare-table td { white-space:nowrap; min-width:120px; }
+  .form-row { grid-template-columns:1fr; }
+  .hero-h1 { font-size:clamp(40px,10vw,80px); }
+  .sec-title { font-size:clamp(30px,7vw,52px); }
+  .hero-actions { flex-direction:column; }
+  .btn-primary, .btn-ghost { width:100%; text-align:center; justify-content:center; }
+}
+
+/* LENA + Feature-List mobile */
+@media(max-width:768px) {
+  #lena > .container > div[style*="grid-template-columns:1fr 1fr"] { display:block !important; }
+  #lena > .container > div > div:last-child { margin-top:32px; }
+  #featureList > div > div[style*="grid-template-columns:1fr 1fr"] { display:grid !important; grid-template-columns:1fr !important; }
+  .price-card { margin-bottom:8px; }
+}
+
+/* Small phones */
+@media(max-width:480px) {
+  .nav { padding:0 16px; height:52px; }
+  .nav-logo { font-size:18px; }
+  .nav-cta { font-size:8px; padding:7px 14px; }
+  .container { padding:0 16px; }
+  .hero-inner { padding:0 16px; }
+  .cta-inner { padding:0 16px; }
+  footer { padding:32px 16px; }
+  .footer-bottom { flex-direction:column; gap:12px; text-align:center; }
+  .footer-meta { flex-wrap:wrap; justify-content:center; }
+  section { padding:48px 0; }
+  .hero { min-height:auto; padding:80px 0 48px; }
+  .hero-h1 { font-size:clamp(32px,9vw,56px); }
+  .steps { grid-template-columns:1fr; }
+  .proof-grid { grid-template-columns:1fr; }
+  .hstat-val { font-size:32px; }
+  .modal { padding:32px 20px; }
 }
 </style>
 </head>
