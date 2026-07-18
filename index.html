@@ -55,6 +55,8 @@ body { background:var(--ink); color:var(--paper); font-family:var(--sans); font-
 .nav-link:hover { color:var(--green); }
 .nav-cta { font-family:var(--mono); font-size:9px; letter-spacing:2px; padding:9px 20px; background:var(--green); color:white; text-decoration:none; text-transform:uppercase; margin-left:16px; transition:background .2s; border:none; cursor:pointer; }
 .nav-cta:hover { background:var(--green2); }
+.nav-app { font-family:var(--mono); font-size:9px; letter-spacing:2px; padding:8px 19px; background:transparent; color:var(--paper); text-decoration:none; text-transform:uppercase; margin-left:12px; border:1px solid rgba(255,255,255,0.25); transition:border-color .2s, color .2s; }
+.nav-app:hover { border-color:var(--green); color:var(--green); }
 
 /* ── HERO ── */
 .hero {
@@ -357,6 +359,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   .nav { padding:0 16px; height:52px; }
   .nav-logo { font-size:18px; }
   .nav-cta { font-size:8px; padding:7px 14px; }
+  .nav-app { font-size:8px; padding:6px 11px; margin-left:8px; }
   .container { padding:0 16px; }
   .hero-inner { padding:0 16px; }
   .cta-inner { padding:0 16px; }
@@ -380,11 +383,12 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   <a href="https://kiron.tech" class="nav-logo">Kiron <em>χ</em></a>
   <div class="nav-links">
     <a href="#solution" class="nav-link">Produkt</a>
-    <a href="#proof" class="nav-link">Ergebnisse</a>
+    <a href="#proof" class="nav-link">Warum Kiron</a>
     <a href="#pricing" class="nav-link">Preise</a>
     <a href="#faq" class="nav-link">FAQ</a>
   </div>
   <button class="nav-cta" onclick="openModal()">Demo anfragen</button>
+  <a href="https://app.kiron.tech" class="nav-app">Go to App</a>
 </nav>
 
 <!-- HERO -->
@@ -423,7 +427,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         <span class="hstat-lbl">Verwaltung pro Woche</span>
       </div>
       <div class="hstat">
-        <span class="hstat-val">ab 299 €</span>
+        <span class="hstat-val">ab 199 €</span>
         <span class="hstat-lbl">pro Monat · ab 5 User</span>
       </div>
       <div class="hstat">
@@ -446,7 +450,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
     </div>
     <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      TISAX-ready
+      ISO-27001-Rechenzentren
     </div>
     <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
@@ -469,7 +473,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
     <span class="ticker-item">Made in Germany</span><span class="ticker-sep">·</span>
     <span class="ticker-item">DSGVO-nativ</span><span class="ticker-sep">·</span>
     <span class="ticker-item">GoBD-konform</span><span class="ticker-sep">·</span>
-    <span class="ticker-item">TISAX-ready</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">ISO-27001-Rechenzentren</span><span class="ticker-sep">·</span>
     <span class="ticker-item">In einem Tag live</span><span class="ticker-sep">·</span>
     <!-- Duplicate for seamless loop -->
     <span class="ticker-item">Shopfloor Manager</span><span class="ticker-sep">·</span>
@@ -481,7 +485,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
     <span class="ticker-item">Made in Germany</span><span class="ticker-sep">·</span>
     <span class="ticker-item">DSGVO-nativ</span><span class="ticker-sep">·</span>
     <span class="ticker-item">GoBD-konform</span><span class="ticker-sep">·</span>
-    <span class="ticker-item">TISAX-ready</span><span class="ticker-sep">·</span>
+    <span class="ticker-item">ISO-27001-Rechenzentren</span><span class="ticker-sep">·</span>
     <span class="ticker-item">In einem Tag live</span><span class="ticker-sep">·</span>
   </div>
 </div>
@@ -495,7 +499,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         <h2 class="sec-title dark">Enterprise-ERP ist zu groß.<br><em>Excel zu gefährlich.</em></h2>
         <p class="lead">Zehntausende produzierende KMUs in Deutschland steuern Shopfloor, Aufträge und Lager mit Excel, WhatsApp und Papier. Das muss nicht so sein.</p>
         <p>Enterprise-ERP-Anbieter sind für Ihren Betrieb zu komplex, zu teuer und zu starr. Bestehende Mittelstandslösungen wie Etablierter ERP-Anbieter oder Klassische ERP-Lösung sind veraltet und nicht auf moderne Fertigungsprozesse ausgelegt.</p>
-        <p>Kiron schließt diese Lücke — gebaut von einem Ingenieur, der das Problem selbst hatte.</p>
+        <p>Kiron schließt diese Lücke — gegründet von Florian Wagner und Sebastian Schmoll, die das Problem aus der eigenen Fertigung kennen.</p>
 
         <div class="terminal-block">
           <div class="t-bar">
@@ -639,7 +643,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
       <!-- STARTER -->
       <div style="margin-bottom:48px;">
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Starter · 299 €/mo</div>
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Starter · 199 €/mo</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);">
 
           <div style="background:var(--paper2);padding:20px 24px;">
@@ -691,7 +695,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
       <!-- PROFESSIONAL -->
       <div style="margin-bottom:48px;">
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Professional · 599 €/mo · Alles aus Starter, plus:</div>
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Professional · 399 €/mo · Alles aus Starter, plus:</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);">
 
           <div style="background:var(--paper2);padding:20px 24px;">
@@ -741,7 +745,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
       <!-- ENTERPRISE -->
       <div>
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Enterprise · 1.499 €/mo · Alles aus Professional, plus:</div>
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Enterprise · 799 €/mo · Alles aus Professional, plus:</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);">
 
           <div style="background:var(--paper2);padding:20px 24px;">
@@ -784,7 +788,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         <div class="step-dot"></div>
         <span class="step-n">Tag 1</span>
         <div class="step-title">Live-Demo</div>
-        <p class="step-desc">30 Minuten. Keine Präsentation. Wir zeigen Kiron live — an Beispielen aus Ihrer Branche. Direkt mit dem Gründer.</p>
+        <p class="step-desc">30 Minuten. Keine Präsentation. Wir zeigen Kiron live — an Beispielen aus Ihrer Branche. Direkt mit den Gründern.</p>
       </div>
       <div class="step active">
         <div class="step-dot"></div>
@@ -869,22 +873,14 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 <!-- PROOF -->
 <section class="section-proof" id="proof">
   <div class="container">
-    <span class="sec-lbl">Ergebnisse · Nach 90 Tagen</span>
-    <h2 class="sec-title dark">Was unsere Kunden<br><em>berichten.</em></h2>
+    <span class="sec-lbl">Der Anspruch · Ihre ersten 90 Tage</span>
+    <h2 class="sec-title dark">Wofür Kiron<br><em>gebaut ist.</em></h2>
 
     <div class="proof-grid">
-      <div class="proof-stat hi"><span class="proof-val">-11h</span><span class="proof-lbl">Verwaltungszeit</span><div class="proof-sub">pro Woche · GF + Meister</div></div>
-      <div class="proof-stat"><span class="proof-val">+23%</span><span class="proof-lbl">Mehr Aufträge</span><div class="proof-sub">Gleiche Mannschaft · Q2 vs Q1</div></div>
-      <div class="proof-stat hi"><span class="proof-val">98%</span><span class="proof-lbl">Liefertermintreue</span><div class="proof-sub">Vorher: Ø 76%</div></div>
-      <div class="proof-stat"><span class="proof-val">1 Tag</span><span class="proof-lbl">Onboarding</span><div class="proof-sub">Demo bis Vollbetrieb</div></div>
-    </div>
-
-    <div class="testimonial">
-      <div class="t-avatar">M</div>
-      <div>
-        <p class="t-quote">„Ich zahle 599 Euro im Monat. Ich habe in den ersten drei Monaten mindestens das Zehnfache an Wert zurückbekommen — durch eingesparte Zeit, weniger Fehler und einen Kunden der seinen Termin gehalten hat, weil ich ihn <em>rechtzeitig informieren konnte.</em>"</p>
-        <span class="t-person">Thomas M. · GF · Metallbau · 42 Mitarbeiter · NRW</span>
-      </div>
+      <div class="proof-stat hi"><span class="proof-val">1 Tag</span><span class="proof-lbl">Onboarding</span><div class="proof-sub">Vollbetrieb ab Tag 8</div></div>
+      <div class="proof-stat"><span class="proof-val">9</span><span class="proof-lbl">Module</span><div class="proof-sub">vollständig integriert</div></div>
+      <div class="proof-stat hi"><span class="proof-val">17</span><span class="proof-lbl">Systemprüfungen</span><div class="proof-sub">laufen automatisch</div></div>
+      <div class="proof-stat"><span class="proof-val">DE</span><span class="proof-lbl">Datenhaltung</span><div class="proof-sub">Frankfurt am Main</div></div>
     </div>
 
     <div class="photo-strip">
@@ -920,7 +916,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       <tbody>
         <tr class="kiron-row">
           <td>Gesamtkosten / Jahr</td>
-          <td><strong>3.600–7.200 €</strong></td>
+          <td><strong>2.400–4.800 €</strong></td>
           <td>50.000–150.000 €+</td>
           <td>30.000–60.000 €+</td>
           <td>8.000–20.000 €</td>
@@ -992,14 +988,14 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   <div class="container">
     <span class="sec-lbl">Preise</span>
     <h2 class="sec-title dark">Ehrlich.<br><em>Ohne Überraschungen.</em></h2>
-    <p style="color:rgba(255,255,255,0.35);font-size:15px;max-width:560px;margin-bottom:0;">Drei Pläne. Keine versteckten Kosten. Monatlich kündbar. Jährlich 20 % sparen.</p>
+    <p style="color:rgba(255,255,255,0.35);font-size:15px;max-width:560px;margin-bottom:0;">Drei Pläne. Keine versteckten Kosten. Monatlich kündbar. Jährlich 20 % sparen. Alle Preise inkl. MwSt.</p>
 
     <div class="pricing-grid">
 
       <div class="price-card">
         <span class="price-tier">Starter</span>
-        <span class="price-val">299€</span>
-        <span class="price-per">/Monat · 5 User inkl. · jährl. 239 €</span>
+        <span class="price-val">199€</span>
+        <span class="price-per">/Monat inkl. MwSt. · 5 User inkl. · jährl. 159 €</span>
         <ul class="price-features">
           <li class="strong">Stammdaten & Dokumentenmanagement</li>
           <li>Angebote, Aufträge, Rechnungen & Mahnwesen</li>
@@ -1017,8 +1013,8 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       <div class="price-card featured">
         <span class="price-badge">Empfohlen</span>
         <span class="price-tier">Professional</span>
-        <span class="price-val">599€</span>
-        <span class="price-per">/Monat · 15 User inkl. · jährl. 479 €</span>
+        <span class="price-val">399€</span>
+        <span class="price-per">/Monat inkl. MwSt. · 15 User inkl. · jährl. 319 €</span>
         <ul class="price-features">
           <li class="strong">Alles aus Starter, plus:</li>
           <li class="strong">Produktion: Jobmanager, Kapazitätsplanung, Shopfloor</li>
@@ -1036,8 +1032,8 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
       <div class="price-card">
         <span class="price-tier">Enterprise</span>
-        <span class="price-val" style="font-size:52px;">1.499€</span>
-        <span class="price-per">/Monat · 50 User inkl. · jährl. 1.199 €</span>
+        <span class="price-val" style="font-size:52px;">799€</span>
+        <span class="price-per">/Monat inkl. MwSt. · 50 User inkl. · jährl. 639 €</span>
         <ul class="price-features">
           <li class="strong">Alles aus Professional, plus:</li>
           <li class="strong">Engineering: Kostenkalkulation, 3D-Modell-Viewer</li>
@@ -1081,12 +1077,6 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         <div class="module-name">Spedition</div>
         <p class="module-desc">Live-Flottentracking, Tour-Management, ETA-Berechnung und automatische Lieferscheinverknüpfung. Frachtbriefe auf Knopfdruck.</p>
         <span class="module-status live" style="color:var(--green2);">45 €/mo</span>
-      </div>
-      <div class="module">
-        <div class="module-num">🏭</div>
-        <div class="module-name">Stanzerei</div>
-        <p class="module-desc">Live-Shopfloor-Karte mit Maschinenstatus, OEE-Tracking, digitales Schichtbuch und Werkzeugverwaltung mit Hubzähler.</p>
-        <span class="module-status live" style="color:var(--green2);">49 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">⛴</div>
@@ -1149,18 +1139,6 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         <p class="module-desc">Lean-Manufacturing nach 7S für Ihre Fertigung: Shopfloor-Area-Map, Audit-Wizard, Gefahrstoff-Registry und 8-Wochen-Trend.</p>
         <span class="module-status live" style="color:var(--green2);">59 €/mo · Im Enterprise inkl.</span>
       </div>
-      <div class="module">
-        <div class="module-num">📷</div>
-        <div class="module-name">Schablonenscanner</div>
-        <p class="module-desc">Mechanische Schablonen in Sekunden digitalisieren. Erzeugt eine präzise Schnittkontur für Ihre Zuschnittsmaschine — kein manuelles Nachmessen, kein Zeichnen.</p>
-        <span class="module-status live" style="color:var(--green2);">49 €/mo</span>
-      </div>
-      <div class="module">
-        <div class="module-num">📌</div>
-        <div class="module-name">Planmarker</div>
-        <p class="module-desc">Probleme und Hinweise direkt auf Plänen und Bildern markieren — smart und mit System. Jede Markierung wird dokumentiert und ist für das Team nachvollziehbar.</p>
-        <span class="module-status live" style="color:var(--green2);">49 €/mo</span>
-      </div>
       <div class="module module-featured">
         <div class="module-num">📊</div>
         <div class="module-name">Nexara Restrukturierung</div>
@@ -1169,7 +1147,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       </div>
     </div>
 
-    <p style="color:rgba(15,15,13,0.4);font-size:13px;margin-top:24px;text-align:center;">Mengenrabatt: 3 Extensions gleichzeitig = -15 % · ab 5 Extensions = -25 %. Im Professional 2, im Enterprise 4 inklusive.</p>
+    <p style="color:rgba(15,15,13,0.4);font-size:13px;margin-top:24px;text-align:center;">Mengenrabatt: 3 Extensions gleichzeitig = -15 % · ab 5 Extensions = -25 %. Im Professional 2, im Enterprise 4 inklusive. Alle Preise inkl. MwSt.</p>
   </div>
 </section>
 
@@ -1189,8 +1167,8 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         <p class="faq-a">Ja. Vollständig. Jederzeit. Ihre Daten gehören Ihnen — nicht uns. Export in gängige Formate auf Knopfdruck. Kein Lock-in, kein Datengeisel, kein Verhandlungspoker bei der Kündigung.</p>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Ist Kiron DSGVO-, GoBD- und TISAX-konform?</div>
-        <p class="faq-a"><strong>DSGVO:</strong> Ja. Hosting in Deutschland, AV-Vertrag standardmäßig, keine US-Cloud-Abhängigkeit.<br><br><strong>GoBD:</strong> Ja. Kiron erfüllt die Grundsätze zur ordnungsmäßigen Buchführung — revisionssichere Belegarchivierung, Unveränderlichkeit von Dokumenten, lückenlose Nachvollziehbarkeit und Exportfähigkeit für Betriebsprüfungen.<br><br><strong>TISAX:</strong> Kiron ist TISAX-ready — geeignet für Automotive-Zulieferer mit TISAX-Anforderungen. Informationssicherheitsmanagement, Zugriffsrechte und Datenklassifizierung nach VDA-ISA-Anforderungen. TISAX-Label auf Anfrage für Enterprise-Kunden.</p>
+        <div class="faq-q">Ist Kiron DSGVO- und GoBD-konform?</div>
+        <p class="faq-a"><strong>DSGVO:</strong> Ja. Datenhaltung in Deutschland (Frankfurt am Main), Auftragsverarbeitungsvertrag inklusive. Alle eingesetzten Dienstleister sind vertraglich über EU-Standardvertragsklauseln gebunden und transparent gelistet.<br><br><strong>GoBD:</strong> Kiron ist auf die Grundsätze zur ordnungsmäßigen Buchführung ausgelegt — revisionssichere Belegarchivierung, Unveränderlichkeit von Dokumenten, lückenlose Nachvollziehbarkeit und Exportfähigkeit für Betriebsprüfungen.<br><br><strong>TISAX:</strong> Kirons Sicherheitsarchitektur orientiert sich an den VDA-ISA-Anforderungen (Rollenkonzept, Zugriffsrechte, Datenklassifizierung). Ein eigenes TISAX-Label besitzt Kiron derzeit nicht — sprechen Sie uns an, wenn Ihr Auftraggeber ein Assessment voraussetzt.</p>
       </div>
       <div class="faq-item">
         <div class="faq-q">Für welche Branchen ist Kiron geeignet?</div>
@@ -1198,7 +1176,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       </div>
       <div class="faq-item">
         <div class="faq-q">Was kostet die Einführung zusätzlich?</div>
-        <p class="faq-a">Nichts. Das Onboarding ist im Preis enthalten. Kein Setup-Paket, kein Schulungsvertrag, keine Beratungstage. Starter ab 299 €/mo, Professional ab 599 €/mo, Enterprise ab 1.499 €/mo. Jährlich 20 % sparen.</p>
+        <p class="faq-a">Nichts. Das Onboarding ist im Preis enthalten. Kein Setup-Paket, kein Schulungsvertrag, keine Beratungstage. Starter ab 199 €/mo, Professional ab 399 €/mo, Enterprise ab 799 €/mo — alle Preise inkl. MwSt. Jährlich 20 % sparen.</p>
       </div>
       <div class="faq-item">
         <div class="faq-q">Was ist LENA und was kostet sie?</div>
@@ -1219,7 +1197,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   <div class="cta-inner">
     <div class="hero-eyebrow" style="justify-content:center;margin-bottom:20px;">Ende der Geschichte · Anfang der Arbeit</div>
     <h2 class="cta-h">Ihr Stapel<br>wartet <em>nicht.</em></h2>
-    <p class="cta-sub">30 Minuten Demo. Kein Vertrag. Direkter Kontakt mit dem Entwickler aus Düsseldorf. Wir zeigen Kiron live — an Ihren eigenen Dokumenten.</p>
+    <p class="cta-sub">30 Minuten Demo. Kein Vertrag. Direkter Kontakt mit den Gründern. Wir zeigen Kiron live — an Ihren eigenen Dokumenten.</p>
     <div class="cta-actions">
       <button class="btn-primary" onclick="openModal()">
         <span class="live-dot"></span>
@@ -1244,16 +1222,13 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         <li><a href="#solution">Module</a></li>
         <li><a href="#pricing">Preise</a></li>
         <li><a href="https://kiron.tech" onclick="openModal()">Demo anfragen</a></li>
-        <li><a href="https://kiron.tech">Roadmap</a></li>
       </ul>
     </div>
     <div>
       <span class="footer-col-title">Unternehmen</span>
       <ul class="footer-links">
-        <li><a href="https://kiron.tech">Die Geschichte</a></li>
-        <li><a href="https://kiron.tech">Nexara Group</a></li>
-        <li><a href="https://kiron.tech">Karriere</a></li>
-        <li><a href="https://kiron.tech">Kontakt</a></li>
+        <li><a href="#lena">LENA</a></li>
+        <li><a href="mailto:info@kiron.tech">Kontakt</a></li>
       </ul>
     </div>
     <div>
@@ -1261,18 +1236,16 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       <ul class="footer-links">
         <li><a href="/impressum.html">Impressum</a></li>
         <li><a href="/datenschutz.html">Datenschutz</a></li>
-        <li><a href="/datenschutz.html">AGB</a></li>
-        <li><a href="/datenschutz.html">DSGVO</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Kiron GmbH i.G. · Anschrift folgt · kiron.tech</span>
+    <span class="footer-copy">© 2026 Todix GmbH · Kiron ist ein Produkt der Todix GmbH · kiron.tech</span>
     <div class="footer-meta">
       <span>Made in Germany</span>
       <span>DSGVO-nativ</span>
       <span>GoBD-konform</span>
-      <span>TISAX-ready</span>
+      <span>ISO-27001-Rechenzentren</span>
       <span>Hosted in DE</span>
     </div>
   </div>
@@ -1284,7 +1257,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
     <button class="modal-close" onclick="closeModal()">Schließen ✕</button>
     <span class="modal-label">// Demo anfragen</span>
     <h3 class="modal-h">30 Minuten.<br><em>Ihr Shopfloor. Live.</em></h3>
-    <p class="modal-desc">Kein Vertrag. Keine Präsentation. Direkter Kontakt mit Florian Schreiber, Gründer von Kiron. Wir zeigen das Produkt live an Beispielen aus Ihrer Branche.</p>
+    <p class="modal-desc">Kein Vertrag. Keine Präsentation. Direkter Kontakt mit Florian Wagner und Sebastian Schmoll, den Gründern von Kiron. Wir zeigen das Produkt live an Beispielen aus Ihrer Branche.</p>
 
     <form id="demoForm" onsubmit="submitLead(event)">
       <div class="form-row">
