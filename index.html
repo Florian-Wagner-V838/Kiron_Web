@@ -144,7 +144,7 @@ body { background:var(--paper); color:var(--ink); font-family:var(--sans); font-
 .hstat { flex:1; padding:0 28px 0 0; }
 .hstat:first-child { padding-left:0; }
 .hstat + .hstat { border-left:1px solid var(--border); padding-left:28px; }
-.hstat-val { font-family:var(--serif); font-size:40px; font-weight:400; color:var(--ink); line-height:1; display:block; }
+.hstat-val { font-family:var(--serif); font-size:40px; font-weight:400; color:var(--ink); line-height:1.15; display:block; padding-bottom:6px; }
 .hstat-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-top:4px; display:block; }
 
 /* Compliance-Badges */
@@ -179,7 +179,7 @@ p.light { color:var(--muted); }
 .problem-badge {
   position:absolute; bottom:-20px; right:-20px;
   background:var(--green); padding:24px 28px;
-  font-family:var(--serif); font-size:48px; font-weight:400; color:#fff; line-height:1;
+  font-family:var(--serif); font-size:48px; font-weight:400; color:#fff; line-height:1.1;
   border-radius:14px; box-shadow:0 12px 30px rgba(29,158,117,0.28);
 }
 .problem-badge-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.8); display:block; margin-top:4px; text-transform:uppercase; }
@@ -227,7 +227,7 @@ p.light { color:var(--muted); }
 .proof-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px; margin:56px 0; }
 .proof-stat { background:var(--white); padding:32px 24px; text-align:center; border:1px solid var(--border2); border-radius:14px; box-shadow:var(--shadow); }
 .proof-stat.hi { background:linear-gradient(160deg, var(--mint2) 0%, var(--white) 100%); border-color:rgba(29,158,117,0.22); }
-.proof-val { font-family:var(--serif); font-size:52px; font-weight:400; color:var(--greent); line-height:1; display:block; }
+.proof-val { font-family:var(--serif); font-size:52px; font-weight:400; color:var(--greent); line-height:1.12; display:block; padding-bottom:8px; }
 .proof-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--ink3); text-transform:uppercase; margin-top:6px; display:block; }
 .proof-sub { font-size:11px; color:var(--muted2); margin-top:4px; }
 
@@ -268,8 +268,12 @@ p.light { color:var(--muted); }
 .price-card.featured { border:1px solid rgba(29,158,117,0.35); border-top:3px solid var(--green); box-shadow:var(--shadow2); }
 .price-badge { position:absolute; top:-12px; left:32px; background:var(--green); font-family:var(--mono); font-size:8px; letter-spacing:2px; color:#fff; padding:4px 12px; text-transform:uppercase; border-radius:999px; }
 .price-tier { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:var(--greent); text-transform:uppercase; margin-bottom:16px; display:block; }
-.price-val { font-family:var(--serif); font-size:64px; font-weight:400; color:var(--ink); line-height:1; display:block; }
-.price-per { font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:1.5px; margin-bottom:24px; display:block; text-transform:uppercase; }
+/* Cormorant setzt Mediaevalziffern: 3, 9, 7 reichen ~0,28em unter die
+   Grundlinie. Zeilenhoehe + Innenabstand halten sie von der Zeile darunter frei.
+   (font-feature-settings "lnum" hilft hier nicht — der Google-Fonts-Build
+   enthaelt keine Versalziffern.) */
+.price-val { font-family:var(--serif); font-size:64px; font-weight:400; color:var(--ink); line-height:1.12; display:block; padding-bottom:12px; }
+.price-per { font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:1.5px; margin-bottom:24px; display:block; text-transform:uppercase; line-height:1.6; }
 .price-features { list-style:none; margin-bottom:32px; }
 .price-features li { font-size:13px; color:var(--muted); padding:9px 0; border-bottom:1px solid var(--border2); display:flex; gap:10px; align-items:flex-start; }
 .price-features li::before { content:'→'; color:var(--green); flex-shrink:0; }
@@ -280,6 +284,12 @@ p.light { color:var(--muted); }
 .price-cta.ghost { background:var(--paper2); color:var(--ink2); border:1px solid var(--border); }
 .price-cta.ghost:hover { border-color:rgba(29,158,117,0.45); color:var(--greent); background:var(--green4); }
 .price-note { font-family:var(--mono); font-size:9px; color:var(--muted2); text-align:center; margin-top:16px; letter-spacing:1px; }
+.billing-toggle { display:inline-flex; align-items:center; gap:4px; margin-top:28px; padding:4px; background:var(--white); border:1px solid var(--border); border-radius:999px; box-shadow:var(--shadow); }
+.billing-toggle button { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:11px 20px; border:none; border-radius:999px; background:transparent; color:var(--muted); cursor:pointer; transition:background .2s, color .2s; white-space:nowrap; }
+.billing-toggle button:hover { color:var(--greent); }
+.billing-toggle button[aria-pressed="true"] { background:var(--green); color:#fff; }
+.billing-save { font-family:var(--mono); font-size:9px; letter-spacing:1.5px; color:var(--greent); margin-left:12px; text-transform:uppercase; }
+.price-year { font-family:var(--mono); font-size:9px; letter-spacing:1px; color:var(--muted2); text-transform:uppercase; margin:-16px 0 22px; display:block; min-height:13px; }
 
 /* ── FAQ ── */
 .section-faq { background:var(--mint); }
@@ -1106,14 +1116,20 @@ footer { background:var(--paper2); border-top:1px solid var(--border); padding:6
   <div class="container">
     <span class="sec-lbl">Preise</span>
     <h2 class="sec-title dark">Ehrlich.<br><em>Ohne Überraschungen.</em></h2>
-    <p style="color:var(--muted);font-size:15px;max-width:560px;margin-bottom:0;">Drei Pläne. Keine versteckten Kosten. Monatlich kündbar. Jährlich 20 % sparen. Alle Preise inkl. MwSt.</p>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;margin-bottom:0;">Drei Pläne. Keine versteckten Kosten. Monatlich kündbar. Alle Preise inkl. MwSt.</p>
+
+    <div class="billing-toggle" role="group" aria-label="Abrechnungszeitraum wählen">
+      <button type="button" id="billMonth" aria-pressed="true"  onclick="setBilling('month')">Monatlich</button>
+      <button type="button" id="billYear"  aria-pressed="false" onclick="setBilling('year')">Jährlich · 20 % sparen</button>
+    </div>
 
     <div class="pricing-grid">
 
       <div class="price-card">
         <span class="price-tier">Starter</span>
-        <span class="price-val">199€</span>
-        <span class="price-per">/Monat inkl. MwSt. · 5 User inkl. · jährl. 159 €</span>
+        <span class="price-val" data-month="199" data-year="159">199 €</span>
+        <span class="price-per">/Monat inkl. MwSt. · 5 User inkl.</span>
+        <span class="price-year" data-total="1.908 €"></span>
         <ul class="price-features">
           <li class="strong">Stammdaten & Dokumentenmanagement</li>
           <li>Angebote, Aufträge, Rechnungen & Mahnwesen</li>
@@ -1131,8 +1147,9 @@ footer { background:var(--paper2); border-top:1px solid var(--border); padding:6
       <div class="price-card featured">
         <span class="price-badge">Empfohlen</span>
         <span class="price-tier">Professional</span>
-        <span class="price-val">399€</span>
-        <span class="price-per">/Monat inkl. MwSt. · 15 User inkl. · jährl. 319 €</span>
+        <span class="price-val" data-month="399" data-year="319">399 €</span>
+        <span class="price-per">/Monat inkl. MwSt. · 15 User inkl.</span>
+        <span class="price-year" data-total="3.828 €"></span>
         <ul class="price-features">
           <li class="strong">Alles aus Starter, plus:</li>
           <li class="strong">Produktion: Jobmanager, Kapazitätsplanung, Shopfloor</li>
@@ -1149,8 +1166,9 @@ footer { background:var(--paper2); border-top:1px solid var(--border); padding:6
 
       <div class="price-card">
         <span class="price-tier">Enterprise</span>
-        <span class="price-val" style="font-size:52px;">799€</span>
-        <span class="price-per">/Monat inkl. MwSt. · 50 User inkl. · jährl. 639 €</span>
+        <span class="price-val" data-month="799" data-year="639">799 €</span>
+        <span class="price-per">/Monat inkl. MwSt. · 50 User inkl.</span>
+        <span class="price-year" data-total="7.668 €"></span>
         <ul class="price-features">
           <li class="strong">Alles aus Professional, plus:</li>
           <li class="strong">Engineering: Kostenkalkulation, 3D-Modell-Viewer</li>
@@ -1558,6 +1576,29 @@ async function submitLead(e) {
     btn.textContent = 'Demo-Termin anfragen →';
     document.getElementById('f-error').style.display = 'block';
   }
+}
+
+/* ── Preis-Umschalter: monatlich / jaehrlich ── */
+function setBilling(mode) {
+  const yearly = mode === 'year';
+  document.getElementById('billMonth').setAttribute('aria-pressed', yearly ? 'false' : 'true');
+  document.getElementById('billYear').setAttribute('aria-pressed', yearly ? 'true' : 'false');
+
+  document.querySelectorAll('.price-val').forEach(el => {
+    el.textContent = (yearly ? el.dataset.year : el.dataset.month) + ' €';
+  });
+  document.querySelectorAll('.price-card').forEach(card => {
+    const per  = card.querySelector('.price-per');
+    const year = card.querySelector('.price-year');
+    if (per) {
+      /* Ausgangstext einmalig sichern, damit das Umschalten beliebig oft geht */
+      if (!per.dataset.base) per.dataset.base = per.textContent;
+      per.textContent = yearly
+        ? per.dataset.base.replace('/Monat inkl. MwSt.', '/Monat inkl. MwSt. bei Jahreszahlung')
+        : per.dataset.base;
+    }
+    if (year) year.textContent = yearly ? 'Entspricht ' + year.dataset.total + ' pro Jahr' : '';
+  });
 }
 
 // Feature list toggle
