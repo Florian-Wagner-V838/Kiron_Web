@@ -289,7 +289,11 @@ p.light { color:var(--muted); }
 .billing-toggle button:hover { color:var(--greent); }
 .billing-toggle button[aria-pressed="true"] { background:var(--green); color:#fff; }
 .billing-save { font-family:var(--mono); font-size:9px; letter-spacing:1.5px; color:var(--greent); margin-left:12px; text-transform:uppercase; }
-.price-year { font-family:var(--mono); font-size:9px; letter-spacing:1px; color:var(--muted2); text-transform:uppercase; margin:-16px 0 22px; display:block; min-height:13px; }
+/* Tatsaechlich abgerechneter Betrag — muss lesbar sein, nicht Fussnote */
+.price-year { font-family:var(--mono); font-size:11px; letter-spacing:.5px; color:var(--ink3); margin:-14px 0 22px; display:block; line-height:1.5; min-height:17px; }
+.price-year::before { content:''; display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--green); margin-right:7px; vertical-align:middle; }
+.price-year:empty::before { display:none; }
+.price-year strong { color:var(--ink); font-weight:400; }
 
 /* ── FAQ ── */
 .section-faq { background:var(--mint); }
@@ -1597,7 +1601,12 @@ function setBilling(mode) {
         ? per.dataset.base.replace('/Monat inkl. MwSt.', '/Monat inkl. MwSt. bei Jahreszahlung')
         : per.dataset.base;
     }
-    if (year) year.textContent = yearly ? 'Entspricht ' + year.dataset.total + ' pro Jahr' : '';
+    if (year) {
+      const val = card.querySelector('.price-val');
+      year.innerHTML = yearly
+        ? 'Abrechnung: <strong>' + year.dataset.total + '</strong> einmal pro Jahr'
+        : 'Abrechnung: <strong>' + val.dataset.month + ' €</strong> pro Monat';
+    }
   });
 }
 
@@ -1949,6 +1958,9 @@ function closeChat(force) {
   panel.classList.remove('open');
   document.getElementById('chatToggle').setAttribute('aria-expanded', 'false');
 }
+
+/* Ausgangszustand setzen, damit die Abrechnungszeile schon beim Laden steht */
+setBilling('month');
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
