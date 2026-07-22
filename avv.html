@@ -9,38 +9,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper: #f4f0e8; --ink: #0f0f0d; --ink2: #1a1a17; --ink3: #242420;
-  --green: #1d9e75; --green2: #157a5a;
+  --paper: #fbf9f5; --paper2: #f4f1e9; --white: #ffffff; --mint: #eff6f2;
+  --ink: #16211c; --ink2: #3d4a45; --muted: #6b7a74; --muted2: #8b9791;
+  --border: rgba(22,33,28,0.10); --border2: rgba(22,33,28,0.06);
+  --green: #1d9e75; --greent: #0e6d4f; --green2: #157a5a;
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'Space Grotesk', sans-serif;
   --mono: 'Space Mono', monospace;
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { font-size:16px; }
-body { background:var(--ink); color:var(--paper); font-family:var(--sans); font-weight:300; line-height:1.7; }
+body { background:var(--paper); color:var(--ink); font-family:var(--sans); font-weight:300; line-height:1.7; }
 .nav {
   position:fixed; top:0; left:0; right:0; z-index:500; height:60px;
-  background:rgba(15,15,13,0.98); border-bottom:1px solid rgba(29,158,117,0.15);
+  background:rgba(251,249,245,0.94); border-bottom:1px solid var(--border);
+  box-shadow:0 1px 20px rgba(22,33,28,0.05);
   display:flex; align-items:center; padding:0 56px; backdrop-filter:blur(12px);
 }
-.nav-logo { font-family:var(--serif); font-size:22px; font-weight:300; color:var(--paper); margin-right:auto; display:flex; align-items:center; gap:8px; text-decoration:none; }
-.nav-logo em { color:var(--green); font-style:italic; }
+.nav-logo { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--ink); margin-right:auto; display:flex; align-items:center; gap:8px; text-decoration:none; }
+.nav-logo em { color:var(--greent); font-style:italic; }
+.nav-logo svg { flex:0 0 auto; color:var(--green2); }
 .content { max-width:800px; margin:0 auto; padding:120px 56px 80px; }
 h1 { font-family:var(--serif); font-size:clamp(36px,5vw,56px); font-weight:300; line-height:1; margin-bottom:48px; }
-h1 em { color:rgba(29,158,117,0.8); font-style:italic; }
-h2 { font-family:var(--serif); font-size:24px; font-weight:300; color:var(--paper); margin:40px 0 16px; }
-h3 { font-family:var(--sans); font-size:16px; font-weight:400; color:var(--paper); margin:24px 0 8px; }
-p, li { color:rgba(244,240,232,0.6); font-size:14px; line-height:1.9; margin-bottom:12px; }
+h1 em { color:var(--greent); font-style:italic; }
+h2 { font-family:var(--serif); font-size:26px; font-weight:400; color:var(--ink); margin:40px 0 16px; }
+h3 { font-family:var(--sans); font-size:16px; font-weight:500; color:var(--ink2); margin:24px 0 8px; }
+p, li { color:var(--muted); font-size:14px; line-height:1.9; margin-bottom:12px; }
 ul { padding-left:20px; margin-bottom:16px; }
-a { color:var(--green); text-decoration:none; }
-a:hover { color:var(--green2); }
+a { color:var(--greent); text-decoration:none; }
+a:hover { color:var(--green2); text-decoration:underline; }
 .table-wrap { overflow-x:auto; margin:16px 0 24px; }
 table { border-collapse:collapse; width:100%; min-width:560px; }
-th, td { border:1px solid rgba(255,255,255,0.1); padding:10px 12px; font-size:13px; text-align:left; vertical-align:top; }
-th { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(29,158,117,0.85); background:rgba(255,255,255,0.02); }
-td { color:rgba(244,240,232,0.6); }
-footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); padding:40px 56px; text-align:center; }
-.footer-copy { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,0.2); letter-spacing:1px; text-transform:uppercase; }
+th, td { border:1px solid var(--border); padding:10px 12px; font-size:13px; text-align:left; vertical-align:top; }
+th { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--greent); background:var(--paper2); }
+td { color:var(--muted); }
+footer { background:var(--paper2); border-top:1px solid var(--border); padding:40px 56px; text-align:center; }
+.footer-copy { font-family:var(--mono); font-size:9px; color:var(--muted2); letter-spacing:1px; text-transform:uppercase; }
 @media(max-width:960px) {
   .nav { padding:0 24px; }
   .content { padding:100px 24px 60px; }
@@ -51,7 +55,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 <body>
 
 <nav class="nav">
-  <a href="/" class="nav-logo">Kiron <em>χ</em></a>
+  <a href="/" class="nav-logo"><svg width="26" height="26" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="rotate(-14 24 24)" stroke="currentColor"><ellipse cx="24" cy="24" rx="18.6" ry="8.4" transform="rotate(32 24 24)" stroke-width="3.4"/><ellipse cx="24" cy="24" rx="18.6" ry="8.4" transform="rotate(-32 24 24)" stroke-width="2.4"/></g><circle cx="26.4" cy="21.6" r="5.4" fill="currentColor"/><circle cx="41.4" cy="30.2" r="3.6" fill="currentColor"/></svg>Kiron</a>
 </nav>
 
 <div class="content">
@@ -132,7 +136,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
     </table>
   </div>
 
-  <p style="margin-top:48px; color:rgba(244,240,232,0.3); font-size:12px;">Stand: Juli 2026</p>
+  <p style="margin-top:48px; color:var(--muted2); font-size:12px;">Stand: Juli 2026</p>
 </div>
 
 <footer>

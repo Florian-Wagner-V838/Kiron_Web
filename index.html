@@ -3,60 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kiron χ — kiron.tech — Das ERP für die, die wirklich produzieren</title>
+<title>Kiron — kiron.tech — Das ERP für die, die wirklich produzieren</title>
 <meta name="description" content="Kiron digitalisiert den Shopfloor des deutschen Mittelstands. Ohne Enterprise-ERP-Overhead, ohne Berater, ohne Kompromisse. In einem Tag einsatzbereit.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper:   #f4f0e8;
-  --paper2:  #ece8df;
-  --paper3:  #e2ddd3;
-  --ink:     #0f0f0d;
-  --ink2:    #1a1a17;
-  --ink3:    #242420;
-  --muted:   #6e6e62;
-  --border:  rgba(0,0,0,0.09);
+  /* Flächen — hell, warm, freundlich */
+  --paper:   #fbf9f5;
+  --paper2:  #f4f1e9;
+  --paper3:  #ebe6db;
+  --white:   #ffffff;
+  --mint:    #eff6f2;
+  --mint2:   #e6f1ec;
+
+  /* Text */
+  --ink:     #16211c;
+  --ink2:    #3d4a45;
+  --ink3:    #5b6863;
+  --muted:   #6b7a74;
+  --muted2:  #8b9791;
+
+  --border:  rgba(22,33,28,0.10);
+  --border2: rgba(22,33,28,0.06);
+
+  /* Grün — Marke */
   --green:   #1d9e75;
+  --greent:  #0e6d4f;   /* für Text auf hellem Grund (Kontrast) */
   --green2:  #157a5a;
   --green3:  #0d5e44;
   --green4:  rgba(29,158,117,0.08);
-  --green5:  rgba(29,158,117,0.15);
+  --green5:  rgba(29,158,117,0.16);
+
+  --shadow:  0 1px 2px rgba(22,33,28,0.04), 0 8px 24px rgba(22,33,28,0.05);
+  --shadow2: 0 2px 4px rgba(22,33,28,0.05), 0 18px 48px rgba(22,33,28,0.09);
+
   --serif:   'Cormorant Garamond', Georgia, serif;
   --sans:    'Space Grotesk', sans-serif;
   --mono:    'Space Mono', monospace;
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; font-size:16px; }
-body { background:var(--ink); color:var(--paper); font-family:var(--sans); font-weight:300; line-height:1.7; overflow-x:hidden; }
+body { background:var(--paper); color:var(--ink); font-family:var(--sans); font-weight:300; line-height:1.7; overflow-x:hidden; }
 
 /* ── SCROLLBAR ── */
-::-webkit-scrollbar { width:4px; }
-::-webkit-scrollbar-track { background:var(--ink2); }
-::-webkit-scrollbar-thumb { background:var(--green3); }
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background:var(--paper2); }
+::-webkit-scrollbar-thumb { background:rgba(29,158,117,0.35); border-radius:8px; }
+::-webkit-scrollbar-thumb:hover { background:rgba(29,158,117,0.55); }
 
 /* ── NAV ── */
 .nav {
   position:fixed; top:0; left:0; right:0; z-index:500;
   height:60px;
-  background:rgba(15,15,13,0.92);
-  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:rgba(251,249,245,0.82);
+  border-bottom:1px solid var(--border2);
   display:flex; align-items:center;
   padding:0 56px;
   gap:0;
-  backdrop-filter:blur(12px);
-  transition:background .3s;
+  backdrop-filter:blur(14px);
+  transition:background .3s, box-shadow .3s;
 }
-.nav.scrolled { background:rgba(15,15,13,0.98); border-bottom-color:rgba(29,158,117,0.15); }
-.nav-logo { font-family:var(--serif); font-size:22px; font-weight:300; color:var(--paper); margin-right:auto; display:flex; align-items:center; gap:8px; text-decoration:none; }
-.nav-logo em { color:var(--green); font-style:italic; }
+.nav.scrolled { background:rgba(251,249,245,0.96); border-bottom-color:var(--border); box-shadow:0 1px 20px rgba(22,33,28,0.05); }
+.nav-logo { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--ink); margin-right:auto; display:flex; align-items:center; gap:8px; text-decoration:none; }
+.nav-logo svg { color:var(--green2); }
+.nav-logo em { color:var(--greent); font-style:italic; }
 .nav-links { display:flex; align-items:center; gap:0; }
-.nav-link { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.4); padding:0 18px; height:60px; display:flex; align-items:center; text-decoration:none; text-transform:uppercase; transition:color .2s; border-left:1px solid rgba(255,255,255,0.04); }
-.nav-link:hover { color:var(--green); }
-.nav-cta { font-family:var(--mono); font-size:9px; letter-spacing:2px; padding:9px 20px; background:var(--green); color:white; text-decoration:none; text-transform:uppercase; margin-left:16px; transition:background .2s; border:none; cursor:pointer; }
-.nav-cta:hover { background:var(--green2); }
-.nav-app { font-family:var(--mono); font-size:9px; letter-spacing:2px; padding:8px 19px; background:transparent; color:var(--paper); text-decoration:none; text-transform:uppercase; margin-left:12px; border:1px solid rgba(255,255,255,0.25); transition:border-color .2s, color .2s; }
-.nav-app:hover { border-color:var(--green); color:var(--green); }
+.nav-link { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--muted); padding:0 18px; height:60px; display:flex; align-items:center; text-decoration:none; text-transform:uppercase; transition:color .2s; }
+.nav-link:hover { color:var(--greent); }
+.nav-cta { font-family:var(--mono); font-size:9px; letter-spacing:2px; padding:10px 20px; background:var(--green); color:#fff; text-decoration:none; text-transform:uppercase; margin-left:16px; transition:background .2s, transform .15s; border:none; cursor:pointer; border-radius:8px; }
+.nav-cta:hover { background:var(--green2); transform:translateY(-1px); }
+.nav-app { font-family:var(--mono); font-size:9px; letter-spacing:2px; padding:9px 19px; background:transparent; color:var(--ink2); text-decoration:none; text-transform:uppercase; margin-left:12px; border:1px solid var(--border); transition:border-color .2s, color .2s, background .2s; border-radius:8px; }
+.nav-app:hover { border-color:rgba(29,158,117,0.45); color:var(--greent); background:var(--green4); }
 
 /* ── HERO ── */
 .hero {
@@ -66,256 +84,327 @@ body { background:var(--ink); color:var(--paper); font-family:var(--sans); font-
 }
 .hero-bg {
   position:absolute; inset:0;
-  background:var(--ink2);
+  background:linear-gradient(165deg, var(--white) 0%, var(--paper) 45%, var(--mint) 100%);
 }
 .hero-img {
   position:absolute; inset:0;
   background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1800&q=85&fit=crop&crop=center');
   background-size:cover; background-position:center;
-  opacity:.25;
+  opacity:.10;
 }
 .hero-gradient {
   position:absolute; inset:0;
   background:linear-gradient(
     135deg,
-    rgba(15,15,13,0.95) 0%,
-    rgba(15,15,13,0.7) 50%,
-    rgba(15,15,13,0.85) 100%
+    rgba(251,249,245,0.94) 0%,
+    rgba(251,249,245,0.72) 50%,
+    rgba(239,246,242,0.92) 100%
   );
 }
 .hero-grid {
   position:absolute; inset:0; pointer-events:none;
   background-image:
-    linear-gradient(rgba(29,158,117,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(29,158,117,0.035) 1px, transparent 1px);
+    linear-gradient(rgba(29,158,117,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,158,117,0.055) 1px, transparent 1px);
   background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 90% 70% at 60% 40%, #000 30%, transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 60% 40%, #000 30%, transparent 100%);
 }
 .hero-chi {
   position:absolute; top:50%; right:-2%;
   transform:translateY(-52%);
-  font-family:var(--serif); font-size:clamp(280px,35vw,520px);
-  font-weight:300; font-style:italic;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(29,158,117,0.06);
+  color:rgba(29,158,117,0.14);
   pointer-events:none; user-select:none; line-height:1;
   animation:float 10s ease-in-out infinite;
 }
+.hero-chi svg { display:block; width:clamp(280px,35vw,520px); height:auto; }
 @keyframes float { 0%,100%{transform:translateY(-52%) rotate(-2deg)} 50%{transform:translateY(-55%) rotate(-2deg)} }
 
 .hero-inner { position:relative; z-index:2; max-width:1280px; margin:0 auto; padding:0 56px; width:100%; }
-.hero-eyebrow { font-family:var(--mono); font-size:9px; letter-spacing:5px; color:rgba(29,158,117,0.85); text-transform:uppercase; margin-bottom:24px; display:flex; align-items:center; gap:12px; }
-.hero-eyebrow::before { content:'//'; color:rgba(29,158,117,0.4); }
-.hero-h1 { font-family:var(--serif); font-weight:300; font-size:clamp(56px,9vw,130px); line-height:.9; letter-spacing:-.02em; margin-bottom:36px; }
-.hero-h1 em { color:rgba(29,158,117,0.85); font-style:italic; }
-.hero-sub { font-size:17px; color:rgba(244,240,232,0.5); max-width:520px; line-height:1.85; border-left:2px solid var(--green); padding-left:20px; font-style:italic; margin-bottom:48px; font-family:var(--serif); }
+.hero-eyebrow { font-family:var(--mono); font-size:9px; letter-spacing:5px; color:var(--greent); text-transform:uppercase; margin-bottom:24px; display:flex; align-items:center; gap:12px; }
+.hero-eyebrow::before { content:'//'; color:rgba(29,158,117,0.5); }
+.hero-h1 { font-family:var(--serif); font-weight:400; font-size:clamp(56px,9vw,130px); line-height:.9; letter-spacing:-.02em; margin-bottom:36px; color:var(--ink); }
+.hero-h1 em { color:var(--greent); font-style:italic; }
+.hero-sub { font-size:17px; color:var(--ink3); max-width:520px; line-height:1.85; border-left:2px solid var(--green); padding-left:20px; font-style:italic; margin-bottom:48px; font-family:var(--serif); }
 
 .hero-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-.btn-primary { font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:16px 32px; background:var(--green); color:white; border:none; cursor:pointer; text-decoration:none; text-transform:uppercase; display:inline-flex; align-items:center; gap:10px; transition:background .2s, transform .15s; }
-.btn-primary:hover { background:var(--green2); transform:translateY(-1px); }
-.live-dot { width:7px; height:7px; border-radius:50%; background:white; animation:blink 1.4s ease-in-out infinite; flex-shrink:0; }
+.btn-primary { font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:16px 32px; background:var(--green); color:#fff; border:none; cursor:pointer; text-decoration:none; text-transform:uppercase; display:inline-flex; align-items:center; gap:10px; transition:background .2s, transform .15s, box-shadow .2s; border-radius:10px; box-shadow:0 6px 18px rgba(29,158,117,0.22); }
+.btn-primary:hover { background:var(--green2); transform:translateY(-2px); box-shadow:0 10px 26px rgba(29,158,117,0.28); }
+.live-dot { width:7px; height:7px; border-radius:50%; background:#fff; animation:blink 1.4s ease-in-out infinite; flex-shrink:0; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-.btn-ghost { font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:15px 32px; background:transparent; color:rgba(244,240,232,0.5); border:1px solid rgba(255,255,255,0.1); cursor:pointer; text-decoration:none; text-transform:uppercase; transition:all .2s; }
-.btn-ghost:hover { border-color:rgba(29,158,117,0.4); color:var(--green); }
+.btn-ghost { font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:15px 32px; background:var(--white); color:var(--ink2); border:1px solid var(--border); cursor:pointer; text-decoration:none; text-transform:uppercase; transition:all .2s; border-radius:10px; }
+.btn-ghost:hover { border-color:rgba(29,158,117,0.45); color:var(--greent); background:var(--green4); }
 
-.hero-scroll { position:absolute; bottom:32px; right:56px; z-index:2; font-family:var(--mono); font-size:8px; letter-spacing:3px; color:rgba(255,255,255,0.2); text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px; }
-.hero-scroll::after { content:''; width:1px; height:40px; background:linear-gradient(transparent, rgba(29,158,117,0.4)); }
+.hero-scroll { position:absolute; bottom:32px; right:56px; z-index:2; font-family:var(--mono); font-size:8px; letter-spacing:3px; color:var(--muted2); text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px; }
+.hero-scroll::after { content:''; width:1px; height:40px; background:linear-gradient(transparent, rgba(29,158,117,0.5)); }
 
 /* Hero stats strip */
-.hero-stats { display:flex; gap:0; margin-top:56px; border-top:1px solid rgba(255,255,255,0.06); padding-top:32px; }
+.hero-stats { display:flex; gap:0; margin-top:56px; border-top:1px solid var(--border); padding-top:32px; }
 .hstat { flex:1; padding:0 28px 0 0; }
 .hstat:first-child { padding-left:0; }
-.hstat + .hstat { border-left:1px solid rgba(255,255,255,0.06); padding-left:28px; }
-.hstat-val { font-family:var(--serif); font-size:40px; font-weight:300; color:var(--paper); line-height:1; display:block; }
-.hstat-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.3); text-transform:uppercase; margin-top:4px; display:block; }
+.hstat + .hstat { border-left:1px solid var(--border); padding-left:28px; }
+.hstat-val { font-family:var(--serif); font-size:40px; font-weight:400; color:var(--ink); line-height:1; display:block; }
+.hstat-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-top:4px; display:block; }
+
+/* Compliance-Badges */
+.badge-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; padding-top:24px; border-top:1px solid var(--border); }
+.badge { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--ink3); background:var(--white); border:1px solid var(--border); padding:7px 14px; display:flex; align-items:center; gap:8px; text-transform:uppercase; border-radius:999px; }
+.badge svg { stroke:var(--green); }
 
 /* ── TICKER BAND ── */
 .ticker { background:var(--green); padding:12px 0; overflow:hidden; white-space:nowrap; }
 .ticker-inner { display:inline-flex; animation:ticker 30s linear infinite; }
-.ticker-item { font-family:var(--mono); font-size:10px; letter-spacing:3px; color:rgba(255,255,255,0.7); padding:0 32px; text-transform:uppercase; }
-.ticker-sep { color:rgba(255,255,255,0.3); padding:0 8px; }
+.ticker-item { font-family:var(--mono); font-size:10px; letter-spacing:3px; color:rgba(255,255,255,0.92); padding:0 32px; text-transform:uppercase; }
+.ticker-sep { color:rgba(255,255,255,0.45); padding:0 8px; }
 @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
 /* ── SHARED STYLES ── */
 .container { max-width:1280px; margin:0 auto; padding:0 56px; }
 section { padding:100px 0; }
-.sec-lbl { font-family:var(--mono); font-size:9px; letter-spacing:5px; color:var(--green); text-transform:uppercase; display:block; margin-bottom:14px; }
-.sec-title { font-family:var(--serif); font-size:clamp(36px,5.5vw,68px); font-weight:300; line-height:.98; letter-spacing:-.02em; margin-bottom:48px; }
-.sec-title em { font-style:italic; color:rgba(29,158,117,0.8); }
-.sec-title.dark { color:var(--paper); }
-.sec-title.light { color:var(--ink); }
-p { color:rgba(244,240,232,0.55); font-size:14px; line-height:1.9; margin-bottom:16px; }
-p.light { color:rgba(15,15,13,0.55); }
-.lead { font-family:var(--serif); font-style:italic; font-size:18px; color:rgba(244,240,232,0.65); line-height:1.85; margin-bottom:40px; font-weight:300; }
-.lead.light-lead { color:rgba(15,15,13,0.6); }
+.sec-lbl { font-family:var(--mono); font-size:9px; letter-spacing:5px; color:var(--greent); text-transform:uppercase; display:block; margin-bottom:14px; }
+.sec-title { font-family:var(--serif); font-size:clamp(36px,5.5vw,68px); font-weight:400; line-height:.98; letter-spacing:-.02em; margin-bottom:48px; color:var(--ink); }
+.sec-title em { font-style:italic; color:var(--greent); }
+.sec-title.dark, .sec-title.light { color:var(--ink); }
+p { color:var(--muted); font-size:14px; line-height:1.9; margin-bottom:16px; }
+p.light { color:var(--muted); }
+.lead { font-family:var(--serif); font-style:italic; font-size:18px; color:var(--ink2); line-height:1.85; margin-bottom:40px; font-weight:400; }
+.lead.light-lead { color:var(--ink2); }
 
 /* ── PROBLEM SECTION ── */
-.section-problem { background:var(--ink2); }
+.section-problem { background:var(--mint); }
 .problem-split { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
 .problem-visual { position:relative; }
-.problem-visual-img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block; filter:grayscale(20%) brightness(.85); }
+.problem-visual-img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block; border-radius:16px; box-shadow:var(--shadow2); }
 .problem-badge {
   position:absolute; bottom:-20px; right:-20px;
   background:var(--green); padding:24px 28px;
-  font-family:var(--serif); font-size:48px; font-weight:300; color:white; line-height:1;
+  font-family:var(--serif); font-size:48px; font-weight:400; color:#fff; line-height:1;
+  border-radius:14px; box-shadow:0 12px 30px rgba(29,158,117,0.28);
 }
-.problem-badge-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.6); display:block; margin-top:4px; text-transform:uppercase; }
+.problem-badge-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.8); display:block; margin-top:4px; text-transform:uppercase; }
 
-.terminal-block { background:#0a0f0c; border:1px solid rgba(29,158,117,0.15); margin-top:40px; }
-.t-bar { background:rgba(255,255,255,0.03); padding:8px 16px; display:flex; align-items:center; gap:6px; border-bottom:1px solid rgba(255,255,255,0.04); }
+/* Terminal-Block — hell */
+.terminal-block { background:var(--white); border:1px solid var(--border); margin-top:40px; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+.t-bar { background:var(--paper2); padding:9px 16px; display:flex; align-items:center; gap:6px; border-bottom:1px solid var(--border2); }
 .t-dot { width:8px; height:8px; border-radius:50%; }
-.t-title { font-family:var(--mono); font-size:8px; letter-spacing:2px; color:rgba(29,158,117,0.4); margin-left:auto; text-transform:uppercase; }
+.t-title { font-family:var(--mono); font-size:8px; letter-spacing:2px; color:var(--muted2); margin-left:auto; text-transform:uppercase; }
 .t-body { padding:16px; font-family:var(--mono); font-size:11px; display:flex; flex-direction:column; gap:3px; }
-.t-line { color:rgba(244,240,232,0.4); }
-.t-bad { color:#e05555; }
-.t-ok { color:var(--green); }
-.t-prompt { color:rgba(244,240,232,0.2); margin-top:6px; }
+.t-line { color:var(--ink3); }
+.t-bad { color:#c0392b; }
+.t-ok { color:var(--greent); }
+.t-prompt { color:var(--muted2); margin-top:6px; }
 
 /* ── SOLUTION / MODULES ── */
 .section-solution { background:var(--paper); }
-.modules-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); margin-top:48px; }
-.module { background:var(--paper2); padding:36px 28px; position:relative; overflow:hidden; transition:background .2s; }
-.module:hover { background:var(--paper3); }
-.module-num { font-family:var(--serif); font-size:80px; font-weight:300; color:rgba(0,0,0,0.04); line-height:1; position:absolute; top:10px; right:16px; font-style:italic; }
+.modules-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:48px; }
+.module { background:var(--white); padding:36px 28px; position:relative; overflow:hidden; transition:transform .2s, box-shadow .2s, border-color .2s; border:1px solid var(--border2); border-radius:14px; box-shadow:var(--shadow); }
+.module:hover { transform:translateY(-3px); box-shadow:var(--shadow2); border-color:rgba(29,158,117,0.25); }
+.module-num { font-family:var(--serif); font-size:80px; font-weight:400; color:rgba(22,33,28,0.05); line-height:1; position:absolute; top:10px; right:16px; font-style:italic; }
 .module-icon { margin-bottom:16px; }
-.module-icon svg { color:var(--green); opacity:.7; }
-.module-name { font-family:var(--serif); font-size:20px; font-weight:300; color:var(--ink); margin-bottom:10px; }
+.module-icon svg { color:var(--green); }
+.module-name { font-family:var(--serif); font-size:21px; font-weight:400; color:var(--ink); margin-bottom:10px; }
 .module-desc { font-size:13px; color:var(--muted); line-height:1.75; }
 .module-status { font-family:var(--mono); font-size:9px; letter-spacing:2px; margin-top:16px; display:block; text-transform:uppercase; }
-.module-status.live { color:var(--green); }
-.module-status.dev { color:#c07840; }
-.module-featured { background:var(--ink2); }
-.module-featured .module-name { color:var(--paper); }
-.module-featured .module-desc { color:rgba(244,240,232,0.45); }
-.module-featured .module-num { color:rgba(29,158,117,0.06); }
+.module-status.live { color:var(--greent); }
+.module-status.dev { color:#a8641f; }
+.module-featured { background:linear-gradient(160deg, var(--mint2) 0%, var(--white) 100%); border-color:rgba(29,158,117,0.28); }
+.module-featured .module-num { color:rgba(29,158,117,0.10); }
 
 /* ── HOW IT WORKS ── */
-.section-how { background:var(--ink3); }
+.section-how { background:var(--mint2); }
 .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; margin-top:56px; }
-.steps::before { content:''; position:absolute; top:22px; left:5%; width:90%; height:1px; background:rgba(29,158,117,0.15); }
+.steps::before { content:''; position:absolute; top:22px; left:5%; width:90%; height:1px; background:rgba(29,158,117,0.28); }
 .step { padding:14px; }
-.step-dot { width:12px; height:12px; border:2px solid rgba(29,158,117,0.5); background:var(--ink3); border-radius:50%; margin-bottom:20px; position:relative; z-index:1; }
-.step.active .step-dot { background:var(--green); border-color:var(--green); }
-.step-n { font-family:var(--mono); font-size:8px; letter-spacing:3px; color:rgba(29,158,117,0.55); margin-bottom:8px; display:block; text-transform:uppercase; }
-.step-title { font-family:var(--serif); font-size:18px; font-weight:300; color:var(--paper); margin-bottom:10px; }
-.step-desc { font-size:12px; color:rgba(244,240,232,0.4); line-height:1.75; }
+.step-dot { width:12px; height:12px; border:2px solid rgba(29,158,117,0.5); background:var(--paper); border-radius:50%; margin-bottom:20px; position:relative; z-index:1; }
+.step.active .step-dot { background:var(--green); border-color:var(--green); box-shadow:0 0 0 4px rgba(29,158,117,0.14); }
+.step-n { font-family:var(--mono); font-size:8px; letter-spacing:3px; color:var(--greent); margin-bottom:8px; display:block; text-transform:uppercase; }
+.step-title { font-family:var(--serif); font-size:19px; font-weight:400; color:var(--ink); margin-bottom:10px; }
+.step-desc { font-size:12px; color:var(--muted); line-height:1.75; }
 
 /* ── PROOF ── */
-.section-proof { background:var(--ink2); }
-.proof-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:2px; background:rgba(255,255,255,0.04); margin:56px 0; }
-.proof-stat { background:var(--ink2); padding:32px 24px; text-align:center; }
-.proof-stat.hi { background:var(--ink3); }
-.proof-val { font-family:var(--serif); font-size:52px; font-weight:300; color:var(--green); line-height:1; display:block; }
-.proof-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.3); text-transform:uppercase; margin-top:6px; display:block; }
-.proof-sub { font-size:11px; color:rgba(255,255,255,0.2); margin-top:4px; }
+.section-proof { background:var(--mint); }
+.proof-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px; margin:56px 0; }
+.proof-stat { background:var(--white); padding:32px 24px; text-align:center; border:1px solid var(--border2); border-radius:14px; box-shadow:var(--shadow); }
+.proof-stat.hi { background:linear-gradient(160deg, var(--mint2) 0%, var(--white) 100%); border-color:rgba(29,158,117,0.22); }
+.proof-val { font-family:var(--serif); font-size:52px; font-weight:400; color:var(--greent); line-height:1; display:block; }
+.proof-lbl { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--ink3); text-transform:uppercase; margin-top:6px; display:block; }
+.proof-sub { font-size:11px; color:var(--muted2); margin-top:4px; }
 
 /* Testimonial */
-.testimonial { display:grid; grid-template-columns:auto 1fr; gap:32px; padding:40px; background:var(--ink3); border:1px solid rgba(29,158,117,0.1); margin-top:48px; align-items:start; }
-.t-avatar { width:64px; height:64px; border-radius:50%; background:var(--green4); border:1px solid rgba(29,158,117,0.2); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:24px; color:var(--green); font-style:italic; flex-shrink:0; }
-.t-quote { font-family:var(--serif); font-size:20px; font-weight:300; font-style:italic; color:var(--paper); line-height:1.45; margin-bottom:14px; }
-.t-quote em { color:rgba(29,158,117,0.8); font-style:italic; }
-.t-person { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.35); text-transform:uppercase; }
+.testimonial { display:grid; grid-template-columns:auto 1fr; gap:32px; padding:40px; background:var(--white); border:1px solid var(--border2); border-radius:16px; margin-top:48px; align-items:start; box-shadow:var(--shadow); }
+.t-avatar { width:64px; height:64px; border-radius:50%; background:var(--green4); border:1px solid rgba(29,158,117,0.25); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:24px; color:var(--greent); font-style:italic; flex-shrink:0; }
+.t-quote { font-family:var(--serif); font-size:21px; font-weight:400; font-style:italic; color:var(--ink); line-height:1.45; margin-bottom:14px; }
+.t-quote em { color:var(--greent); font-style:italic; }
+.t-person { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
 
 /* Photo strip */
-.photo-strip { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2px; background:rgba(255,255,255,0.04); margin:48px 0 0; }
-.pstrip-item { overflow:hidden; position:relative; }
-.pstrip-item img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(25%) brightness(.8); transition:filter .4s; }
-.pstrip-item:hover img { filter:grayscale(10%) brightness(.9); }
+.photo-strip { display:grid; grid-template-columns:2fr 1fr 1fr; gap:16px; margin:48px 0 0; }
+.pstrip-item { overflow:hidden; position:relative; border-radius:14px; box-shadow:var(--shadow); }
+.pstrip-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s; }
+.pstrip-item:hover img { transform:scale(1.03); }
 .pstrip-main { aspect-ratio:16/9; }
 .pstrip-sq { aspect-ratio:1; }
 
 /* ── COMPARISON ── */
 .section-compare { background:var(--paper); }
-.compare-table { width:100%; border-collapse:collapse; margin-top:48px; font-size:13px; }
-.compare-table th { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:var(--green); padding:12px 16px; text-align:left; border-bottom:1px solid var(--green); background:var(--paper2); text-transform:uppercase; }
-.compare-table th.highlight { background:var(--green); color:white; }
-.compare-table td { padding:14px 16px; border-bottom:1px solid var(--border); color:var(--muted); }
+.compare-wrap { margin-top:48px; background:var(--white); border:1px solid var(--border2); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; }
+.compare-table { width:100%; border-collapse:collapse; font-size:13px; }
+.compare-table th { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:var(--greent); padding:14px 16px; text-align:left; border-bottom:1px solid var(--border); background:var(--paper2); text-transform:uppercase; }
+.compare-table th.highlight { background:var(--green); color:#fff; }
+.compare-table td { padding:14px 16px; border-bottom:1px solid var(--border2); color:var(--muted); }
+.compare-table tr:last-child td { border-bottom:none; }
 .compare-table tr:hover td { background:var(--paper2); }
 .compare-table tr.kiron-row td { color:var(--ink); background:var(--green4); }
-.compare-table tr.kiron-row td:first-child { font-family:var(--mono); font-size:11px; color:var(--green2); }
-.c-ok { color:var(--green); } .c-no { color:#c05050; } .c-mid { color:#b07030; }
+.compare-table tr.kiron-row td:first-child { font-family:var(--mono); font-size:11px; color:var(--greent); }
+.c-ok { color:var(--greent); } .c-no { color:#b53f30; } .c-mid { color:#a8641f; }
 
 /* ── PRICING ── */
-.section-pricing { background:var(--ink2); }
-.pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.04); margin-top:56px; }
-.price-card { background:var(--ink2); padding:40px 32px; position:relative; }
-.price-card.featured { background:var(--ink3); border-top:2px solid var(--green); }
-.price-badge { position:absolute; top:-12px; left:32px; background:var(--green); font-family:var(--mono); font-size:8px; letter-spacing:2px; color:white; padding:3px 12px; text-transform:uppercase; }
-.price-tier { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:rgba(29,158,117,0.6); text-transform:uppercase; margin-bottom:16px; display:block; }
-.price-val { font-family:var(--serif); font-size:64px; font-weight:300; color:var(--paper); line-height:1; display:block; }
-.price-per { font-family:var(--mono); font-size:10px; color:rgba(255,255,255,0.3); letter-spacing:2px; margin-bottom:24px; display:block; text-transform:uppercase; }
+.section-pricing { background:var(--mint2); }
+.pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:56px; align-items:start; }
+.price-card { background:var(--white); padding:40px 32px; position:relative; border:1px solid var(--border2); border-radius:16px; box-shadow:var(--shadow); }
+.price-card.featured { border:1px solid rgba(29,158,117,0.35); border-top:3px solid var(--green); box-shadow:var(--shadow2); }
+.price-badge { position:absolute; top:-12px; left:32px; background:var(--green); font-family:var(--mono); font-size:8px; letter-spacing:2px; color:#fff; padding:4px 12px; text-transform:uppercase; border-radius:999px; }
+.price-tier { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:var(--greent); text-transform:uppercase; margin-bottom:16px; display:block; }
+.price-val { font-family:var(--serif); font-size:64px; font-weight:400; color:var(--ink); line-height:1; display:block; }
+.price-per { font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:1.5px; margin-bottom:24px; display:block; text-transform:uppercase; }
 .price-features { list-style:none; margin-bottom:32px; }
-.price-features li { font-size:13px; color:rgba(244,240,232,0.5); padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.04); display:flex; gap:10px; align-items:flex-start; }
+.price-features li { font-size:13px; color:var(--muted); padding:9px 0; border-bottom:1px solid var(--border2); display:flex; gap:10px; align-items:flex-start; }
 .price-features li::before { content:'→'; color:var(--green); flex-shrink:0; }
-.price-features li.strong { color:rgba(244,240,232,0.8); }
-.price-cta { display:block; font-family:var(--mono); font-size:10px; letter-spacing:2px; padding:14px 24px; text-align:center; text-decoration:none; text-transform:uppercase; transition:all .2s; cursor:pointer; border:none; width:100%; }
-.price-cta.primary { background:var(--green); color:white; }
+.price-features li.strong { color:var(--ink2); }
+.price-cta { display:block; font-family:var(--mono); font-size:10px; letter-spacing:2px; padding:15px 24px; text-align:center; text-decoration:none; text-transform:uppercase; transition:all .2s; cursor:pointer; border:none; width:100%; border-radius:10px; }
+.price-cta.primary { background:var(--green); color:#fff; box-shadow:0 6px 18px rgba(29,158,117,0.22); }
 .price-cta.primary:hover { background:var(--green2); }
-.price-cta.ghost { background:transparent; color:rgba(244,240,232,0.4); border:1px solid rgba(255,255,255,0.1); }
-.price-cta.ghost:hover { border-color:rgba(29,158,117,0.4); color:var(--green); }
-.price-note { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,0.2); text-align:center; margin-top:16px; letter-spacing:1px; }
+.price-cta.ghost { background:var(--paper2); color:var(--ink2); border:1px solid var(--border); }
+.price-cta.ghost:hover { border-color:rgba(29,158,117,0.45); color:var(--greent); background:var(--green4); }
+.price-note { font-family:var(--mono); font-size:9px; color:var(--muted2); text-align:center; margin-top:16px; letter-spacing:1px; }
 
 /* ── FAQ ── */
-.section-faq { background:var(--ink3); }
-.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:rgba(255,255,255,0.03); margin-top:48px; }
-.faq-item { background:var(--ink2); padding:32px 28px; border-left:2px solid transparent; transition:border-color .2s; cursor:pointer; }
-.faq-item:hover { border-left-color:rgba(29,158,117,0.4); }
-.faq-q { font-family:var(--serif); font-size:17px; font-weight:300; color:var(--paper); margin-bottom:12px; line-height:1.3; }
-.faq-a { font-size:13px; color:rgba(244,240,232,0.45); line-height:1.75; }
+.section-faq { background:var(--mint); }
+.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:48px; }
+.faq-item { background:var(--white); padding:32px 28px; border:1px solid var(--border2); border-left:3px solid transparent; border-radius:12px; transition:border-color .2s, box-shadow .2s; box-shadow:var(--shadow); }
+.faq-item:hover { border-left-color:var(--green); box-shadow:var(--shadow2); }
+.faq-q { font-family:var(--serif); font-size:18px; font-weight:400; color:var(--ink); margin-bottom:12px; line-height:1.3; }
+.faq-a { font-size:13px; color:var(--muted); line-height:1.8; }
+.faq-a strong { color:var(--ink2); }
 
 /* ── CTA FINAL ── */
 .section-cta {
-  background:var(--ink); padding:120px 0;
+  background:linear-gradient(160deg, var(--mint) 0%, var(--paper) 60%, var(--mint2) 100%);
+  padding:120px 0;
   position:relative; overflow:hidden; text-align:center;
 }
 .cta-bg-grid {
   position:absolute; inset:0; pointer-events:none;
   background-image:
-    linear-gradient(rgba(29,158,117,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(29,158,117,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(29,158,117,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,158,117,0.05) 1px, transparent 1px);
   background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 50%, #000 20%, transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%, #000 20%, transparent 100%);
 }
-.cta-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:300px; border-radius:50%; background:radial-gradient(ellipse, rgba(29,158,117,0.07) 0%, transparent 65%); pointer-events:none; }
+.cta-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:700px; height:340px; border-radius:50%; background:radial-gradient(ellipse, rgba(29,158,117,0.12) 0%, transparent 65%); pointer-events:none; }
 .cta-inner { position:relative; z-index:1; max-width:700px; margin:0 auto; padding:0 56px; }
-.cta-h { font-family:var(--serif); font-size:clamp(36px,6vw,80px); font-weight:300; line-height:.95; letter-spacing:-.02em; color:var(--paper); margin-bottom:16px; }
-.cta-h em { color:rgba(29,158,117,0.8); font-style:italic; }
-.cta-sub { font-family:var(--serif); font-style:italic; font-size:17px; color:rgba(244,240,232,0.4); margin-bottom:48px; line-height:1.7; }
+.cta-h { font-family:var(--serif); font-size:clamp(36px,6vw,80px); font-weight:400; line-height:.95; letter-spacing:-.02em; color:var(--ink); margin-bottom:16px; }
+.cta-h em { color:var(--greent); font-style:italic; }
+.cta-sub { font-family:var(--serif); font-style:italic; font-size:17px; color:var(--ink3); margin-bottom:48px; line-height:1.7; }
 .cta-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
-.cta-ornament { font-family:var(--serif); font-size:48px; color:rgba(29,158,117,0.15); margin-top:56px; font-style:italic; }
+.cta-ornament { color:rgba(29,158,117,0.3); margin-top:56px; text-align:center; }
+.cta-ornament svg { display:inline-block; flex:0 0 auto; }
 
 /* ── FORM OVERLAY (Demo Modal) ── */
-.modal-overlay { position:fixed; inset:0; z-index:1000; background:rgba(10,10,8,.92); display:none; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+.modal-overlay { position:fixed; inset:0; z-index:1000; background:rgba(22,33,28,.35); display:none; align-items:center; justify-content:center; backdrop-filter:blur(6px); padding:20px; overflow-y:auto; }
 .modal-overlay.open { display:flex; }
-.modal { background:var(--ink2); border:1px solid rgba(29,158,117,0.15); max-width:520px; width:90%; padding:48px; position:relative; }
-.modal-close { position:absolute; top:20px; right:20px; font-family:var(--mono); font-size:11px; color:rgba(255,255,255,0.3); cursor:pointer; background:none; border:none; letter-spacing:2px; }
-.modal-close:hover { color:var(--green); }
-.modal-label { font-family:var(--mono); font-size:9px; letter-spacing:4px; color:var(--green); text-transform:uppercase; margin-bottom:16px; display:block; }
-.modal-h { font-family:var(--serif); font-size:32px; font-weight:300; color:var(--paper); margin-bottom:8px; line-height:1.1; }
-.modal-h em { font-style:italic; color:rgba(29,158,117,0.8); }
-.modal-desc { font-size:13px; color:rgba(255,255,255,0.35); margin-bottom:32px; line-height:1.7; }
+.modal { background:var(--white); border:1px solid var(--border2); max-width:520px; width:100%; padding:48px; position:relative; border-radius:18px; box-shadow:0 30px 80px rgba(22,33,28,0.22); }
+.modal-close { position:absolute; top:20px; right:20px; font-family:var(--mono); font-size:11px; color:var(--muted); cursor:pointer; background:none; border:none; letter-spacing:2px; }
+.modal-close:hover { color:var(--greent); }
+.modal-label { font-family:var(--mono); font-size:9px; letter-spacing:4px; color:var(--greent); text-transform:uppercase; margin-bottom:16px; display:block; }
+.modal-h { font-family:var(--serif); font-size:32px; font-weight:400; color:var(--ink); margin-bottom:8px; line-height:1.1; }
+.modal-h em { font-style:italic; color:var(--greent); }
+.modal-desc { font-size:13px; color:var(--muted); margin-bottom:32px; line-height:1.7; }
 .form-group { margin-bottom:20px; }
-.form-label { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:rgba(255,255,255,0.35); text-transform:uppercase; display:block; margin-bottom:8px; }
-.form-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:12px 16px; font-family:var(--sans); font-size:14px; color:var(--paper); outline:none; transition:border-color .2s; }
-.form-input:focus { border-color:rgba(29,158,117,0.4); }
-.form-input::placeholder { color:rgba(255,255,255,0.2); }
+.form-label { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; display:block; margin-bottom:8px; }
+.form-input { width:100%; background:var(--paper); border:1px solid var(--border); padding:12px 16px; font-family:var(--sans); font-size:14px; color:var(--ink); outline:none; transition:border-color .2s, box-shadow .2s; border-radius:9px; }
+.form-input:focus { border-color:rgba(29,158,117,0.5); box-shadow:0 0 0 3px rgba(29,158,117,0.12); background:var(--white); }
+.form-input::placeholder { color:var(--muted2); }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-.form-submit { width:100%; font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:16px; background:var(--green); color:white; border:none; cursor:pointer; text-transform:uppercase; margin-top:8px; transition:background .2s; }
+.form-submit { width:100%; font-family:var(--mono); font-size:10px; letter-spacing:3px; padding:16px; background:var(--green); color:#fff; border:none; cursor:pointer; text-transform:uppercase; margin-top:8px; transition:background .2s; border-radius:10px; }
 .form-submit:hover { background:var(--green2); }
-.form-note { font-size:11px; color:rgba(255,255,255,0.2); text-align:center; margin-top:16px; font-family:var(--mono); letter-spacing:1px; }
+.form-note { font-size:11px; color:var(--muted2); text-align:center; margin-top:16px; font-family:var(--mono); letter-spacing:1px; }
 
 /* ── FOOTER ── */
-footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); padding:60px 56px 40px; }
-.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; max-width:1280px; margin:0 auto; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.05); }
-.footer-brand { font-family:var(--serif); font-size:24px; font-weight:300; color:var(--paper); margin-bottom:12px; }
-.footer-brand em { color:var(--green); font-style:italic; }
-.footer-tagline { font-size:13px; color:rgba(255,255,255,0.3); line-height:1.7; font-style:italic; font-family:var(--serif); }
-.footer-col-title { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:rgba(29,158,117,0.6); text-transform:uppercase; margin-bottom:16px; display:block; }
+footer { background:var(--paper2); border-top:1px solid var(--border); padding:60px 56px 40px; }
+.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; max-width:1280px; margin:0 auto; padding-bottom:40px; border-bottom:1px solid var(--border); }
+.footer-brand { font-family:var(--serif); font-size:24px; font-weight:400; color:var(--ink); margin-bottom:12px; display:flex; align-items:center; gap:9px; }
+.footer-brand svg, .nav-logo svg { flex:0 0 auto; color:var(--green2); }
+.footer-brand em { color:var(--greent); font-style:italic; }
+.footer-tagline { font-size:13px; color:var(--muted); line-height:1.7; font-style:italic; font-family:var(--serif); }
+.footer-col-title { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:var(--greent); text-transform:uppercase; margin-bottom:16px; display:block; }
 .footer-links { list-style:none; }
 .footer-links li { margin-bottom:10px; }
-.footer-links a { font-size:13px; color:rgba(255,255,255,0.3); text-decoration:none; transition:color .2s; }
-.footer-links a:hover { color:var(--green); }
-.footer-bottom { max-width:1280px; margin:32px auto 0; display:flex; justify-content:space-between; align-items:center; }
-.footer-copy { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,0.2); letter-spacing:1px; text-transform:uppercase; }
-.footer-meta { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,0.15); letter-spacing:1px; text-transform:uppercase; display:flex; gap:20px; }
+.footer-links a { font-size:13px; color:var(--muted); text-decoration:none; transition:color .2s; }
+.footer-links a:hover { color:var(--greent); }
+.footer-bottom { max-width:1280px; margin:32px auto 0; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+.footer-copy { font-family:var(--mono); font-size:9px; color:var(--muted2); letter-spacing:1px; text-transform:uppercase; }
+.footer-meta { font-family:var(--mono); font-size:9px; color:var(--muted2); letter-spacing:1px; text-transform:uppercase; display:flex; gap:20px; flex-wrap:wrap; }
+
+/* ── KONTAKT-DOCK: WhatsApp + LENA-Chat ── */
+.dock { position:fixed; right:24px; bottom:24px; z-index:900; display:flex; flex-direction:column; align-items:flex-end; gap:12px; }
+.dock-btn {
+  width:56px; height:56px; border-radius:50%; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 6px 20px rgba(22,33,28,0.18); transition:transform .18s, box-shadow .18s;
+  text-decoration:none;
+}
+.dock-btn:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(22,33,28,0.24); }
+.dock-btn:focus-visible { outline:3px solid rgba(29,158,117,0.45); outline-offset:3px; }
+.dock-wa { background:#25D366; }
+.dock-wa svg { fill:#fff; }
+.dock-chat { background:var(--green); }
+.dock-chat svg { stroke:#fff; }
+.dock-tip {
+  position:absolute; right:70px; top:50%; transform:translateY(-50%);
+  background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:9px;
+  letter-spacing:1.5px; text-transform:uppercase; padding:7px 12px; border-radius:8px;
+  white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .2s;
+}
+.dock-item { position:relative; display:flex; }
+.dock-item:hover .dock-tip { opacity:1; }
+
+/* Chat-Panel */
+.chat-panel {
+  position:fixed; right:24px; bottom:96px; z-index:950;
+  width:370px; max-width:calc(100vw - 32px);
+  height:520px; max-height:calc(100vh - 140px);
+  background:var(--white); border:1px solid var(--border);
+  border-radius:18px; box-shadow:0 24px 64px rgba(22,33,28,0.20);
+  display:none; flex-direction:column; overflow:hidden;
+}
+.chat-panel.open { display:flex; }
+.chat-head { background:linear-gradient(135deg, var(--green2) 0%, var(--green) 100%); color:#fff; padding:16px 18px; display:flex; align-items:center; gap:12px; }
+.chat-head-avatar { width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.18); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:19px; font-style:italic; flex-shrink:0; }
+.chat-head-name { font-family:var(--serif); font-size:19px; line-height:1.1; }
+.chat-head-sub { font-family:var(--mono); font-size:8px; letter-spacing:2px; text-transform:uppercase; opacity:.85; display:flex; align-items:center; gap:6px; }
+.chat-head-sub::before { content:''; width:6px; height:6px; border-radius:50%; background:#b7f5dc; }
+.chat-close { margin-left:auto; background:none; border:none; color:#fff; cursor:pointer; font-size:20px; line-height:1; opacity:.85; padding:4px; }
+.chat-close:hover { opacity:1; }
+.chat-log { flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px; background:var(--paper); }
+.chat-msg { max-width:85%; font-size:13.5px; line-height:1.65; padding:11px 14px; border-radius:14px; }
+.chat-msg a { color:var(--greent); }
+.chat-bot { background:var(--white); border:1px solid var(--border2); color:var(--ink2); border-bottom-left-radius:4px; align-self:flex-start; box-shadow:0 1px 2px rgba(22,33,28,0.04); }
+.chat-user { background:var(--green); color:#fff; border-bottom-right-radius:4px; align-self:flex-end; }
+.chat-quick { padding:12px 14px; display:flex; flex-wrap:wrap; gap:8px; border-top:1px solid var(--border2); background:var(--white); }
+.chat-chip { font-family:var(--sans); font-size:12px; padding:8px 13px; border-radius:999px; border:1px solid rgba(29,158,117,0.35); background:var(--green4); color:var(--greent); cursor:pointer; transition:background .18s, transform .12s; }
+.chat-chip:hover { background:rgba(29,158,117,0.16); transform:translateY(-1px); }
+.chat-foot { padding:10px 14px 14px; border-top:1px solid var(--border2); background:var(--white); display:flex; gap:8px; }
+.chat-foot a { flex:1; text-align:center; font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; padding:11px 8px; border-radius:9px; text-decoration:none; transition:opacity .2s; }
+.chat-foot .cf-wa { background:#25D366; color:#fff; }
+.chat-foot .cf-demo { background:var(--green); color:#fff; cursor:pointer; border:none; font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; }
+.chat-foot a:hover, .chat-foot button:hover { opacity:.88; }
+.chat-typing { display:flex; gap:4px; align-items:center; padding:13px 14px; }
+.chat-typing span { width:6px; height:6px; border-radius:50%; background:var(--muted2); animation:dotp 1.2s infinite; }
+.chat-typing span:nth-child(2) { animation-delay:.18s; }
+.chat-typing span:nth-child(3) { animation-delay:.36s; }
+@keyframes dotp { 0%,60%,100%{opacity:.25; transform:translateY(0)} 30%{opacity:1; transform:translateY(-3px)} }
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px) {
@@ -324,26 +413,27 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   .hero-inner { padding:0 24px; }
   .hero-chi { display:none; }
   .hero-stats { flex-direction:column; gap:16px; }
+  .hstat + .hstat { border-left:none; border-top:1px solid var(--border); padding-left:0; padding-top:16px; }
   .hero-scroll { display:none; }
   .container { padding:0 24px; }
   .problem-split, .faq-grid, .pricing-grid, .footer-grid { grid-template-columns:1fr; }
-  .modules-grid { display:grid; grid-template-columns:1fr; gap:2px; }
-  .steps { display:grid; grid-template-columns:1fr 1fr; }
-  .proof-grid { display:grid; grid-template-columns:1fr 1fr; }
-  .photo-strip { display:grid; grid-template-columns:1fr; }
-  .pricing-grid { gap:16px; background:transparent; }
+  .modules-grid { grid-template-columns:1fr; }
+  .steps { grid-template-columns:1fr 1fr; }
+  .proof-grid { grid-template-columns:1fr 1fr; }
+  .photo-strip { grid-template-columns:1fr; }
   section { padding:64px 0; }
   .cta-inner { padding:0 24px; }
   footer { padding:40px 24px; }
   .hero { padding:0 0 60px; }
   .testimonial { grid-template-columns:1fr; }
-  .compare-table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .compare-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
   .compare-table th, .compare-table td { white-space:nowrap; min-width:120px; }
   .form-row { grid-template-columns:1fr; }
   .hero-h1 { font-size:clamp(40px,10vw,80px); }
   .sec-title { font-size:clamp(30px,7vw,52px); }
-  .hero-actions { flex-direction:column; }
+  .hero-actions { flex-direction:column; align-items:stretch; }
   .btn-primary, .btn-ghost { width:100%; text-align:center; justify-content:center; }
+  .problem-badge { right:0; bottom:-16px; padding:18px 20px; font-size:36px; }
 }
 
 /* LENA + Feature-List mobile */
@@ -351,15 +441,16 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   #lena > .container > div[style*="grid-template-columns:1fr 1fr"] { display:block !important; }
   #lena > .container > div > div:last-child { margin-top:32px; }
   #featureList > div > div[style*="grid-template-columns:1fr 1fr"] { display:grid !important; grid-template-columns:1fr !important; }
-  .price-card { margin-bottom:8px; }
+  .chat-panel { right:12px; left:12px; width:auto; bottom:88px; height:min(70vh,520px); }
+  .dock { right:16px; bottom:16px; }
 }
 
 /* Small phones */
 @media(max-width:480px) {
   .nav { padding:0 16px; height:52px; }
   .nav-logo { font-size:18px; }
-  .nav-cta { font-size:8px; padding:7px 14px; }
-  .nav-app { font-size:8px; padding:6px 11px; margin-left:8px; }
+  .nav-cta { font-size:8px; padding:8px 14px; }
+  .nav-app { font-size:8px; padding:7px 11px; margin-left:8px; }
   .container { padding:0 16px; }
   .hero-inner { padding:0 16px; }
   .cta-inner { padding:0 16px; }
@@ -370,9 +461,15 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   .hero { min-height:auto; padding:80px 0 48px; }
   .hero-h1 { font-size:clamp(32px,9vw,56px); }
   .steps { grid-template-columns:1fr; }
+  .steps::before { display:none; }
   .proof-grid { grid-template-columns:1fr; }
   .hstat-val { font-size:32px; }
   .modal { padding:32px 20px; }
+  .dock-btn { width:52px; height:52px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
 }
 </style>
 </head>
@@ -380,7 +477,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <a href="https://kiron.tech" class="nav-logo">Kiron <em>χ</em></a>
+  <a href="https://kiron.tech" class="nav-logo"><svg class="kmark" width="26" height="26" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="rotate(-14 24 24)" stroke="currentColor"><ellipse cx="24" cy="24" rx="18.6" ry="8.4" transform="rotate(32 24 24)" stroke-width="3.4"/><ellipse cx="24" cy="24" rx="18.6" ry="8.4" transform="rotate(-32 24 24)" stroke-width="2.4"/></g><circle cx="26.4" cy="21.6" r="5.4" fill="currentColor"/><circle cx="41.4" cy="30.2" r="3.6" fill="currentColor"/></svg>Kiron</a>
   <div class="nav-links">
     <a href="#solution" class="nav-link">Produkt</a>
     <a href="#proof" class="nav-link">Warum Kiron</a>
@@ -397,7 +494,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   <div class="hero-img"></div>
   <div class="hero-gradient"></div>
   <div class="hero-grid"></div>
-  <div class="hero-chi">χ</div>
+  <div class="hero-chi"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><mask id="heroStrong"><rect width="48" height="48" fill="#fff"/><circle cx="24" cy="15.5" r="1.5"/><circle cx="24" cy="32.5" r="1.5"/></mask><mask id="heroWeak"><rect width="48" height="48" fill="#fff"/><circle cx="35.9" cy="24" r="2.1"/><circle cx="12.1" cy="24" r="2.1"/></mask><g transform="rotate(-14 24 24)" stroke="currentColor"><ellipse cx="24" cy="24" rx="19.4" ry="7.4" transform="rotate(32 24 24)" stroke-width="2.6" mask="url(#heroStrong)"/><ellipse cx="24" cy="24" rx="19.4" ry="7.4" transform="rotate(-32 24 24)" stroke-width="1.35" mask="url(#heroWeak)"/></g><circle cx="26.4" cy="21.6" r="4.4" fill="currentColor"/><circle cx="42.1" cy="30" r="2.9" fill="currentColor"/></svg></div>
 
   <div class="hero-inner">
     <div class="hero-eyebrow">ERP für produzierende KMU · Made in Germany</div>
@@ -431,29 +528,29 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         <span class="hstat-lbl">pro Monat · ab 5 User</span>
       </div>
       <div class="hstat">
-        <span class="hstat-val">0</span>
-        <span class="hstat-lbl">externe Berater notwendig</span>
+        <span class="hstat-val">30 Tage</span>
+        <span class="hstat-lbl">kostenlos testen · endet automatisch</span>
       </div>
     </div>
   </div>
 
 
   <!-- COMPLIANCE BADGES -->
-  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);">
-    <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+  <div class="badge-row">
+    <div class="badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       DSGVO-konform
     </div>
-    <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <div class="badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       GoBD-konform
     </div>
-    <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <div class="badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       ISO-27001-Rechenzentren
     </div>
-    <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:6px 14px;display:flex;align-items:center;gap:8px;text-transform:uppercase;">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(29,158,117,0.7)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+    <div class="badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
       Hosted in Deutschland
     </div>
   </div>
@@ -503,9 +600,9 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
         <div class="terminal-block">
           <div class="t-bar">
-            <div class="t-dot" style="background:#e05555;"></div>
-            <div class="t-dot" style="background:#d4a017;"></div>
-            <div class="t-dot" style="background:#1d9e75;"></div>
+            <div class="t-dot" style="background:#e88b7d;"></div>
+            <div class="t-dot" style="background:#e8c47d;"></div>
+            <div class="t-dot" style="background:#7fd3b4;"></div>
             <span class="t-title">Düsseldorf · 2023 · 06:47</span>
           </div>
           <div class="t-body">
@@ -633,7 +730,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
     <!-- TOGGLE BUTTON -->
     <div style="text-align:center;margin-top:40px;">
-      <button id="featureToggle" onclick="toggleFeatures()" style="font-family:var(--mono);font-size:10px;letter-spacing:3px;padding:14px 32px;background:transparent;color:var(--green2);border:1px solid var(--green2);cursor:pointer;text-transform:uppercase;transition:all .2s;">
+      <button id="featureToggle" onclick="toggleFeatures()" style="font-family:var(--mono);font-size:10px;letter-spacing:3px;padding:14px 32px;background:var(--white);color:var(--greent);border:1px solid rgba(29,158,117,0.4);border-radius:10px;cursor:pointer;text-transform:uppercase;transition:all .2s;box-shadow:var(--shadow);">
         Vollständige Feature-Liste anzeigen ↓
       </button>
     </div>
@@ -643,10 +740,10 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
       <!-- STARTER -->
       <div style="margin-bottom:48px;">
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Starter · 199 €/mo</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--greent);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Starter · 199 €/mo</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">Stammdaten & Verwaltung</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Artikelverwaltung mit 16 Detail-Tabs</li>
@@ -657,7 +754,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
             </ul>
           </div>
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">Verkauf (Sales-to-Cash)</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Angebote mit Staffelpreisen & PDF-Versand</li>
@@ -669,7 +766,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
             </ul>
           </div>
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">Einkauf (Procure-to-Pay)</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Bestellanforderung — auch unterwegs mit Foto</li>
@@ -679,14 +776,13 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
             </ul>
           </div>
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">Lager, KI & Sicherheit</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Lager-Dashboard, Buchungsjournal, Inventur</li>
               <li>→ LENA Chat + Spracheingabe (2.500 Credits)</li>
               <li>→ Smartphone-App — einfach im Browser öffnen</li>
               <li>→ Doppelt gesicherter Login + Rechteverwaltung</li>
-              <li>→ 10 GB Storage</li>
             </ul>
           </div>
 
@@ -695,10 +791,10 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
       <!-- PROFESSIONAL -->
       <div style="margin-bottom:48px;">
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Professional · 399 €/mo · Alles aus Starter, plus:</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--greent);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Professional · 399 €/mo · Alles aus Starter, plus:</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">Produktion</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Produktions-Dashboard mit Echtzeit-KPIs</li>
@@ -709,7 +805,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
             </ul>
           </div>
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">Lager erweitert</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Touch-Terminal — auch offline</li>
@@ -719,7 +815,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
             </ul>
           </div>
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">LENA KI erweitert</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Mail-Klassifikation mit Aktionsvorschlag</li>
@@ -729,14 +825,13 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
             </ul>
           </div>
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">Einkauf, Mobile & Admin</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Alle offenen Positionen auf einen Blick (Anforderung → Bestellung → Bezahlung)</li>
               <li>→ Lieferanten-Angebote archivieren</li>
               <li>→ Bestellanforderung, Fahrtenbuch, Lagerterminal — alles mobil</li>
               <li>→ Feedback-System, 17 automatische Systemprüfungen</li>
-              <li>→ 2 Extensions inklusive · 100 GB Storage</li>
             </ul>
           </div>
 
@@ -745,10 +840,10 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
       <!-- ENTERPRISE -->
       <div>
-        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--green2);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Enterprise · 799 €/mo · Alles aus Professional, plus:</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--greent);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);">Enterprise · 799 €/mo · Alles aus Professional, plus:</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">Engineering</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Kostenkalkulation direkt aus Arbeitsschritten</li>
@@ -758,15 +853,15 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
             </ul>
           </div>
 
-          <div style="background:var(--paper2);padding:20px 24px;">
+          <div style="background:var(--white);padding:22px 24px;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
             <div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-bottom:8px;">LENA Premium & Extras</div>
             <ul style="list-style:none;font-size:13px;color:var(--muted);line-height:2;">
               <li>→ Zeichnungs-Analyse (Maße, Toleranzen, Material)</li>
               <li>→ Dokument-Trainer für eigene Dokumenttypen</li>
               <li>→ 60.000 KI-Credits/Monat</li>
-              <li>→ 4 Extensions + 7S-Produktion inklusive</li>
+              <li>→ Kostenkalkulation, Programm-Manager, API-Zugang, 7S-Produktion, Prozessmanager &amp; Drawing-Intelligence inklusive</li>
               <li>→ Dediziertes Onboarding + 2 Trainings/Jahr</li>
-              <li>→ Telefon-Support SLA 8 h · 500 GB Storage</li>
+              <li>→ Telefon-Support mit SLA (8 h)</li>
             </ul>
           </div>
 
@@ -821,7 +916,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:48px;align-items:start;">
       <div>
-        <h3 style="font-family:var(--serif);font-size:28px;font-weight:300;color:var(--ink);margin-bottom:20px;line-height:1.15;">Die <em style="color:var(--green2);font-style:italic;">Geschichte</em></h3>
+        <h3 style="font-family:var(--serif);font-size:28px;font-weight:300;color:var(--ink);margin-bottom:20px;line-height:1.15;">Die <em style="color:var(--greent);font-style:italic;">Geschichte</em></h3>
         <p class="light" style="font-size:15px;line-height:1.9;">Stellen Sie sich vor, Sie stehen morgens um 7 in der Halle. Der Meister fragt: <em style="color:var(--ink);">„Chef, haben wir das Material für den Auftrag Schmitz?"</em> Sie greifen zum Telefon, rufen den Einkauf an, der Einkauf schaut in Excel, ruft zurück — 20 Minuten später wissen Sie: Nein, fehlt noch.</p>
         <p class="light" style="font-size:15px;line-height:1.9;">Mit LENA tippen Sie: <strong style="color:var(--ink);">„Ist das Material für Schmitz da?"</strong> — und 3 Sekunden später haben Sie die Antwort. Mit Bestellstatus, Liefertermin und der Info, dass Sie den gleichen Artikel auch bei einem anderen Lieferanten 12 % günstiger bekommen.</p>
         <p class="light" style="font-size:15px;line-height:1.9;"><strong style="color:var(--ink);">LENA ist keine Suchmaske.</strong> Sie ist die Kollegin, die Ihr gesamtes ERP kennt — jeden Auftrag, jede Rechnung, jeden Lagerbestand. Sie antwortet auf Deutsch, in ganzen Sätzen, und fragt nach, wenn etwas unklar ist.</p>
@@ -836,9 +931,9 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
             <span class="t-title">LENA · Live</span>
           </div>
           <div class="t-body" style="padding:20px;">
-            <span class="t-line" style="color:rgba(244,240,232,0.3);margin-bottom:8px;display:block;">Sie:</span>
-            <span class="t-line" style="color:var(--paper);margin-bottom:16px;display:block;">"Welche Aufträge sind diese Woche überfällig?"</span>
-            <span class="t-line" style="color:rgba(244,240,232,0.3);margin-bottom:8px;display:block;">LENA:</span>
+            <span class="t-line" style="color:var(--muted2);margin-bottom:8px;display:block;">Sie:</span>
+            <span class="t-line" style="color:var(--ink);margin-bottom:16px;display:block;">"Welche Aufträge sind diese Woche überfällig?"</span>
+            <span class="t-line" style="color:var(--muted2);margin-bottom:8px;display:block;">LENA:</span>
             <span class="t-ok" style="display:block;margin-bottom:4px;">3 Aufträge sind überfällig:</span>
             <span class="t-line" style="display:block;">→ AUF-2026-0147 · Müller Metallbau · Fällig: Mo 07.04.</span>
             <span class="t-line" style="display:block;">→ AUF-2026-0152 · Schmitz GmbH · Fällig: Di 08.04.</span>
@@ -848,20 +943,20 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
-          <div style="background:var(--paper2);padding:16px;text-align:center;">
-            <span style="font-family:var(--serif);font-size:28px;color:var(--green2);display:block;">Chat</span>
+          <div style="background:var(--white);padding:18px 16px;text-align:center;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
+            <span style="font-family:var(--serif);font-size:28px;color:var(--greent);display:block;">Chat</span>
             <span style="font-size:11px;color:var(--muted);">Fragen in natürlicher Sprache</span>
           </div>
-          <div style="background:var(--paper2);padding:16px;text-align:center;">
-            <span style="font-family:var(--serif);font-size:28px;color:var(--green2);display:block;">Sprache</span>
+          <div style="background:var(--white);padding:18px 16px;text-align:center;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
+            <span style="font-family:var(--serif);font-size:28px;color:var(--greent);display:block;">Sprache</span>
             <span style="font-size:11px;color:var(--muted);">Sprechen statt tippen</span>
           </div>
-          <div style="background:var(--paper2);padding:16px;text-align:center;">
-            <span style="font-family:var(--serif);font-size:28px;color:var(--green2);display:block;">Belege</span>
+          <div style="background:var(--white);padding:18px 16px;text-align:center;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
+            <span style="font-family:var(--serif);font-size:28px;color:var(--greent);display:block;">Belege</span>
             <span style="font-size:11px;color:var(--muted);">Kassenzettel fotografieren</span>
           </div>
-          <div style="background:var(--paper2);padding:16px;text-align:center;">
-            <span style="font-family:var(--serif);font-size:28px;color:var(--green2);display:block;">Alerts</span>
+          <div style="background:var(--white);padding:18px 16px;text-align:center;border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow);">
+            <span style="font-family:var(--serif);font-size:28px;color:var(--greent);display:block;">Alerts</span>
             <span style="font-size:11px;color:var(--muted);">Warnt wenn es wichtig wird</span>
           </div>
         </div>
@@ -902,11 +997,12 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   <div class="container">
     <span class="sec-lbl">Wettbewerbsvergleich</span>
     <h2 class="sec-title light">Kiron vs.<br><em>die Alternativen.</em></h2>
+    <div class="compare-wrap">
     <table class="compare-table">
       <thead>
         <tr>
           <th>Anbieter</th>
-          <th class="highlight">Kiron χ</th>
+          <th class="highlight">Kiron</th>
           <th>Enterprise-ERP</th>
           <th>Etablierter ERP-Anbieter</th>
           <th>Generische Cloud-ERP</th>
@@ -916,7 +1012,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       <tbody>
         <tr class="kiron-row">
           <td>Gesamtkosten / Jahr</td>
-          <td><strong>2.400–4.800 €</strong></td>
+          <td><strong>1.908–7.668 €</strong></td>
           <td>50.000–150.000 €+</td>
           <td>30.000–60.000 €+</td>
           <td>8.000–20.000 €</td>
@@ -980,6 +1076,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </section>
 
@@ -988,7 +1085,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   <div class="container">
     <span class="sec-lbl">Preise</span>
     <h2 class="sec-title dark">Ehrlich.<br><em>Ohne Überraschungen.</em></h2>
-    <p style="color:rgba(255,255,255,0.35);font-size:15px;max-width:560px;margin-bottom:0;">Drei Pläne. Keine versteckten Kosten. Monatlich kündbar. Jährlich 20 % sparen. Alle Preise inkl. MwSt.</p>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;margin-bottom:0;">Drei Pläne. Keine versteckten Kosten. Monatlich kündbar. Jährlich 20 % sparen. Alle Preise inkl. MwSt.</p>
 
     <div class="pricing-grid">
 
@@ -1007,7 +1104,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
           <li class="strong">Zusatz-User: 25 €/mo</li>
         </ul>
         <button class="price-cta ghost" onclick="openModal()">Demo anfragen</button>
-        <p class="price-note">E-Mail-Support · 48 h · 10 GB Storage</p>
+        <p class="price-note">E-Mail-Support · Antwort in 48 h</p>
       </div>
 
       <div class="price-card featured">
@@ -1022,12 +1119,11 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
           <li>Lager erweitert: Terminal, Umlagerung, MHD, Chargen-QS</li>
           <li class="strong">LENA: Mail-Klassifikation, Kassenzettel-OCR, Alerts</li>
           <li>15.000 KI-Credits</li>
-          <li class="strong">2 Extensions inklusive (frei wählbar)</li>
           <li>Bestellanforderung, Fahrtenbuch, Lagerterminal — alles mobil</li>
           <li class="strong">Zusatz-User: 18 €/mo</li>
         </ul>
         <button class="price-cta primary" onclick="openModal()">Demo anfragen</button>
-        <p class="price-note">E-Mail 24 h + Chat · 100 GB Storage</p>
+        <p class="price-note">E-Mail 24 h + Chat-Support</p>
       </div>
 
       <div class="price-card">
@@ -1039,13 +1135,13 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
           <li class="strong">Engineering: Kostenkalkulation, 3D-Modell-Viewer</li>
           <li>LENA: Zeichnungs-Analyse, Dokument-Trainer</li>
           <li>60.000 KI-Credits</li>
-          <li class="strong">4 Extensions + 7S-Produktion inklusive</li>
+          <li class="strong">Kostenkalkulation, Programm-Manager, API-Zugang, 7S-Produktion, Prozessmanager &amp; Drawing-Intelligence inklusive</li>
           <li>Dediziertes Onboarding + 2 Trainings/Jahr</li>
           <li>Telefon-Support mit SLA (8 h)</li>
           <li class="strong">Zusatz-User: 12 €/mo</li>
         </ul>
         <button class="price-cta ghost" onclick="openModal()">Kontakt aufnehmen</button>
-        <p class="price-note">500 GB Storage · On-Premise Option</p>
+        <p class="price-note">On-Premise-Option auf Anfrage</p>
       </div>
     </div>
   </div>
@@ -1056,98 +1152,104 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   <div class="container">
     <span class="sec-lbl">Extensions</span>
     <h2 class="sec-title light">Ihr Kiron.<br><em>Ihre Branche.</em></h2>
-    <p class="lead light-lead">Wählen Sie die Erweiterungen, die zu Ihren Prozessen passen. Alle arbeiten auf derselben Datenbasis — Ihrem Kiron-ERP. Ab Professional zubuchbar, im Enterprise bis zu 4 inklusive.</p>
+    <p class="lead light-lead">Wählen Sie die Erweiterungen, die zu Ihren Prozessen passen. Alle arbeiten auf derselben Datenbasis — Ihrem Kiron-ERP. Jede Extension ist einzeln zubuchbar, monatlich kündbar und 30 Tage kostenlos testbar.</p>
 
     <div class="modules-grid">
       <!-- Branchen-Extensions -->
       <div class="module">
         <div class="module-num">🏗</div>
-        <div class="module-name">Baustelle</div>
-        <p class="module-desc">Interaktiver Bauplan, planbasierte Tickets mit Foto, digitales Bautagebuch, Checklisten und Abnahmeprotokoll. Bestellungen direkt aus dem Ticket.</p>
-        <span class="module-status live" style="color:var(--green2);">45 €/mo</span>
+        <div class="module-name">Baumanager</div>
+        <p class="module-desc">Gewerke-Kanban-Board, Handwerker-Pool, Mängelliste mit Foto-Upload, Abnahmeprotokolle und mobile Baustellen-Doku. Bestellungen direkt aus dem Ticket.</p>
+        <span class="module-status live" style="color:var(--greent);">89 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">🔧</div>
         <div class="module-name">KFZ-Werkstatt</div>
         <p class="module-desc">Kanban-Auftragsboard, Fahrzeugverwaltung, Zeiterfassung und digitale Werkstattkarte. Vom Kundenanruf bis zur Fahrzeugausgabe.</p>
-        <span class="module-status live" style="color:var(--green2);">39 €/mo</span>
+        <span class="module-status live" style="color:var(--greent);">49 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">🚛</div>
         <div class="module-name">Spedition</div>
         <p class="module-desc">Live-Flottentracking, Tour-Management, ETA-Berechnung und automatische Lieferscheinverknüpfung. Frachtbriefe auf Knopfdruck.</p>
-        <span class="module-status live" style="color:var(--green2);">45 €/mo</span>
+        <span class="module-status live" style="color:var(--greent);">69 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">⛴</div>
         <div class="module-name">Binnenschifffahrt</div>
         <p class="module-desc">AIS-Live-Tracking auf Rhein und Kanalnetz. Pegelstands-Anbindung mit Niedrigwasser-Warnung wenn der Tiefgang kritisch wird.</p>
-        <span class="module-status live" style="color:var(--green2);">55 €/mo</span>
+        <span class="module-status live" style="color:var(--greent);">79 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">🏠</div>
         <div class="module-name">Hausverwaltung</div>
-        <p class="module-desc">Objekte, Einheiten, Nebenkostenabrechnung, Mieter-Portal mit Direktzugang und automatisches Mahnwesen.</p>
-        <span class="module-status live" style="color:var(--green2);">49 €/mo</span>
+        <p class="module-desc">Immobilien-Stammdaten, Mietverwaltung, Nebenkostenabrechnung, Wartungs-Tickets und automatisches Mahnwesen.</p>
+        <span class="module-status live" style="color:var(--greent);">59 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">📐</div>
         <div class="module-name">Konstruktionsbüro</div>
-        <p class="module-desc">Projektstruktur mit Honorarberechnung, Zeiterfassung je Projekt und DATEV-Export. Für Planungsbüros und Ingenieurbüros.</p>
-        <span class="module-status live" style="color:var(--green2);">29 €/mo</span>
+        <p class="module-desc">CAD-Dateiverwaltung mit Versionskontrolle und Auftragsmanagement für Konstrukteure ohne eigene Fertigung. Fokus auf den Engineering-Workflow.</p>
+        <span class="module-status live" style="color:var(--greent);">49 €/mo</span>
       </div>
       <div class="module">
-        <div class="module-num">📝</div>
-        <div class="module-name">Vertrieb</div>
-        <p class="module-desc">Gesprächsnotiz diktieren oder tippen — LENA erstellt Angebotspositionen direkt aus dem Kundengespräch. Vom Außendienst ins Angebot.</p>
-        <span class="module-status live" style="color:var(--green2);">25 €/mo</span>
+        <div class="module-num">💬</div>
+        <div class="module-name">WhatsApp Vertrieb</div>
+        <p class="module-desc">Kundenanfragen per WhatsApp direkt im ERP — LENA erfasst die Anfrage, ordnet sie dem richtigen Vorgang zu und schlägt Angebotspositionen vor. Benötigt ein eigenes Meta-Business-Konto; die Meta-Konversationsgebühren rechnen Sie direkt mit Meta ab.</p>
+        <span class="module-status live" style="color:var(--greent);">49 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">🏆</div>
         <div class="module-name">Gamification</div>
         <p class="module-desc">Punkte, Badges und Ranglisten für motivierte Teams. Tages-Streaks und Team-Challenges. Besonders wirkungsvoll in der Fertigung.</p>
-        <span class="module-status live" style="color:var(--green2);">49 €/mo</span>
+        <span class="module-status live" style="color:var(--greent);">19 €/mo</span>
       </div>
       <!-- Feature-Extensions -->
       <div class="module">
         <div class="module-num">🖼</div>
         <div class="module-name">Drawing-Intelligence</div>
         <p class="module-desc">LENA analysiert Ihre technischen Zeichnungen — erkennt Maße, Toleranzen und Material. Erkannte Daten direkt in den Artikelstamm übernehmen.</p>
-        <span class="module-status live" style="color:var(--green2);">79 €/mo · Im Enterprise inkl.</span>
+        <span class="module-status live" style="color:var(--greent);">79 €/mo · Im Enterprise inkl.</span>
       </div>
       <div class="module">
         <div class="module-num">⚙</div>
         <div class="module-name">Prozessmanager</div>
         <p class="module-desc">Eigene Geschäftsprozesse visuell modellieren: Schritte, Verantwortliche, Eskalationsregeln. Prozesse an Aufträge und Projekte anhängen.</p>
-        <span class="module-status live" style="color:var(--green2);">39 €/mo · Im Enterprise inkl.</span>
+        <span class="module-status live" style="color:var(--greent);">39 €/mo · Im Enterprise inkl.</span>
       </div>
       <div class="module">
         <div class="module-num">🚗</div>
         <div class="module-name">Fahrerapp</div>
         <p class="module-desc">Dedizierte App für Fahrer: GPS-Fahrtenbuch, Barcode-Scanner, Foto-Dokumentation und mobile Freigaben. Funktioniert auch ohne Internet.</p>
-        <span class="module-status live" style="color:var(--green2);">29 €/mo</span>
+        <span class="module-status live" style="color:var(--greent);">29 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">🚐</div>
         <div class="module-name">Fuhrpark</div>
         <p class="module-desc">Fahrzeugstammdaten, Führerschein-Checks, Fahrtenbuch und GPS. Automatische Erinnerung an TÜV, Versicherung und Leasingablauf.</p>
-        <span class="module-status live" style="color:var(--green2);">49 €/mo</span>
+        <span class="module-status live" style="color:var(--greent);">29 €/mo</span>
       </div>
       <div class="module">
         <div class="module-num">🏭</div>
         <div class="module-name">7S-Produktion</div>
         <p class="module-desc">Lean-Manufacturing nach 7S für Ihre Fertigung: Shopfloor-Area-Map, Audit-Wizard, Gefahrstoff-Registry und 8-Wochen-Trend.</p>
-        <span class="module-status live" style="color:var(--green2);">59 €/mo · Im Enterprise inkl.</span>
+        <span class="module-status live" style="color:var(--greent);">59 €/mo · Im Enterprise inkl.</span>
+      </div>
+      <div class="module">
+        <div class="module-num">📸</div>
+        <div class="module-name">Baustellendoku</div>
+        <p class="module-desc">Mobile-First-Dokumentation für die Baustelle: Tagesberichte, Foto-Upload, Mängelliste, Abnahmeprotokolle, GPS-Tracking und Wetter-Log.</p>
+        <span class="module-status live" style="color:var(--greent);">29 €/mo</span>
       </div>
       <div class="module module-featured">
         <div class="module-num">📊</div>
         <div class="module-name">Nexara Restrukturierung</div>
         <p class="module-desc">Restrukturierungsplanung mit KI-Unterstützung: Krisen-Uhr, Maßnahmen-Tracking, Finanzplan-Tabellen. LENA unterstützt als Berater-Assistentin. Für Sanierungsberater und Geschäftsführer.</p>
-        <span class="module-status live" style="color:rgba(244,240,232,0.6);">149 €/mo</span>
+        <span class="module-status live" style="color:var(--greent);">149 €/mo</span>
       </div>
     </div>
 
-    <p style="color:rgba(15,15,13,0.4);font-size:13px;margin-top:24px;text-align:center;">Mengenrabatt: 3 Extensions gleichzeitig = -15 % · ab 5 Extensions = -25 %. Im Professional 2, im Enterprise 4 inklusive. Alle Preise inkl. MwSt.</p>
+    <p style="color:var(--muted);font-size:13px;margin-top:24px;text-align:center;">Jede Extension einzeln zubuchbar · monatlich kündbar · 30 Tage kostenlos testen · alle Preise inkl. MwSt.</p>
   </div>
 </section>
 
@@ -1161,6 +1263,10 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       <div class="faq-item">
         <div class="faq-q">Wie lange dauert die Einführung wirklich?</div>
         <p class="faq-a">Ein Tag — das ist kein Marketing-Versprechen. Am Tag 1 legen Sie Ihre Maschinen, Mitarbeiter und Artikel an (2–3 Stunden). Am Tag 2 starten die ersten Aufträge. Am Tag 8 läuft der Vollbetrieb. Kein Berater. Kein Projekt. Keine IT-Abteilung.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Kann ich Kiron vorher kostenlos testen?</div>
+        <p class="faq-a">Ja — 30 Tage lang, mit vollem Funktionsumfang und allen Modulen. Die Testphase endet automatisch: Sie müssen nicht kündigen, und solange Sie nicht selbst einen Plan buchen, entstehen keine Kosten. Auch jede Extension, die Sie noch nicht gebucht haben, können Sie 30 Tage kostenlos ausprobieren.</p>
       </div>
       <div class="faq-item">
         <div class="faq-q">Was passiert wenn ich kündige — bekomme ich meine Daten?</div>
@@ -1184,7 +1290,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       </div>
       <div class="faq-item">
         <div class="faq-q">Was sind Extensions und wie funktionieren sie?</div>
-        <p class="faq-a">Extensions sind Branchenmodule (KFZ-Werkstatt, Spedition, Baumanager, …) und Feature-Erweiterungen (Gamification, Drawing-Intelligence, …), die ab Professional einzeln zubuchbar sind. Im Professional sind 2, im Enterprise 4 inklusive. Ab 3 Extensions gibt es 15 % Rabatt, ab 5 sogar 25 %.</p>
+        <p class="faq-a">Extensions sind Branchenmodule (KFZ-Werkstatt, Spedition, Baumanager, Hausverwaltung, …) und Feature-Erweiterungen (WhatsApp Vertrieb, Gamification, Drawing-Intelligence, …). Sie werden einzeln zum angegebenen Monatspreis dazugebucht, laufen auf derselben Datenbasis und sind monatlich kündbar. Jede noch nicht gebuchte Extension können Sie 30 Tage kostenlos testen. Im Enterprise sind Kostenkalkulation, Programm-Manager, API-Zugang, 7S-Produktion, Prozessmanager und Drawing-Intelligence bereits enthalten.</p>
       </div>
     </div>
   </div>
@@ -1197,7 +1303,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
   <div class="cta-inner">
     <div class="hero-eyebrow" style="justify-content:center;margin-bottom:20px;">Ende der Geschichte · Anfang der Arbeit</div>
     <h2 class="cta-h">Ihr Stapel<br>wartet <em>nicht.</em></h2>
-    <p class="cta-sub">30 Minuten Demo. Kein Vertrag. Direkter Kontakt mit den Gründern. Wir zeigen Kiron live — an Ihren eigenen Dokumenten.</p>
+    <p class="cta-sub">30 Minuten Demo. Kein Vertrag. Direkter Kontakt mit den Gründern. Wir zeigen Kiron live — an Ihren eigenen Dokumenten. Danach testen Sie 30 Tage kostenlos.</p>
     <div class="cta-actions">
       <button class="btn-primary" onclick="openModal()">
         <span class="live-dot"></span>
@@ -1205,7 +1311,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       </button>
       <a href="#pricing" class="btn-ghost">Preise ansehen</a>
     </div>
-    <div class="cta-ornament">χ</div>
+    <div class="cta-ornament"><svg width="52" height="52" viewBox="0 0 48 48" fill="none" aria-hidden="true"><mask id="ctaStrong"><rect width="48" height="48" fill="#fff"/><circle cx="24" cy="15.5" r="1.5"/><circle cx="24" cy="32.5" r="1.5"/></mask><mask id="ctaWeak"><rect width="48" height="48" fill="#fff"/><circle cx="35.9" cy="24" r="2.1"/><circle cx="12.1" cy="24" r="2.1"/></mask><g transform="rotate(-14 24 24)" stroke="currentColor"><ellipse cx="24" cy="24" rx="19.4" ry="7.4" transform="rotate(32 24 24)" stroke-width="2.6" mask="url(#ctaStrong)"/><ellipse cx="24" cy="24" rx="19.4" ry="7.4" transform="rotate(-32 24 24)" stroke-width="1.35" mask="url(#ctaWeak)"/></g><circle cx="26.4" cy="21.6" r="4.4" fill="currentColor"/><circle cx="42.1" cy="30" r="2.9" fill="currentColor"/></svg></div>
   </div>
 </section>
 
@@ -1213,7 +1319,7 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
 <footer>
   <div class="footer-grid">
     <div>
-      <div class="footer-brand">Kiron <em>χ</em></div>
+      <div class="footer-brand"><svg width="28" height="28" viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="rotate(-14 24 24)" stroke="currentColor"><ellipse cx="24" cy="24" rx="18.6" ry="8.4" transform="rotate(32 24 24)" stroke-width="3.4"/><ellipse cx="24" cy="24" rx="18.6" ry="8.4" transform="rotate(-32 24 24)" stroke-width="2.4"/></g><circle cx="26.4" cy="21.6" r="5.4" fill="currentColor"/><circle cx="41.4" cy="30.2" r="3.6" fill="currentColor"/></svg>Kiron</div>
       <p class="footer-tagline">"Jeder produzierende Betrieb hat einen Stapel. Kiron macht ihn unsichtbar."</p>
     </div>
     <div>
@@ -1312,14 +1418,41 @@ footer { background:var(--ink2); border-top:1px solid rgba(255,255,255,0.05); pa
       <button type="submit" id="f-submit" class="form-submit">Demo-Termin anfragen →</button>
       <p class="form-note">Kein Spam. Keine Weitergabe. Direkter Rückruf innerhalb von 24 Stunden.</p>
       <div id="f-success" style="display:none;text-align:center;padding:20px 0;">
-        <span style="font-size:32px;display:block;margin-bottom:12px;">✓</span>
-        <span style="font-family:var(--serif);font-size:22px;color:var(--paper);display:block;margin-bottom:8px;">Anfrage erhalten!</span>
-        <span style="font-size:13px;color:rgba(244,240,232,0.5);">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</span>
+        <span style="font-size:34px;display:block;margin-bottom:12px;color:var(--green);">✓</span>
+        <span style="font-family:var(--serif);font-size:22px;color:var(--ink);display:block;margin-bottom:8px;">Anfrage erhalten!</span>
+        <span style="font-size:13px;color:var(--muted);">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</span>
       </div>
-      <div id="f-error" style="display:none;text-align:center;padding:12px;background:rgba(224,85,85,0.15);margin-top:12px;">
-        <span style="font-size:13px;color:#e05555;">Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an info@kiron.tech.</span>
+      <div id="f-error" style="display:none;text-align:center;padding:12px;background:rgba(181,63,48,0.10);border-radius:9px;margin-top:12px;">
+        <span style="font-size:13px;color:#b53f30;">Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an info@kiron.tech.</span>
       </div>
     </form>
+  </div>
+</div>
+
+<!-- KONTAKT-DOCK: WhatsApp + LENA-Chat -->
+<div class="dock">
+  <div class="dock-item">
+    <span class="dock-tip">Mit LENA chatten</span>
+    <button class="dock-btn dock-chat" id="chatToggle" onclick="toggleChat()" aria-label="Chat mit LENA öffnen" aria-expanded="false" aria-controls="chatPanel">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- LENA-CHAT -->
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat mit LENA">
+  <div class="chat-head">
+    <div class="chat-head-avatar">L</div>
+    <div>
+      <div class="chat-head-name">LENA</div>
+      <div class="chat-head-sub">Kiron-Assistentin</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Chat schließen">&times;</button>
+  </div>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chat-quick" id="chatQuick"></div>
+  <div class="chat-foot">
+    <button class="cf-demo" onclick="openModal()">Demo-Termin anfragen</button>
   </div>
 </div>
 
@@ -1341,7 +1474,7 @@ function closeModal() {
 function closeModalOutside(e) {
   if (e.target === document.getElementById('modal')) closeModal();
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeChat(); } });
 
 // Lead form submit
 const SUPABASE_URL = 'https://mahshbbsicmirqbfakhl.supabase.co';
@@ -1411,6 +1544,178 @@ function toggleFeatures() {
     list.style.display = 'none';
     btn.innerHTML = 'Vollständige Feature-Liste anzeigen ↓';
   }
+}
+
+
+/* ─────────────────────────────────────────────
+   WhatsApp-Kontakt — deaktiviert, bis die Nummer feststeht.
+   Zum Reaktivieren:
+     1. WA_NUMBER unten auf die echte Nummer setzen
+        (international, ohne + und ohne Leerzeichen, z. B. '4915112345678')
+     2. Die drei auskommentierten Zeilen aktivieren
+     3. Markup wieder einsetzen: Dock-Item (.dock-wa), Chat-Footer-Link
+        (.cf-wa) und den Footer-Eintrag unter "Unternehmen" — jeweils mit
+        id="waLink" / "waLink2" / "waLink3"
+   ───────────────────────────────────────────── */
+// const WA_NUMBER = '';
+// const WA_TEXT   = 'Hallo Kiron, ich habe eine Frage zu Ihrem ERP.';
+// (function initWhatsApp() {
+//   const href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT);
+//   ['waLink', 'waLink2', 'waLink3'].forEach(id => {
+//     const el = document.getElementById(id);
+//     if (el) el.href = href;
+//   });
+// })();
+
+/* ── LENA-Chat (lokal, ohne externen Dienst, ohne Tracking) ── */
+const CHAT_TOPICS = [
+  {
+    key: 'preise',
+    chip: 'Was kostet Kiron?',
+    answer: 'Es gibt drei Pläne — alle Preise inklusive MwSt.:<br><br>' +
+            '<strong>Starter — 199 €/Monat</strong> · 5 User inklusive<br>' +
+            '<strong>Professional — 399 €/Monat</strong> · 15 User inklusive<br>' +
+            '<strong>Enterprise — 799 €/Monat</strong> · 50 User inklusive<br><br>' +
+            'Bei jährlicher Zahlung sparen Sie 20 % (159 / 319 / 639 € pro Monat). ' +
+            'Zusatz-User kosten 25 / 18 / 12 € pro Monat. Monatlich kündbar, keine Einrichtungsgebühr. ' +
+            '<a href="#pricing" onclick="closeChat()">Zur Preisübersicht →</a>'
+  },
+  {
+    key: 'test',
+    chip: '30 Tage testen',
+    answer: 'Sie testen Kiron <strong>30 Tage kostenlos</strong> — mit vollem Funktionsumfang und allen Modulen.<br><br>' +
+            'Die Testphase endet automatisch. Sie müssen nicht kündigen, und es werden keine Zahlungsdaten benötigt, ' +
+            'solange Sie nicht selbst einen Plan buchen. Auch jede noch nicht gebuchte Extension können Sie 30 Tage kostenlos ausprobieren.'
+  },
+  {
+    key: 'einfuehrung',
+    chip: 'Wie lange dauert die Einführung?',
+    answer: 'Deutlich kürzer als bei klassischen ERP-Projekten:<br><br>' +
+            '<strong>Tag 1</strong> — 30 Minuten Live-Demo, direkt mit den Gründern<br>' +
+            '<strong>Tag 2–3</strong> — Artikel, Maschinen und Mitarbeiter anlegen (ca. 2 Stunden, machen Sie selbst)<br>' +
+            '<strong>Tag 4–7</strong> — Pilotphase, erste Aufträge laufen über Kiron<br>' +
+            '<strong>Tag 8</strong> — Vollbetrieb<br><br>' +
+            'Kein externer Berater, kein Implementierungsprojekt. Das Onboarding ist im Preis enthalten.'
+  },
+  {
+    key: 'module',
+    chip: 'Welche Module gibt es?',
+    answer: 'Neun integrierte Module: Stammdaten &amp; Dokumente, Verkauf &amp; Aufträge, Einkauf &amp; Beschaffung, ' +
+            'Lager &amp; Inventur, Produktion &amp; Shopfloor, LENA (KI), Engineering, Mobile App sowie Sicherheit &amp; Administration.<br><br>' +
+            'Dazu kommen Extensions für einzelne Branchen — etwa KFZ-Werkstatt, Spedition, Baumanager, Hausverwaltung oder WhatsApp Vertrieb. ' +
+            '<a href="#solution" onclick="closeChat()">Module ansehen →</a>'
+  },
+  {
+    key: 'lena',
+    chip: 'Was kann LENA?',
+    answer: 'Ich bin der KI-Assistent in Kiron und kenne Ihre Aufträge, Bestände und Lieferanten.<br><br>' +
+            'Ab <strong>Starter</strong>: Chat und Spracheingabe auf Deutsch, 2.500 Credits pro Monat.<br>' +
+            'Ab <strong>Professional</strong>: Mail-Klassifikation, Kassenzettel-OCR, Alerts, 15.000 Credits.<br>' +
+            'Ab <strong>Enterprise</strong>: Zeichnungs-Analyse und Dokument-Trainer, 60.000 Credits.<br><br>' +
+            'Zusätzliche Credits gibt es als Top-Up-Pack ab 320 € für 10.000 Credits.<br><br>' +
+            '<em>Hinweis: Hier auf der Website antworte ich aus einem festen Fragenkatalog — im Produkt arbeite ich auf Ihren echten Daten.</em>'
+  },
+  {
+    key: 'dsgvo',
+    chip: 'DSGVO & Hosting',
+    answer: '<strong>Hosting:</strong> Ausschließlich in Deutschland (Frankfurt am Main), ISO-27001-zertifizierte Rechenzentren.<br><br>' +
+            '<strong>DSGVO:</strong> Auftragsverarbeitungsvertrag ist inklusive, alle Subprozessoren sind transparent gelistet.<br><br>' +
+            '<strong>GoBD:</strong> Revisionssichere Belegarchivierung, unveränderliche Dokumente, lückenlose Nachvollziehbarkeit.<br><br>' +
+            '<a href="/avv.html">AVV ansehen</a> · <a href="/datenschutz.html">Datenschutzerklärung</a>'
+  },
+  {
+    key: 'daten',
+    chip: 'Bekomme ich meine Daten zurück?',
+    answer: 'Ja — vollständig und jederzeit. Ihre Daten gehören Ihnen. Export in gängige Formate auf Knopfdruck, ' +
+            'kein Lock-in und keine Verhandlung bei der Kündigung. Kiron ist monatlich kündbar.'
+  },
+  {
+    key: 'branche',
+    chip: 'Passt Kiron zu meinem Betrieb?',
+    answer: 'Kiron ist für produzierende KMU gebaut — Maschinenbau, Metallverarbeitung, Kunststoff, Sondermaschinenbau, Holz &amp; Möbel.<br><br>' +
+            'Faustregel: Wenn Sie Aufträge, Maschinen und Mitarbeiter haben, passt Kiron. Bei Serienfertigung mit zehntausenden ' +
+            'Einheiten pro Tag sind Sie bei einem Enterprise-ERP besser aufgehoben — das sagen wir Ihnen dann auch offen.'
+  },
+  {
+    key: 'kontakt',
+    chip: 'Mit einem Menschen sprechen',
+    answer: 'Sehr gerne — Sie sprechen direkt mit den Gründern, nicht mit einem Callcenter:<br><br>' +
+            '→ <strong>Demo-Termin</strong>: 30 Minuten, unverbindlich — Button unten im Chat<br>' +
+            '→ <strong>E-Mail</strong>: <a href="mailto:info@kiron.tech">info@kiron.tech</a>'
+  }
+];
+
+const CHAT_FALLBACK = 'Das kann ich hier auf der Website leider nicht beantworten — ich arbeite auf dieser Seite mit einem festen Fragenkatalog.<br><br>' +
+  'Schreiben Sie uns am besten direkt per <strong>WhatsApp</strong> oder <a href="mailto:info@kiron.tech">info@kiron.tech</a>, ' +
+  'dann antwortet ein Mensch. Oder wählen Sie eine der Fragen oben.';
+
+let chatStarted = false;
+
+function chatAppend(html, who) {
+  const log = document.getElementById('chatLog');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + (who === 'user' ? 'chat-user' : 'chat-bot');
+  div.innerHTML = html;
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+  return div;
+}
+
+function chatTyping() {
+  const log = document.getElementById('chatLog');
+  const div = document.createElement('div');
+  div.className = 'chat-msg chat-bot chat-typing';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+  return div;
+}
+
+function renderChips() {
+  const quick = document.getElementById('chatQuick');
+  quick.innerHTML = '';
+  CHAT_TOPICS.forEach(t => {
+    const b = document.createElement('button');
+    b.className = 'chat-chip';
+    b.type = 'button';
+    b.textContent = t.chip;
+    b.onclick = () => askTopic(t.key);
+    quick.appendChild(b);
+  });
+}
+
+function askTopic(key) {
+  const topic = CHAT_TOPICS.find(t => t.key === key);
+  if (!topic) return;
+  chatAppend(topic.chip, 'user');
+  const typing = chatTyping();
+  setTimeout(() => {
+    typing.remove();
+    chatAppend(topic.answer, 'bot');
+  }, 450);
+}
+
+function startChat() {
+  if (chatStarted) return;
+  chatStarted = true;
+  chatAppend('Hallo! Ich bin <strong>LENA</strong>, die Assistentin von Kiron. 👋<br><br>' +
+             'Ich beantworte hier die häufigsten Fragen zu Produkt, Preisen und Datenschutz. ' +
+             'Wenn Sie lieber mit einem Menschen sprechen: Button unten oder info@kiron.tech.', 'bot');
+  renderChips();
+}
+
+function toggleChat() {
+  const panel = document.getElementById('chatPanel');
+  const btn = document.getElementById('chatToggle');
+  const open = panel.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (open) startChat();
+}
+
+function closeChat() {
+  const panel = document.getElementById('chatPanel');
+  panel.classList.remove('open');
+  document.getElementById('chatToggle').setAttribute('aria-expanded', 'false');
 }
 
 // Smooth scroll for anchor links

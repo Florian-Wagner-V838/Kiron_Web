@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#f4f0e8"/>
-  <text x="16" y="24" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="300" font-style="italic" fill="#1d9e75">χ</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Kiron brand mark, small cut. 6 units of clear space around a 48 unit mark. -->
+  <rect width="60" height="60" rx="11" fill="#fbf9f5"/>
+  <g transform="translate(6 6)">
+    <g transform="rotate(-14 24 24)" fill="none" stroke="#157a5a">
+      <ellipse cx="24" cy="24" rx="18.6" ry="8.4" transform="rotate(32 24 24)" stroke-width="3.4"/>
+      <ellipse cx="24" cy="24" rx="18.6" ry="8.4" transform="rotate(-32 24 24)" stroke-width="2.4"/>
+    </g>
+    <circle cx="26.4" cy="21.6" r="5.4" fill="#0e6d4f"/>
+    <circle cx="41.4" cy="30.2" r="3.6" fill="#0e6d4f"/>
+  </g>
 </svg>
