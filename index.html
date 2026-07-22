@@ -400,6 +400,23 @@ footer { background:var(--paper2); border-top:1px solid var(--border); padding:6
 .chat-foot .cf-wa { background:#25D366; color:#fff; }
 .chat-foot .cf-demo { background:var(--green); color:#fff; cursor:pointer; border:none; font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; }
 .chat-foot a:hover, .chat-foot button:hover { opacity:.88; }
+.chat-input { padding:10px 12px; border-top:1px solid var(--border2); background:var(--white); display:flex; gap:8px; align-items:center; }
+.chat-input input { flex:1; border:1px solid var(--border); border-radius:999px; padding:11px 16px; font-family:var(--sans); font-size:13.5px; color:var(--ink); background:var(--paper); outline:none; transition:border-color .2s, box-shadow .2s; }
+.chat-input input:focus { border-color:rgba(29,158,117,0.5); box-shadow:0 0 0 3px rgba(29,158,117,0.12); background:var(--white); }
+.chat-send { width:38px; height:38px; flex:0 0 38px; border-radius:50%; border:none; background:var(--green); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+.chat-send:hover { background:var(--green2); }
+.chat-send svg { stroke:#fff; }
+.lead-form { background:var(--white); border:1px solid rgba(29,158,117,0.3); border-radius:14px; padding:14px; align-self:stretch; max-width:100%; box-shadow:var(--shadow); }
+.lead-form .lf-title { font-family:var(--serif); font-size:16px; color:var(--ink); margin-bottom:4px; }
+.lead-form .lf-hint { font-size:11.5px; color:var(--muted); line-height:1.55; margin-bottom:12px; }
+.lead-form input, .lead-form textarea { width:100%; border:1px solid var(--border); border-radius:9px; padding:9px 12px; font-family:var(--sans); font-size:13px; color:var(--ink); background:var(--paper); outline:none; margin-bottom:8px; }
+.lead-form input:focus, .lead-form textarea:focus { border-color:rgba(29,158,117,0.5); background:var(--white); }
+.lead-form textarea { resize:vertical; min-height:58px; }
+.lead-form button { width:100%; border:none; border-radius:9px; padding:12px; background:var(--green); color:#fff; font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
+.lead-form button:hover { background:var(--green2); }
+.lead-form button[disabled] { opacity:.6; cursor:default; }
+.lead-form .lf-legal { font-size:10.5px; color:var(--muted2); line-height:1.5; margin-top:9px; }
+.lead-form .lf-err { font-size:11.5px; color:#b53f30; margin-top:8px; display:none; }
 .chat-typing { display:flex; gap:4px; align-items:center; padding:13px 14px; }
 .chat-typing span { width:6px; height:6px; border-radius:50%; background:var(--muted2); animation:dotp 1.2s infinite; }
 .chat-typing span:nth-child(2) { animation-delay:.18s; }
@@ -1451,6 +1468,12 @@ footer { background:var(--paper2); border-top:1px solid var(--border); padding:6
   </div>
   <div class="chat-log" id="chatLog" aria-live="polite"></div>
   <div class="chat-quick" id="chatQuick"></div>
+  <form class="chat-input" id="chatInputRow" onsubmit="sendChatInput(event)">
+    <input type="text" id="chatInput" autocomplete="off" placeholder="Frage schreiben …" aria-label="Ihre Frage an LENA">
+    <button class="chat-send" type="submit" aria-label="Absenden">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </form>
   <div class="chat-foot">
     <button class="cf-demo" onclick="openModal()">Demo-Termin anfragen</button>
   </div>
@@ -1474,7 +1497,7 @@ function closeModal() {
 function closeModalOutside(e) {
   if (e.target === document.getElementById('modal')) closeModal();
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeChat(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeChat(true); } });
 
 // Lead form submit
 const SUPABASE_URL = 'https://mahshbbsicmirqbfakhl.supabase.co';
@@ -1578,7 +1601,7 @@ const CHAT_TOPICS = [
             '<strong>Enterprise — 799 €/Monat</strong> · 50 User inklusive<br><br>' +
             'Bei jährlicher Zahlung sparen Sie 20 % (159 / 319 / 639 € pro Monat). ' +
             'Zusatz-User kosten 25 / 18 / 12 € pro Monat. Monatlich kündbar, keine Einrichtungsgebühr. ' +
-            '<a href="#pricing" onclick="closeChat()">Zur Preisübersicht →</a>'
+            '<a href="#pricing" onclick="closeChat(true)">Zur Preisübersicht →</a>'
   },
   {
     key: 'test',
@@ -1603,7 +1626,7 @@ const CHAT_TOPICS = [
     answer: 'Neun integrierte Module: Stammdaten &amp; Dokumente, Verkauf &amp; Aufträge, Einkauf &amp; Beschaffung, ' +
             'Lager &amp; Inventur, Produktion &amp; Shopfloor, LENA (KI), Engineering, Mobile App sowie Sicherheit &amp; Administration.<br><br>' +
             'Dazu kommen Extensions für einzelne Branchen — etwa KFZ-Werkstatt, Spedition, Baumanager, Hausverwaltung oder WhatsApp Vertrieb. ' +
-            '<a href="#solution" onclick="closeChat()">Module ansehen →</a>'
+            '<a href="#solution" onclick="closeChat(true)">Module ansehen →</a>'
   },
   {
     key: 'lena',
@@ -1645,11 +1668,28 @@ const CHAT_TOPICS = [
   }
 ];
 
-const CHAT_FALLBACK = 'Das kann ich hier auf der Website leider nicht beantworten — ich arbeite auf dieser Seite mit einem festen Fragenkatalog.<br><br>' +
-  'Schreiben Sie uns am besten direkt per <strong>WhatsApp</strong> oder <a href="mailto:info@kiron.tech">info@kiron.tech</a>, ' +
-  'dann antwortet ein Mensch. Oder wählen Sie eine der Fragen oben.';
+const CHAT_FALLBACK = 'Das kann ich hier auf der Website nicht sicher beantworten — ich arbeite auf dieser Seite mit einem festen Fragenkatalog.<br><br>' +
+  'Lassen Sie mir Ihre Frage da, dann meldet sich ein Mensch bei Ihnen — meistens noch am selben Tag.';
+
+/* Stichworte je Thema für die Freitext-Erkennung */
+const CHAT_KEYWORDS = {
+  preise:       ['preis', 'kosten', 'teuer', 'euro', 'tarif', 'plan', 'abo', 'lizenz', 'monat', 'zahlen', 'guenstig', 'günstig'],
+  test:         ['test', 'testen', 'kostenlos', 'probe', 'trial', 'ausprobieren', 'demo-zugang', '30 tage'],
+  einfuehrung:  ['einfuehrung', 'einführung', 'onboarding', 'dauer', 'wie lange', 'implement', 'umstieg', 'migration', 'start'],
+  module:       ['modul', 'funktion', 'feature', 'kann kiron', 'umfang', 'produktion', 'lager', 'einkauf', 'finanzen', 'datev'],
+  lena:         ['lena', 'ki', 'k.i.', 'assistent', 'chatbot', 'sprache', 'credits', 'ocr'],
+  dsgvo:        ['dsgvo', 'datenschutz', 'server', 'hosting', 'gobd', 'iso', 'sicherheit', 'avv', 'deutschland'],
+  daten:        ['export', 'kuendig', 'kündig', 'daten zurueck', 'daten zurück', 'lock-in', 'eigentum'],
+  branche:      ['branche', 'passt', 'eignet', 'maschinenbau', 'metall', 'kunststoff', 'holz', 'fertigung', 'betrieb'],
+  kontakt:      ['mensch', 'anruf', 'rueckruf', 'rückruf', 'telefon', 'sprechen', 'kontakt', 'berater', 'termin']
+};
 
 let chatStarted = false;
+let leadSent = false;          // Lead schon abgeschickt?
+let leadFormOpen = false;      // Formular gerade sichtbar?
+let lastQuestion = '';         // letzte Freitextfrage des Besuchers
+let chatTrail = [];            // Gespraechsverlauf für die Lead-Notiz
+let exitOfferShown = false;
 
 function chatAppend(html, who) {
   const log = document.getElementById('chatLog');
@@ -1688,19 +1728,155 @@ function askTopic(key) {
   const topic = CHAT_TOPICS.find(t => t.key === key);
   if (!topic) return;
   chatAppend(topic.chip, 'user');
+  chatTrail.push('F: ' + topic.chip);
   const typing = chatTyping();
   setTimeout(() => {
     typing.remove();
     chatAppend(topic.answer, 'bot');
+    if (key === 'kontakt') {
+      showLeadForm('Damit sich jemand bei Ihnen melden kann, brauche ich nur zwei Angaben:');
+    } else {
+      maybeOfferLead();
+    }
   }, 450);
+}
+
+/* Freitext: Thema erkennen, sonst Lead-Formular anbieten */
+function sendChatInput(e) {
+  e.preventDefault();
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  chatAppend(escapeHtml(text), 'user');
+  chatTrail.push('F: ' + text);
+  lastQuestion = text;
+
+  const needle = text.toLowerCase();
+  let hit = null;
+  for (const key in CHAT_KEYWORDS) {
+    if (CHAT_KEYWORDS[key].some(w => needle.includes(w))) { hit = key; break; }
+  }
+
+  const typing = chatTyping();
+  setTimeout(() => {
+    typing.remove();
+    if (hit) {
+      const topic = CHAT_TOPICS.find(t => t.key === hit);
+      chatAppend(topic.answer, 'bot');
+      if (hit === 'kontakt') {
+        showLeadForm('Damit sich jemand bei Ihnen melden kann, brauche ich nur zwei Angaben:');
+      } else {
+        maybeOfferLead();
+      }
+    } else {
+      chatAppend(CHAT_FALLBACK, 'bot');
+      showLeadForm('Wohin darf die Antwort gehen?');
+    }
+  }, 500);
+}
+
+function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+/* Nach der zweiten Frage einmalig anbieten, sich zu melden */
+function maybeOfferLead() {
+  if (leadSent || leadFormOpen || exitOfferShown) return;
+  if (chatTrail.length < 2) return;
+  exitOfferShown = true;
+  setTimeout(() => {
+    if (leadSent || leadFormOpen) return;
+    chatAppend('Soll sich jemand von uns bei Ihnen melden — mit einer Antwort, die auf Ihren Betrieb passt?', 'bot');
+    showLeadForm('');
+  }, 700);
+}
+
+/* Inline-Formular im Chat */
+function showLeadForm(intro) {
+  if (leadSent || leadFormOpen) return;
+  leadFormOpen = true;
+  const log = document.getElementById('chatLog');
+  const box = document.createElement('div');
+  box.className = 'lead-form';
+  box.id = 'leadForm';
+  box.innerHTML =
+    '<div class="lf-title">Rückruf oder Antwort per Mail</div>' +
+    (intro ? '<div class="lf-hint">' + intro + '</div>' : '<div class="lf-hint">Zwei Angaben genügen — wir melden uns in der Regel am selben Werktag.</div>') +
+    '<input type="text"  id="lfName"  placeholder="Ihr Name *" autocomplete="name">' +
+    '<input type="email" id="lfMail"  placeholder="E-Mail *" autocomplete="email">' +
+    '<input type="text"  id="lfFirma" placeholder="Unternehmen (optional)" autocomplete="organization">' +
+    '<textarea id="lfText" placeholder="Ihre Frage (optional)">' + escapeHtml(lastQuestion) + '</textarea>' +
+    '<button type="button" id="lfSend" onclick="submitChatLead()">Absenden</button>' +
+    '<div class="lf-err" id="lfErr"></div>' +
+    '<div class="lf-legal">Wir nutzen Ihre Angaben ausschließlich, um Ihre Anfrage zu beantworten. ' +
+    'Mehr dazu in der <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</div>';
+  log.appendChild(box);
+  log.scrollTop = log.scrollHeight;
+}
+
+async function submitChatLead() {
+  const name  = document.getElementById('lfName').value.trim();
+  const mail  = document.getElementById('lfMail').value.trim();
+  const firma = document.getElementById('lfFirma').value.trim();
+  const text  = document.getElementById('lfText').value.trim();
+  const err   = document.getElementById('lfErr');
+  const btn   = document.getElementById('lfSend');
+
+  if (!name || !mail || mail.indexOf('@') < 1) {
+    err.textContent = 'Bitte Name und eine gültige E-Mail-Adresse angeben.';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Wird gesendet …';
+
+  const parts = name.split(/\s+/);
+  const vorname  = parts[0];
+  const nachname = parts.length > 1 ? parts.slice(1).join(' ') : '–';
+  const verlauf  = chatTrail.length ? '\n\nVerlauf im Chat:\n' + chatTrail.join('\n') : '';
+
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/rpc/submit_lead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON,
+        'Authorization': 'Bearer ' + SUPABASE_ANON
+      },
+      body: JSON.stringify({
+        p_vorname: vorname,
+        p_nachname: nachname,
+        p_email: mail,
+        p_unternehmen: firma || null,
+        p_nachricht: '[LENA-Chat] ' + (text || lastQuestion || 'Keine konkrete Frage hinterlassen.') + verlauf,
+        p_wunschzeit: 'flexibel'
+      })
+    });
+    if (!res.ok) throw new Error(res.status);
+    document.getElementById('leadForm').remove();
+    leadSent = true;
+    leadFormOpen = false;
+    chatAppend('Danke, ' + escapeHtml(vorname) + '! Ihre Anfrage ist bei uns — wir melden uns in der Regel noch am selben Werktag. ' +
+               'Bis dahin können Sie mir gern weitere Fragen stellen.', 'bot');
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = 'Absenden';
+    err.innerHTML = 'Das hat leider nicht geklappt. Bitte erneut versuchen oder direkt an ' +
+                    '<a href="mailto:info@kiron.tech">info@kiron.tech</a> schreiben.';
+    err.style.display = 'block';
+  }
 }
 
 function startChat() {
   if (chatStarted) return;
   chatStarted = true;
   chatAppend('Hallo! Ich bin <strong>LENA</strong>, die Assistentin von Kiron. 👋<br><br>' +
-             'Ich beantworte hier die häufigsten Fragen zu Produkt, Preisen und Datenschutz. ' +
-             'Wenn Sie lieber mit einem Menschen sprechen: Button unten oder info@kiron.tech.', 'bot');
+             'Fragen Sie mich einfach — oder tippen Sie unten frei los. Was ich nicht beantworten kann, ' +
+             'leite ich an einen Menschen weiter.', 'bot');
   renderChips();
 }
 
@@ -1712,7 +1888,15 @@ function toggleChat() {
   if (open) startChat();
 }
 
-function closeChat() {
+function closeChat(force) {
+  /* Einmalig anbieten, bevor der Besucher weg ist */
+  if (!force && chatStarted && !leadSent && !leadFormOpen && !exitOfferShown && chatTrail.length > 0) {
+    exitOfferShown = true;
+    chatAppend('Bevor Sie gehen — soll ich Ihre Frage an einen Menschen weitergeben? Dann bekommen Sie eine Antwort, ' +
+               'die auf Ihren Betrieb passt.', 'bot');
+    showLeadForm('');
+    return;
+  }
   const panel = document.getElementById('chatPanel');
   panel.classList.remove('open');
   document.getElementById('chatToggle').setAttribute('aria-expanded', 'false');
