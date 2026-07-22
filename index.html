@@ -79,8 +79,9 @@ body { background:var(--paper); color:var(--ink); font-family:var(--sans); font-
 /* ── HERO ── */
 .hero {
   min-height:100vh; position:relative; overflow:hidden;
-  display:flex; flex-direction:column; justify-content:flex-end;
-  padding:0 0 80px;
+  display:flex; flex-direction:column; justify-content:center;
+  /* padding-top haelt den Inhalt frei von der fixen Nav (60px) */
+  padding:104px 0 80px;
 }
 .hero-bg {
   position:absolute; inset:0;
@@ -123,7 +124,7 @@ body { background:var(--paper); color:var(--ink); font-family:var(--sans); font-
 .hero-inner { position:relative; z-index:2; max-width:1280px; margin:0 auto; padding:0 56px; width:100%; }
 .hero-eyebrow { font-family:var(--mono); font-size:9px; letter-spacing:5px; color:var(--greent); text-transform:uppercase; margin-bottom:24px; display:flex; align-items:center; gap:12px; }
 .hero-eyebrow::before { content:'//'; color:rgba(29,158,117,0.5); }
-.hero-h1 { font-family:var(--serif); font-weight:400; font-size:clamp(56px,9vw,130px); line-height:.9; letter-spacing:-.02em; margin-bottom:36px; color:var(--ink); }
+.hero-h1 { font-family:var(--serif); font-weight:400; font-size:clamp(56px,9vw,130px); line-height:.98; letter-spacing:-.02em; margin-bottom:36px; color:var(--ink); }
 .hero-h1 em { color:var(--greent); font-style:italic; }
 .hero-sub { font-size:17px; color:var(--ink3); max-width:520px; line-height:1.85; border-left:2px solid var(--green); padding-left:20px; font-style:italic; margin-bottom:48px; font-family:var(--serif); }
 
@@ -239,11 +240,13 @@ p.light { color:var(--muted); }
 
 /* Photo strip */
 .photo-strip { display:grid; grid-template-columns:2fr 1fr 1fr; gap:16px; margin:48px 0 0; }
-.pstrip-item { overflow:hidden; position:relative; border-radius:14px; box-shadow:var(--shadow); }
+.pstrip-item { overflow:hidden; position:relative; border-radius:14px; box-shadow:var(--shadow); min-height:0; }
 .pstrip-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s; }
 .pstrip-item:hover img { transform:scale(1.03); }
 .pstrip-main { aspect-ratio:16/9; }
-.pstrip-sq { aspect-ratio:1; }
+/* keine eigene aspect-ratio: die Quadrate strecken sich auf die Zeilenhoehe
+   des Hauptbildes, damit alle Unterkanten buendig sitzen */
+.pstrip-sq { height:100%; }
 
 /* ── COMPARISON ── */
 .section-compare { background:var(--paper); }
@@ -438,6 +441,7 @@ footer { background:var(--paper2); border-top:1px solid var(--border); padding:6
   .steps { grid-template-columns:1fr 1fr; }
   .proof-grid { grid-template-columns:1fr 1fr; }
   .photo-strip { grid-template-columns:1fr; }
+  .pstrip-sq { height:auto; aspect-ratio:16/9; }
   section { padding:64px 0; }
   .cta-inner { padding:0 24px; }
   footer { padding:40px 24px; }
@@ -1003,7 +1007,7 @@ footer { background:var(--paper2); border-top:1px solid var(--border); padding:6
         <img src="https://images.unsplash.com/photo-1567789884554-0b844b597180?w=500&q=80&fit=crop&crop=center" alt="CNC">
       </div>
       <div class="pstrip-item pstrip-sq">
-        <img src="https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=500&q=80&fit=crop&crop=center" alt="Werkstatt">
+        <img src="https://images.unsplash.com/photo-1714504904786-b6732390b206?w=500&q=80&fit=crop&crop=center" alt="Schweissarbeiten in der Fertigung">
       </div>
     </div>
   </div>
