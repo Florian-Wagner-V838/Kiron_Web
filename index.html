@@ -1870,7 +1870,10 @@ async function submitChatLead() {
   const err   = document.getElementById('lfErr');
   const btn   = document.getElementById('lfSend');
 
-  if (!name || !mail || mail.indexOf('@') < 1) {
+  /* Muster identisch zur RLS-Policy anon_insert_leads (Migration 414),
+     sonst wuerde die Datenbank den Datensatz erst nach dem Absenden ablehnen. */
+  const MAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  if (!name || !MAIL_RE.test(mail) || mail.length > 320) {
     err.textContent = 'Bitte Name und eine gültige E-Mail-Adresse angeben.';
     err.style.display = 'block';
     return;
